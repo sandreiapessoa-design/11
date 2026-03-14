@@ -1,0 +1,66 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Digital Ocean Account</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="digital-ocean-accounts-form" action="{echo $app['base_url']}/digital-ocean-accounts/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Account Name</label>
+                            <input type="text" name="digital-ocean-name" class="form-control" data-required="true" data-validation-message="Digital Ocean Account Name is Required !" placeholder="Enter Digital Ocean Account Name">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="digital-ocean-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Token</label>
+                            <input type="text" name="digital-ocean-token" class="form-control" data-required="true" data-validation-message="Digital Ocean Token is Required !" placeholder="Enter Digital Ocean Token">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Proxy IP</label>
+                            <input type="text" name="digital-ocean-proxy-ip" class="form-control" placeholder="Enter Digital Ocean Proxy IP (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Proxy Port</label>
+                            <input type="text" name="digital-ocean-proxy-port" class="form-control input-number" placeholder="Enter Digital Ocean Proxy Port (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Proxy Username</label>
+                            <input type="text" name="digital-ocean-proxy-username" class="form-control" placeholder="Enter Digital Ocean Username (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Proxy Password</label>
+                            <input type="text" name="digital-ocean-proxy-password" class="form-control" placeholder="Enter Digital Ocean Password (Optional)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="digital-ocean-name" data-model="DigitalOceanAccount" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

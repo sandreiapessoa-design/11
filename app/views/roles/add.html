@@ -1,0 +1,1011 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Role</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="roles-form" action="{echo $app['base_url']}/roles/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Role Name</label>
+                            <input type="text" name="name" class="form-control" data-required="true" data-validation-message="Role Name is Required !" placeholder="Enter Role Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Role Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Role Type</label>
+                            <select class="form-control bs-select" title="Select a Type ..." name="type">
+                                <option value="Team Based Role" selected >Team Based Role</option>
+                                <option value="Admin Based Role">Admin Based Role</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="caption">Main Permissions :</h4>
+                        <div class="row">              
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="main-configs" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-app-store" style="margin-right: 10px"></i> Main Permissions</label>
+                                    <div class="mt-checkbox-list main-configs">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Dashboard
+                                            <input type="checkbox" name="permissions[]" value="dashboard" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Full Earning Report
+                                            <input type="checkbox" name="permissions[]" value="show-full-report" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Application Settings
+                                            <input type="checkbox" name="permissions[]" value="manage-settings" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Application Frontend Logs
+                                            <input type="checkbox" name="permissions[]" value="show-frontend-logs"/>
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Application Backend Logs
+                                            <input type="checkbox" name="permissions[]" value="show-backend-logs"/>
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Audit Logs
+                                            <input type="checkbox" name="permissions[]" value="show-auditlogs" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Connected Users
+                                            <input type="checkbox" name="permissions[]" value="show-users-sessions" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Kill Users Sessions
+                                            <input type="checkbox" name="permissions[]" value="kill-users-sessions" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="tools-configs" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-android" style="margin-right: 10px"></i>Tools Permissions</label>
+                                    <div class="mt-checkbox-list tools-configs">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Domains SPF Checker
+                                            <input type="checkbox" name="permissions[]" value="spf-lookup" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Domains / Ips Reputation
+                                            <input type="checkbox" name="permissions[]" value="blacklist-tools" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Mailbox Extractor
+                                            <input type="checkbox" name="permissions[]" value="mailbox-extractor"/>
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Extractor Tool
+                                            <input type="checkbox" name="permissions[]" value="extractor-tools" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="caption">APIs Permissions :</h4>
+                        <div class="row">    
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="amazon" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-amazon" style="margin-right: 10px"></i> AWS Api</label>
+                                    <div class="mt-checkbox-list amazon">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Amazon Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-amazon-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Amazon Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-amazon-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Amazon Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-amazon-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Amazon Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-amazon-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Accounts Processes
+                                            <input type="checkbox" name="permissions[]" value="show-amazon-accounts-processes" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Amazon Instances
+                                            <input type="checkbox" name="permissions[]" value="create-amazon-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Amazon Instances
+                                            <input type="checkbox" name="permissions[]" value="show-amazon-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Amazon Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-amazon-instances" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="digital-ocean" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-digital-ocean" style="margin-right: 10px"></i> Digital Ocean Api</label>
+                                    <div class="mt-checkbox-list digital-ocean">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Digital Ocean Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-digital-ocean-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Digital Ocean Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-digital-ocean-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Digital Ocean Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-digital-ocean-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Digital Ocean Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-digital-ocean-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Digital Ocean Instances
+                                            <input type="checkbox" name="permissions[]" value="create-digital-ocean-droplets" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Digital Ocean Instances
+                                            <input type="checkbox" name="permissions[]" value="show-digital-ocean-droplets" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Digital Ocean Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-digital-ocean-droplets" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="linode" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-linode" style="margin-right: 10px"></i> Linode Api</label>
+                                    <div class="mt-checkbox-list linode">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Linode Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-linode-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Linode Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-linode-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Linode Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-linode-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Linode Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-linode-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Linode Instances
+                                            <input type="checkbox" name="permissions[]" value="create-linode-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Linode Instances
+                                            <input type="checkbox" name="permissions[]" value="show-linode-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Linode Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-linode-instances" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="hetzner" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-h-square" style="margin-right: 10px"></i> Hetzner Api</label>
+                                    <div class="mt-checkbox-list hetzner">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Hetzner Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-hetzner-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Hetzner Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-hetzner-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Hetzner Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-hetzner-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Hetzner Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-hetzner-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Hetzner Instances
+                                            <input type="checkbox" name="permissions[]" value="create-hetzner-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Hetzner Instances
+                                            <input type="checkbox" name="permissions[]" value="show-hetzner-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Hetzner Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-hetzner-instances" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="atlantic" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-adn" style="margin-right: 10px"></i> Atlantic Api</label>
+                                    <div class="mt-checkbox-list atlantic">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Atlantic Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-atlantic-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Atlantic Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-atlantic-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Atlantic Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-atlantic-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Atlantic Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-atlantic-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Atlantic Instances
+                                            <input type="checkbox" name="permissions[]" value="create-atlantic-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Atlantic Instances
+                                            <input type="checkbox" name="permissions[]" value="show-atlantic-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Atlantic Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-atlantic-instances" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="scaleway" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-speakap" style="margin-right: 10px"></i> Scaleway Api</label>
+                                    <div class="mt-checkbox-list scaleway">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Scaleway Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-scaleway-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Scaleway Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-scaleway-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Scaleway Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-scaleway-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Scaleway Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-scaleway-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Scaleway Instances
+                                            <input type="checkbox" name="permissions[]" value="create-scaleway-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Scaleway Instances
+                                            <input type="checkbox" name="permissions[]" value="show-scaleway-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Scaleway Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-scaleway-instances" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="vultr" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-vuejs" style="margin-right: 10px"></i> Vultr Api</label>
+                                    <div class="mt-checkbox-list vultr">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Vultr Accounts
+                                            <input type="checkbox" name="permissions[]" value="show-vultr-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Vultr Accounts
+                                            <input type="checkbox" name="permissions[]" value="add-vultr-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Vultr Accounts
+                                            <input type="checkbox" name="permissions[]" value="edit-vultr-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Vultr Accounts
+                                            <input type="checkbox" name="permissions[]" value="delete-vultr-accounts" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create Vultr Instances
+                                            <input type="checkbox" name="permissions[]" value="create-vultr-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Vultr Instances
+                                            <input type="checkbox" name="permissions[]" value="show-vultr-instances" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Vultr Instances
+                                            <input type="checkbox" name="permissions[]" value="delete-vultr-instances" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="caption">Servers Management Permissions :</h4>
+                        <div class="row">              
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="select-all-checkboxes" data-class-target="servers-providers" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-suitcase" style="margin-right: 10px"></i> Servers Providers</label>
+                                            <div class="mt-checkbox-list servers-providers">
+                                                <label class="mt-checkbox mt-checkbox-outline"> Show Servers Providers
+                                                    <input type="checkbox" name="permissions[]" value="show-servers-providers" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Add Servers Providers
+                                                    <input type="checkbox" name="permissions[]" value="add-servers-providers" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Edit Servers Providers
+                                                    <input type="checkbox" name="permissions[]" value="edit-servers-providers" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Delete Servers Providers
+                                                    <input type="checkbox" name="permissions[]" value="delete-servers-providers" />
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="select-all-checkboxes" data-class-target="management-servers" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-server" style="margin-right: 10px"></i> Management Servers</label>
+                                            <div class="mt-checkbox-list management-servers">
+                                                <label class="mt-checkbox mt-checkbox-outline"> Show Management Servers
+                                                    <input type="checkbox" name="permissions[]" value="show-management-servers" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Add Management Servers
+                                                    <input type="checkbox" name="permissions[]" value="add-management-servers" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Edit Management Servers
+                                                    <input type="checkbox" name="permissions[]" value="edit-management-servers" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Delete Management Servers
+                                                    <input type="checkbox" name="permissions[]" value="delete-management-servers" />
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="mta-servers" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="far fa-server" style="margin-right: 10px"></i> MTA Servers</label>
+                                    <div class="mt-checkbox-list mta-servers">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show MTA Servers
+                                            <input type="checkbox" name="permissions[]" value="show-mta-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add MTA Servers
+                                            <input type="checkbox" name="permissions[]" value="add-mta-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit MTA Servers
+                                            <input type="checkbox" name="permissions[]" value="edit-mta-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete MTA Servers
+                                            <input type="checkbox" name="permissions[]" value="delete-mta-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Configure Additional IPs
+                                            <input type="checkbox" name="permissions[]" value="configure-additional-ips" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Install MTA Servers
+                                            <input type="checkbox" name="permissions[]" value="install-mta-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Execute Servers Actions
+                                            <input type="checkbox" name="permissions[]" value="servers-actions" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show All Vmtas
+                                            <input type="checkbox" name="permissions[]" value="show-mta-servers-vmtas" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Proxies Servers
+                                            <input type="checkbox" name="permissions[]" value="install-proxies-servers" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="smtp-servers" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-cloudversify" style="margin-right: 10px"></i> SMTP Servers</label>
+                                    <div class="mt-checkbox-list smtp-servers">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show SMTP Servers
+                                            <input type="checkbox" name="permissions[]" value="show-smtp-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add SMTP Servers
+                                            <input type="checkbox" name="permissions[]" value="add-smtp-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit SMTP Servers
+                                            <input type="checkbox" name="permissions[]" value="edit-smtp-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete SMTP Servers
+                                            <input type="checkbox" name="permissions[]" value="delete-smtp-servers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add SMTP Users
+                                            <input type="checkbox" name="permissions[]" value="add-smtp-users" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit SMTP Users
+                                            <input type="checkbox" name="permissions[]" value="edit-smtp-users" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete SMTP Users
+                                            <input type="checkbox" name="permissions[]" value="delete-smtp-users" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> SMTP Bulk Check
+                                            <input type="checkbox" name="permissions[]" value="smtp-bulk-check" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="select-all-checkboxes" data-class-target="domains" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-globe" style="margin-right: 10px"></i> Domains</label>
+                                            <div class="mt-checkbox-list domains">
+                                                <label class="mt-checkbox mt-checkbox-outline"> Show Domains
+                                                    <input type="checkbox" name="permissions[]" value="show-domains" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Add Domains
+                                                    <input type="checkbox" name="permissions[]" value="add-domains" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Edit Domains
+                                                    <input type="checkbox" name="permissions[]" value="edit-domains" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Delete Domains
+                                                    <input type="checkbox" name="permissions[]" value="delete-domains" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Upload/Remove Domains Brands
+                                                    <input type="checkbox" name="permissions[]" value="upload-brands" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Manage SubDomains Words
+                                                    <input type="checkbox" name="permissions[]" value="manage-subdomains-names" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Manage Domain Records
+                                                    <input type="checkbox" name="permissions[]" value="manage-domain-records" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Manage Domains Multi Records
+                                                    <input type="checkbox" name="permissions[]" value="manage-multi-records"/>
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="select-all-checkboxes" data-class-target="namecheap-accounts" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-globe" style="margin-right: 10px"></i> Namecheap Accounts</label>
+                                            <div class="mt-checkbox-list namecheap-accounts">
+                                                <label class="mt-checkbox mt-checkbox-outline"> Show Namecheap Accounts
+                                                    <input type="checkbox" name="permissions[]" value="show-namecheap-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Add Namecheap Accounts
+                                                    <input type="checkbox" name="permissions[]" value="add-namecheap-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Edit Namecheap Accounts
+                                                    <input type="checkbox" name="permissions[]" value="edit-namecheap-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Delete Namecheap Accounts
+                                                    <input type="checkbox" name="permissions[]" value="delete-namecheap-accounts" />
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="select-all-checkboxes" data-class-target="godaddy-accounts" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-globe" style="margin-right: 10px"></i> GoDaddy Accounts</label>
+                                            <div class="mt-checkbox-list godaddy-accounts">
+                                                <label class="mt-checkbox mt-checkbox-outline"> Show GoDaddy Accounts
+                                                    <input type="checkbox" name="permissions[]" value="show-godaddy-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Add GoDaddy Accounts
+                                                    <input type="checkbox" name="permissions[]" value="add-godaddy-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Edit GoDaddy Accounts
+                                                    <input type="checkbox" name="permissions[]" value="edit-godaddy-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Delete GoDaddy Accounts
+                                                    <input type="checkbox" name="permissions[]" value="delete-godaddy-accounts" />
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="select-all-checkboxes" data-class-target="namecom-accounts" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-globe" style="margin-right: 10px"></i> Name.com Accounts</label>
+                                            <div class="mt-checkbox-list namecom-accounts">
+                                                <label class="mt-checkbox mt-checkbox-outline"> Show Name.com Accounts
+                                                    <input type="checkbox" name="permissions[]" value="show-namecom-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Add Name.com Accounts
+                                                    <input type="checkbox" name="permissions[]" value="add-namecom-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Edit Name.com Accounts
+                                                    <input type="checkbox" name="permissions[]" value="edit-namecom-accounts" />
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-checkbox mt-checkbox-outline"> Delete Name.com Accounts
+                                                    <input type="checkbox" name="permissions[]" value="delete-namecom-accounts" />
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="caption">Users / Roles / Teams Permissions :</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="users" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-users" style="margin-right: 10px"></i> Users</label>
+                                    <div class="mt-checkbox-list users">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Users
+                                            <input type="checkbox" name="permissions[]" value="show-users" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Users
+                                            <input type="checkbox" name="permissions[]" value="add-users" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Users
+                                            <input type="checkbox" name="permissions[]" value="edit-users" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Users
+                                            <input type="checkbox" name="permissions[]" value="delete-users" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="roles" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-universal-access" style="margin-right: 10px"></i> Roles / Permissions</label>
+                                    <div class="mt-checkbox-list roles">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Roles
+                                            <input type="checkbox" name="permissions[]" value="show-roles" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Roles / Permissions
+                                            <input type="checkbox" name="permissions[]" value="add-roles" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Roles / Permissions
+                                            <input type="checkbox" name="permissions[]" value="edit-roles" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Roles / Permissions
+                                            <input type="checkbox" name="permissions[]" value="delete-roles" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Affect Roles To Users
+                                            <input type="checkbox" name="permissions[]" value="affect-roles" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Affect Users To Roles
+                                            <input type="checkbox" name="permissions[]" value="users-roles" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="teams" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-flag" style="margin-right: 10px"></i> Teams</label>
+                                    <div class="mt-checkbox-list teams">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Teams
+                                            <input type="checkbox" name="permissions[]" value="show-teams" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Teams
+                                            <input type="checkbox" name="permissions[]" value="add-teams" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Teams
+                                            <input type="checkbox" name="permissions[]" value="edit-teams" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Teams
+                                            <input type="checkbox" name="permissions[]" value="delete-teams" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Teams Authorisations
+                                            <input type="checkbox" name="permissions[]" value="manage-teams-authorisations" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Affect Users To Teams
+                                            <input type="checkbox" name="permissions[]" value="users-teams" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="caption">Affiliate Permissions :</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="affiliate-networks" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-briefcase" style="margin-right: 10px"></i> Affiliate Networks</label>
+                                    <div class="mt-checkbox-list affiliate-networks">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Affiliate Networks
+                                            <input type="checkbox" name="permissions[]" value="show-affiliate-networks" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Affiliate Networks
+                                            <input type="checkbox" name="permissions[]" value="add-affiliate-networks" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Affiliate Networks
+                                            <input type="checkbox" name="permissions[]" value="edit-affiliate-networks" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Affiliate Networks
+                                            <input type="checkbox" name="permissions[]" value="delete-affiliate-networks" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Auto Login To Affiliate Networks
+                                            <input type="checkbox" name="permissions[]" value="auto-login-affiliate-networks" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="offers" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i> Offers</label>
+                                    <div class="mt-checkbox-list offers">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Offers
+                                            <input type="checkbox" name="permissions[]" value="show-offers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Offers
+                                            <input type="checkbox" name="permissions[]" value="add-offers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Offers
+                                            <input type="checkbox" name="permissions[]" value="edit-offers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Offers
+                                            <input type="checkbox" name="permissions[]" value="delete-offers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Upload Suppression Lists
+                                            <input type="checkbox" name="permissions[]" value="add-suppression-lists" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="verticals" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fas fa-tags" style="margin-right: 10px"></i> Verticals</label>
+                                    <div class="mt-checkbox-list verticals">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Verticals
+                                            <input type="checkbox" name="permissions[]" value="show-verticals" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Verticals
+                                            <input type="checkbox" name="permissions[]" value="add-verticals" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Verticals
+                                            <input type="checkbox" name="permissions[]" value="edit-verticals" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Verticals
+                                            <input type="checkbox" name="permissions[]" value="delete-verticals" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="caption">Emails Management Permissions :</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="isps" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fab fa-google" style="margin-right: 10px"></i> Isps</label>
+                                    <div class="mt-checkbox-list isps">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Isps
+                                            <input type="checkbox" name="permissions[]" value="show-isps" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Isps
+                                            <input type="checkbox" name="permissions[]" value="add-isps" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Isps
+                                            <input type="checkbox" name="permissions[]" value="edit-isps" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Isps
+                                            <input type="checkbox" name="permissions[]" value="delete-isps" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="data-providers" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-database" style="margin-right: 10px"></i> Data Providers</label>
+                                    <div class="mt-checkbox-list data-providers">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Data Providers
+                                            <input type="checkbox" name="permissions[]" value="show-data-providers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Data Providers
+                                            <input type="checkbox" name="permissions[]" value="add-data-providers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Edit Data Providers
+                                            <input type="checkbox" name="permissions[]" value="edit-data-providers" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Data Providers
+                                            <input type="checkbox" name="permissions[]" value="delete-data-providers" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="emails-lists" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-at" style="margin-right: 10px"></i> Emails Lists</label>
+                                    <div class="mt-checkbox-list emails-lists">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Import / Show Emails Lists
+                                            <input type="checkbox" name="permissions[]" value="import-emails-lists" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Emails Lists
+                                            <input type="checkbox" name="permissions[]" value="delete-emails-lists" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Black Lists
+                                            <input type="checkbox" name="permissions[]" value="black-lists" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Fetch BlackList Emails
+                                            <input type="checkbox" name="permissions[]" value="data-lists-fetch" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="internal" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-envelope" style="margin-right: 10px"></i> Internal Mailboxes</label>
+                                    <div class="mt-checkbox-list internal">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Mailboxes
+                                            <input type="checkbox" name="permissions[]" value="show-internal-mailboxes" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Add Mailboxes
+                                            <input type="checkbox" name="permissions[]" value="add-internal-mailboxes" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Open Mailboxes
+                                            <input type="checkbox" name="permissions[]" value="open-internal-mailboxes" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete Mailboxes
+                                            <input type="checkbox" name="permissions[]" value="delete-internal-mailboxes" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="caption">AutoResponders Permissions :</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="auto-responders" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-envelope-open" style="margin-right: 10px"></i> AutoResponders</label>
+                                    <div class="mt-checkbox-list auto-responders">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show AutoResponders
+                                            <input type="checkbox" name="permissions[]" value="show-auto-responders" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Create AutoResponders
+                                            <input type="checkbox" name="permissions[]" value="create-auto-responders" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Delete AutoResponders
+                                            <input type="checkbox" name="permissions[]" value="delete-auto-responders" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="caption">Production Permissions :</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="drops" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-envelope-open" style="margin-right: 10px"></i> Drops</label>
+                                    <div class="mt-checkbox-list drops">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Send Page
+                                            <input type="checkbox" name="permissions[]" value="send-mta-drops" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Mta Drops
+                                            <input type="checkbox" name="permissions[]" value="show-mta-drops" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show Mta Tests
+                                            <input type="checkbox" name="permissions[]" value="show-mta-tests" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show SMTP Drops
+                                            <input type="checkbox" name="permissions[]" value="show-smtp-drops" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Show SMTP Tests
+                                            <input type="checkbox" name="permissions[]" value="show-smtp-tests" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Upload Images
+                                            <input type="checkbox" name="permissions[]" value="upload-images" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-2">
+                        <h4 class="caption">Pmta Permissions :</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="select-all-checkboxes" data-class-target="pmta" data-status="all" style="font-weight: bold;cursor:pointer;font-size: 15px"><i class="fa fa-cogs" style="margin-right: 10px"></i> Pmta Management</label>
+                                    <div class="mt-checkbox-list pmta">
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Pmta Commands
+                                            <input type="checkbox" name="permissions[]" value="pmta-commands" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Auto Pause/Resume
+                                            <input type="checkbox" name="permissions[]" value="pmta-processes"/>
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Pmta Global Custom Vmtas
+                                            <input type="checkbox" name="permissions[]" value="global-vmtas" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Pmta Individual Custom Vmtas
+                                            <input type="checkbox" name="permissions[]" value="individual-vmtas" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Pmta Templates
+                                            <input type="checkbox" name="permissions[]" value="pmta-templates" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Pmta Configs
+                                            <input type="checkbox" name="permissions[]" value="pmta-configs" />
+                                            <span></span>
+                                        </label>
+                                        <label class="mt-checkbox mt-checkbox-outline"> Manage Pmta History
+                                            <input type="checkbox" name="permissions[]" value="pmta-history" />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="name" data-model="Role" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

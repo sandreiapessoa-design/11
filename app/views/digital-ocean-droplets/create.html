@@ -1,0 +1,167 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Create Digital Ocean Droplets</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="digital-ocean-accounts-form" action="#" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Digital Ocean Accounts</label>
+                            <select id="do-accounts" class="form-control bs-select" data-live-search="true"> 
+                                {if(isset($accounts) && count($accounts)>0)}
+                                    {foreach $row in $accounts}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Nb Of Droplets</label>
+                            <input id="do-nb-of-droplets" type="text" class="form-control input-number" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Region</label>
+                            <select id="do-region" class="form-control bs-select" title="Select a Region ..."data-live-search="true">
+                                <option value="nyc1" selected="">New York 1</option>
+                                <option value="nyc3">New York 3</option>
+                                <option value="sgp1">Singapore 1</option>
+                                <option value="lon1">London 1</option>
+                                <option value="ams3">Amsterdam 3</option>
+                                <option value="fra1">Frankfurt 1</option>
+                                <option value="tor1">Toronto 1</option>
+                                <option value="sfo2">San Francisco 2</option>
+                                <option value="blr1">Bangalore 1</option>
+                            </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                DNS Account
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="accounts" class="form-control bs-select" title="Select Account ..." name="account-id" data-live-search="true" data-required="true" data-validation-message="Account is Required !">
+                                <option value="none|0">None</option>
+                                {if(isset($dnsaccounts) && count($dnsaccounts))} 
+                                    {foreach $account in $dnsaccounts} 
+                                        <option value="{echo $account['type']}|{echo $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Domains
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="do-domains" class="form-control bs-select" data-live-search="true" data-actions-box="true" data-live-search="true" multiple> 
+                                 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Droplet Size</label>
+                            <select id="do-size" class="form-control bs-select" title="Select a Type ...">
+                                <option value="512mb">1 CPU(s),512 MB RAM,20 GB SSD</option>
+                                <option value="s-1vcpu-1gb" selected>1 CPU(s),1024 MB RAM,25 GB SSD</option>
+                                <option value="1gb">1 CPU(s),1024 MB RAM,30 GB SSD</option>
+                                <option value="s-1vcpu-2gb">1 CPU(s),2048 MB RAM,50 GB SSD</option>
+                                <option value="s-1vcpu-3gb">1 CPU(s),3072 MB RAM,60 GB SSD</option>
+                                <option value="s-2vcpu-2gb">2 CPU(s),2048 MB RAM,60 GB SSD</option>
+                                <option value="s-3vcpu-1gb">3 CPU(s),1024 MB RAM,60 GB SSD</option>
+                                <option value="2gb">2 CPU(s),2048 MB RAM,40 GB SSD</option>
+                                <option value="s-2vcpu-4gb">2 CPU(s),4096 MB RAM,80 GB SSD</option>
+                                <option value="4gb">2 CPU(s),4096 MB RAM,60 GB SSD</option>
+                                <option value="c-2">2 CPU(s),4096 MB RAM,25 GB SSD</option>
+                                <option value="m-1vcpu-8gb">1 CPU(s),8192 MB RAM,40 GB SSD</option>
+                                <option value="s-4vcpu-8gb">4 CPU(s),8192 MB RAM,160 GB SSD</option>
+                                <option value="g-2vcpu-8gb">2 CPU(s),8192 MB RAM,25 GB SSD</option>
+                                <option value="gd-2vcpu-8gb">2 CPU(s),8192 MB RAM,50 GB SSD</option>
+                                <option value="m-16gb">2 CPU(s),16384 MB RAM,60 GB SSD</option>
+                                <option value="8gb">4 CPU(s),8192 MB RAM,80 GB SSD</option>
+                                <option value="c-4">4 CPU(s),8192 MB RAM,50 GB SSD</option>
+                                <option value="s-6vcpu-16gb">6 CPU(s),16384 MB RAM,320 GB SSD</option>
+                                <option value="m-2vcpu-16gb">2 CPU(s),16384 MB RAM,50 GB SSD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">OS</label>
+                            <select id="do-os" class="form-control bs-select" title="Select an Operating System ...">
+                                <option value="centos-6" selected>CentOS 6</option>
+                                <option value="centos-7">CentOS 7</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark create-digital-ocean-droplets"><i class="fa fa-plus"></i> Create Droplets</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Digital Ocean Droplets Creation Processes List</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm red stop-process"><i class="fa fa-stop"></i> Stop Process</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="digital-ocean-processes" action="{echo $app['base_url']}/digital-ocean-droplets/get-processes.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#digital-ocean-processes .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,294 @@
+<div class="row">
+    <div class="col-md-6"> 
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Server Selection</span>
+                </div>
+            </div>
+            <div class="portlet-body" style="height: 405px;">
+                <div class="row">
+                    <input type="hidden" id="server-id-old" value="{echo $serverId}"/>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Server Selection
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="servers" class="form-control bs-select" title="Select a Server ..." data-live-search="true"> 
+                                {if(isset($servers) && count($servers) > 0)}
+                                    {foreach $row in $servers}
+                                        <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="caption" style="margin: 62px 4px 50px 4px !important;"> Server's Info :</h4>
+                <div id="server-info" class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Server Name</th>
+                                    <th>Main IP</th>
+                                    <th>OS</th>
+                                </tr>
+                                <tr>
+                                    <td id="server-id">-</td>
+                                    <td id="server-name">-</td>
+                                    <td id="server-ip">-</td>
+                                    <td id="server-os">-</td>
+                                </tr>
+                                <tr>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Nb of Ips v4</th>
+                                    <th>Nb of Ips v6</th>
+                                </tr>
+                                <tr>
+                                    <td id="server-ram">-</td>
+                                    <td id="server-storage">-</td>
+                                    <td id="server-ips-v4-sum">-</td>
+                                    <td id="server-ips-v6-sum">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Configuration</span>
+                </div>
+            </div>
+            <div class="portlet-body" style="height: 405px;">
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: -20px;">
+                        <div class="form-group">
+                            <label class="control-label full-width bold">Fondamentals & Security</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox">
+                                    <input id="install-services" type="checkbox" value="install-services" checked> Install Services
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="update-port" type="checkbox" value="update-port"> Update SSH Port
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="update-password" type="checkbox" value="update-password"> Update Password
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="install-firewall" type="checkbox" value="install-firewall"> Install Firewall
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: -20px;">
+                        <div class="form-group">
+                            <label class="control-label full-width bold">Ips Management</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox">
+                                    <input id="update-ips" type="checkbox" value="update-ips" checked> Update IPs
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="activate-dkim" type="checkbox" value="activate-dkim"> Activate DKIM
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="activate-dmarc" type="checkbox" value="activate-dmarc"> Activate DMARC
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="keep-old-subs" type="checkbox" value="keep-old-subs" checked> Keep Old Subs
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="use-predefined-subs" type="checkbox" value="use-predefined-subs" disabled> Use Predefined Subs ( deselect to randomize )
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: -20px;">
+                        <div class="form-group">
+                            <label class="control-label full-width bold">Tracking System</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox">
+                                    <input id="install-tracking" type="checkbox" value="install-tracking" checked> Install Tracking
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="use-ssl-certs" type="checkbox" value="use-ssl-certs"> Activate HTTPS
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input id="use-brands" type="checkbox" value="use-brands" checked > Use Brands (Deselect For 404 Page)
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: -20px;">
+                        <div class="form-group">
+                            <label class="control-label full-width bold">PowerMTA System</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox">
+                                    <input id="install-pmta" type="checkbox" value="install-pmta" checked> Install PowerMTA
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Random Mapping</span>
+                </div>
+            </div>
+            <div class="portlet-body" style="height: 405px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Domains List</label>
+                            <textarea id="random-domains" class="form-control" style="height: 315px !important;" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input id="random-quantity" type="text" class="form-control input-number" value="60">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <a href="javascript:;" class="btn btn-outline dark mapping-random" style="width: 100%;"> Randomize </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="note note-warning">
+            <p><strong>Warning!</strong> Each domain can contain up to 60 ips (v4 or v6) as maximum ! </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Domains/IPs Selection</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row mapping-container">
+                    <div class="col-md-12 mapping-item first">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Domains
+                                    </label>
+                                    <select class="form-control bs-select domains-mapping" data-index="0" title="Select a Domain ..." data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Availabe IPs V4
+                                        <span class="options-sum" style="margin-left: 5px;">( 0 IP Selected )</span>
+                                        <a class="pull-right tooltips move-option-vert" data-container="body" data-placement="top" data-target=".ips-v4-mapping" data-dir="up" data-original-title="Move Ip Up"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-arrow-up"></i></a>
+                                        <a class="pull-right tooltips move-option-vert" data-container="body" data-placement="top" data-target=".ips-v4-mapping" data-dir="down" data-original-title="Move Ip Down"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-arrow-down"></i></a>
+                                        <a class="pull-right tooltips deselect-all-options" data-container="body" data-target=".ips-v4-mapping" data-placement="top" data-original-title="Deselect all options" href="javascript:;" data-source="ips" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                        <a class="pull-right tooltips select-all-options" data-container="body" data-target=".ips-v4-mapping" data-placement="top" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                    </label>
+                                    <select class="form-control select-actions ips-v4-mapping" data-index="0" multiple="multiple" style="height: 168px !important;"> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Availabe IPs V6
+                                        <span class="options-sum" style="margin-left: 5px;">( 0 IP Selected )</span>
+                                        <a class="pull-right tooltips move-option-vert" data-container="body" data-placement="top" data-target=".ips-v6-mapping" data-dir="up" data-original-title="Move Ip Up"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-arrow-up"></i></a>
+                                        <a class="pull-right tooltips move-option-vert" data-container="body" data-placement="top" data-target=".ips-v6-mapping" data-dir="down" data-original-title="Move Ip Down"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-arrow-down"></i></a>
+                                        <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".ips-v6-mapping" data-original-title="Deselect all options" href="javascript:;" data-source="ips" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                        <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".ips-v6-mapping" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                    </label>
+                                    <select class="form-control select-actions ips-v6-mapping" data-index="0" multiple="multiple" style="height: 168px !important;"> 
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <a href="javascript:;" class="btn btn-outline dark mapping-add" data-template="PGRpdiBjbGFzcz0iY29sLW1kLTEyIG1hcHBpbmctaXRlbSI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtMTIiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3M9ImNvbnRyb2wtbGFiZWwgZnVsbC13aWR0aCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBEb21haW5zCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvbGFiZWw+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzZWxlY3QgY2xhc3M9ImZvcm0tY29udHJvbCBicy1zZWxlY3QgZG9tYWlucy1tYXBwaW5nIiBkYXRhLWluZGV4PSIwIiB0aXRsZT0iU2VsZWN0IGEgRG9tYWluIC4uLiIgZGF0YS1saXZlLXNlYXJjaD0idHJ1ZSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkZG9tYWlucwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3NlbGVjdD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC02Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmb3JtLWdyb3VwIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzPSJjb250cm9sLWxhYmVsIGZ1bGwtd2lkdGgiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQXZhaWxhYmUgSVBzIFY0CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0ib3B0aW9ucy1zdW0iIHN0eWxlPSJtYXJnaW4tbGVmdDogNXB4OyI+KCAwIElQIFNlbGVjdGVkICk8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBtb3ZlLW9wdGlvbi12ZXJ0IiBkYXRhLWNvbnRhaW5lcj0iYm9keSIgZGF0YS1wbGFjZW1lbnQ9InRvcCIgZGF0YS10YXJnZXQ9Ii5pcHMtdjQtbWFwcGluZyIgZGF0YS1kaXI9InVwIiBkYXRhLW9yaWdpbmFsLXRpdGxlPSJNb3ZlIElwIFVwIiAgaHJlZj0iamF2YXNjcmlwdDo7IiBzdHlsZT0ibWFyZ2luLWxlZnQ6IDE1cHg7Y29sb3IgOiM1MjVlNjQ7Ij48aSBjbGFzcz0iZmEgZmEtYXJyb3ctdXAiPjwvaT48L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBtb3ZlLW9wdGlvbi12ZXJ0IiBkYXRhLWNvbnRhaW5lcj0iYm9keSIgZGF0YS1wbGFjZW1lbnQ9InRvcCIgZGF0YS10YXJnZXQ9Ii5pcHMtdjQtbWFwcGluZyIgZGF0YS1kaXI9ImRvd24iIGRhdGEtb3JpZ2luYWwtdGl0bGU9Ik1vdmUgSXAgRG93biIgIGhyZWY9ImphdmFzY3JpcHQ6OyIgc3R5bGU9Im1hcmdpbi1sZWZ0OiAxNXB4O2NvbG9yIDojNTI1ZTY0OyI+PGkgY2xhc3M9ImZhIGZhLWFycm93LWRvd24iPjwvaT48L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBkZXNlbGVjdC1hbGwtb3B0aW9ucyIgZGF0YS1jb250YWluZXI9ImJvZHkiIGRhdGEtdGFyZ2V0PSIuaXBzLXY0LW1hcHBpbmciIGRhdGEtcGxhY2VtZW50PSJ0b3AiIGRhdGEtb3JpZ2luYWwtdGl0bGU9IkRlc2VsZWN0IGFsbCBvcHRpb25zIiBocmVmPSJqYXZhc2NyaXB0OjsiIGRhdGEtc291cmNlPSJpcHMiIHN0eWxlPSJtYXJnaW4tbGVmdDogMTVweDtjb2xvciA6IzUyNWU2NDsiPjxpIGNsYXNzPSJmYSBmYS1iYW4iPjwvaT48L2E+IAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9InB1bGwtcmlnaHQgdG9vbHRpcHMgc2VsZWN0LWFsbC1vcHRpb25zIiBkYXRhLWNvbnRhaW5lcj0iYm9keSIgZGF0YS10YXJnZXQ9Ii5pcHMtdjQtbWFwcGluZyIgZGF0YS1wbGFjZW1lbnQ9InRvcCIgZGF0YS1vcmlnaW5hbC10aXRsZT0iU2VsZWN0IGFsbCBvcHRpb25zIiAgaHJlZj0iamF2YXNjcmlwdDo7IiBzdHlsZT0ibWFyZ2luLWxlZnQ6IDE1cHg7Y29sb3IgOiM1MjVlNjQ7Ij48aSBjbGFzcz0iZmEgZmEtbGlzdCI+PC9pPjwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNlbGVjdCBjbGFzcz0iZm9ybS1jb250cm9sIHNlbGVjdC1hY3Rpb25zIGlwcy12NC1tYXBwaW5nIiBkYXRhLWluZGV4PSIwIiBtdWx0aXBsZT0ibXVsdGlwbGUiIHN0eWxlPSJoZWlnaHQ6IDE2OHB4ICFpbXBvcnRhbnQ7Ij4gCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkaXBzdjQKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zZWxlY3Q+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC02Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmb3JtLWdyb3VwIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzPSJjb250cm9sLWxhYmVsIGZ1bGwtd2lkdGgiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQXZhaWxhYmUgSVBzIFY2CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0ib3B0aW9ucy1zdW0iIHN0eWxlPSJtYXJnaW4tbGVmdDogNXB4OyI+KCAwIElQIFNlbGVjdGVkICk8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBtb3ZlLW9wdGlvbi12ZXJ0IiBkYXRhLWNvbnRhaW5lcj0iYm9keSIgZGF0YS1wbGFjZW1lbnQ9InRvcCIgZGF0YS10YXJnZXQ9Ii5pcHMtdjYtbWFwcGluZyIgZGF0YS1kaXI9InVwIiBkYXRhLW9yaWdpbmFsLXRpdGxlPSJNb3ZlIElwIFVwIiAgaHJlZj0iamF2YXNjcmlwdDo7IiBzdHlsZT0ibWFyZ2luLWxlZnQ6IDE1cHg7Y29sb3IgOiM1MjVlNjQ7Ij48aSBjbGFzcz0iZmEgZmEtYXJyb3ctdXAiPjwvaT48L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBtb3ZlLW9wdGlvbi12ZXJ0IiBkYXRhLWNvbnRhaW5lcj0iYm9keSIgZGF0YS1wbGFjZW1lbnQ9InRvcCIgZGF0YS10YXJnZXQ9Ii5pcHMtdjYtbWFwcGluZyIgZGF0YS1kaXI9ImRvd24iIGRhdGEtb3JpZ2luYWwtdGl0bGU9Ik1vdmUgSXAgRG93biIgIGhyZWY9ImphdmFzY3JpcHQ6OyIgc3R5bGU9Im1hcmdpbi1sZWZ0OiAxNXB4O2NvbG9yIDojNTI1ZTY0OyI+PGkgY2xhc3M9ImZhIGZhLWFycm93LWRvd24iPjwvaT48L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBkZXNlbGVjdC1hbGwtb3B0aW9ucyIgZGF0YS1jb250YWluZXI9ImJvZHkiIGRhdGEtcGxhY2VtZW50PSJ0b3AiIGRhdGEtdGFyZ2V0PSIuaXBzLXY2LW1hcHBpbmciIGRhdGEtb3JpZ2luYWwtdGl0bGU9IkRlc2VsZWN0IGFsbCBvcHRpb25zIiBocmVmPSJqYXZhc2NyaXB0OjsiIGRhdGEtc291cmNlPSJpcHMiIHN0eWxlPSJtYXJnaW4tbGVmdDogMTVweDtjb2xvciA6IzUyNWU2NDsiPjxpIGNsYXNzPSJmYSBmYS1iYW4iPjwvaT48L2E+IAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9InB1bGwtcmlnaHQgdG9vbHRpcHMgc2VsZWN0LWFsbC1vcHRpb25zIiBkYXRhLWNvbnRhaW5lcj0iYm9keSIgZGF0YS1wbGFjZW1lbnQ9InRvcCIgZGF0YS10YXJnZXQ9Ii5pcHMtdjYtbWFwcGluZyIgZGF0YS1vcmlnaW5hbC10aXRsZT0iU2VsZWN0IGFsbCBvcHRpb25zIiAgaHJlZj0iamF2YXNjcmlwdDo7IiBzdHlsZT0ibWFyZ2luLWxlZnQ6IDE1cHg7Y29sb3IgOiM1MjVlNjQ7Ij48aSBjbGFzcz0iZmEgZmEtbGlzdCI+PC9pPjwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNlbGVjdCBjbGFzcz0iZm9ybS1jb250cm9sIHNlbGVjdC1hY3Rpb25zIGlwcy12Ni1tYXBwaW5nIiBkYXRhLWluZGV4PSIwIiBtdWx0aXBsZT0ibXVsdGlwbGUiIHN0eWxlPSJoZWlnaHQ6IDE2OHB4ICFpbXBvcnRhbnQ7Ij4gCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkaXBzdjYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zZWxlY3Q+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtMTIiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9ImphdmFzY3JpcHQ6OyIgY2xhc3M9ImJ0biByZWQgbWFwcGluZy1yZW1vdmUgcHVsbC1yaWdodCI+PGkgY2xhc3M9ImZhIGZhLWNsb3NlIj48L2k+IERlbGV0ZSBNYXBwaW5nPC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2Pg==">
+                    <i class="fa fa-plus"></i> Add Mapping
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Installation Progress and Log</span>
+                </div>
+                <div class="actions">
+                    <a id="start-installation" class="btn btn-outline dark pull-right" href="javascript:;"><i class="fa fa-terminal"></i> Proceed Installation</a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6>Installation Status : <span id="installation-status" style="font-weight: bold;">Nothing in progress !</span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="installation-log" class="scroller" style="padding: 13px;height:700px;background: #000 !important;color:#fff;font-family: monospace;border: 1px #ccc solid" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#555"></div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

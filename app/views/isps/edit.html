@@ -1,0 +1,35 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Isp <span class="bold">{echo $isp['name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="isps-form" action="{echo $app['base_url']}/isps/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="id" value="{echo $isp['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Isp Name</label>
+                            <input id="name" type="text" name="name" data-required="true" data-validation-message="Isp Name is Required !" class="form-control" placeholder="Enter Isp Name" value="{echo $isp['name']}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" {if($isp['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($isp['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="name" data-model="Isp" data-row-id="{echo $isp['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

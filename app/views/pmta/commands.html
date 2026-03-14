@@ -1,0 +1,136 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Manage PowerMta Commands</span>
+                </div>
+                <div class="actions">
+                    <a href="#servers-filter" data-toggle="modal" class="btn btn-outline dark servers-filter"><i class="fa fa-filter"></i> Filter Select </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="pmta-config-form" action="#" class="horizontal-form" method="POST">
+                    <input type="hidden" id="pmta-port" value="{echo $pmtaPort}" />
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Server Selection
+                                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                            </label>
+                                            <select id="commands-servers" class="form-control bs-select filter-servers" title="Select a Server ..." multiple data-actions-box="true" data-live-search="true"> 
+                                                {if(isset($servers) && count($servers)>0)}
+                                                    {foreach $row in $servers}
+                                                        <option value="{echo $row['id']}" data-main-ip="{echo $row['main_ip']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                                    {/foreach}
+                                                {/if}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Vmtas Filter
+                                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                            </label>
+                                            <select id="commands-vmtas" class="form-control bs-select filter-vmtas" title="Select a Vmta ..." multiple data-actions-box="true" data-live-search="true"> 
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Command Target ( Job / All ) Only in clean
+                                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                            </label>
+                                            <select id="command-target" class="form-control bs-select" title="Select a Target ..." data-live-search="true"> 
+                                                <option value="all">All</option>
+                                                <option value="my-jobs" selected>Only My Jobs</option>
+                                                <option value="my-drops">Only My Drops</option>
+                                                <option value="my-tests">Only My Tests</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Queues Names ( seperated by | )
+                                            </label>
+                                            <input id="commands-queues" type="text" class="form-control"  value=""  placeholder="All Queues">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                How Many Schedules
+                                            </label>
+                                            <input id="schedule-times" type="text" class="form-control input-number input-sm"  value="100">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Schedule Time ( in ms )
+                                            </label>
+                                            <input id="schedule-period" type="text" class="form-control input-number input-sm"  value="100">
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <a href="javascript:;" class="btn btn-outline red pmta-action-trigger" data-action="clean"><i class="fa fa-trash"></i> Clean </a>
+                                            <a href="javascript:;" class="btn btn-outline blue pmta-action-trigger" data-action="resume"><i class="fa fa-play"></i> Resume </a>
+                                            <a href="javascript:;" class="btn btn-outline yellow pmta-action-trigger" data-action="pause"><i class="fa fa-pause"></i> Pause </a>
+                                            <a href="javascript:;" class="btn btn-outline dark pmta-action-trigger" data-action="schedule"><i class="fa fa-clock-o"></i> Schedule </a>
+                                            <a href="javascript:;" class="btn btn-outline green pmta-action-trigger pull-right" data-action="reset"><i class="fa fa-stop"></i> Reset</a>
+                                            <a href="javascript:;" class="btn btn-outline dark pmta-action-trigger pull-right" style="margin-right: 5px;" data-action="reload"><i class="fa fa-cog"></i> Reload </a>
+                                            <a href="javascript:;" class="btn btn-outline red pmta-action-trigger pull-right" style="margin-right: 5px;" data-action="stop"><i class="fa fa-power-off"></i> Stop </a>
+                                            <a href="javascript:;" class="btn btn-outline blue pmta-action-trigger pull-right" style="margin-right: 5px;" data-action="restart"><i class="fa fa-spinner"></i> Restart </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Result Log</label>
+                                    <textarea id="log-result" class="form-control" style="height: 137px !important;background: #333;color: #fff;font-family: monospace" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="caption" style="margin-left: 5px;">
+                                PowerMta Monitors : 
+                                <a href="javascript:;" class="btn btn-outline green select-all-servers" style="margin-left:5px;"><i class="fa fa-list-alt"></i> Select All</a>
+                                <a href="javascript:;" class="btn btn-outline red deselect-all-servers" style="margin-left:5px;"><i class="fa fa-ban"></i> Deselect All</a>
+                                <span id="servers-sum" style="margin-left: 5px;">( 0 Servers Selected )</span>
+                                <input type="hidden" id="monitors-status" value="hidden"/>
+                                <a href="javascript:;" class="btn btn-outline green export-pmta-trigger pull-right"><i class="fa fa-link"></i> Open Monitors In Tabs</a>
+                                <a href="javascript:;" class="btn btn-outline blue show-pmta-trigger pull-right" style="margin-right: 5px;"><i class="fa fa-desktop"></i> Show Monitors </a>
+                                <a href="javascript:;" class="btn btn-outline red hide-pmta-trigger pull-right" style="margin-right: 5px;"><i class="fa fa-close"></i> Hide Monitors </a>
+                            </h4>
+                            <div class="col-md-12">
+                                <div class="row" id="pmtas-monitors">   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS -->
+{include includes/modals/servers_filter.html}
+<!-- MODALS -->

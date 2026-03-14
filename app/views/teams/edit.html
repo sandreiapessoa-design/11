@@ -1,0 +1,82 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Team <span class="bold">{echo $team['name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="teams-form" action="{echo $app['base_url']}/teams/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="id" value="{echo $team['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Team Name</label>
+                            <input id="name" type="text" name="name" data-required="true" data-validation-message="Team Name is Required !" class="form-control" placeholder="Enter Team Name" value="{echo $team['name']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" {if($team['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($team['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                ISP
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="isps" class="form-control bs-select" title="Select an ISP ..." name="isps[]" multiple data-actions-box="true" data-live-search="true" data-required="true" data-validation-message="Isp is Required !"> 
+                                {if(isset($isps) && count($isps)>0)}
+                                    {foreach $row in $isps}
+                                        <option value="{echo $row['id']}" {if(in_array($row['id'],explode(',',$team['isps_ids'])))} selected {/if}>{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Team Members
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="leaders" class="form-control bs-select" title="Select a User ..." name="team-members[]" multiple data-actions-box="true" data-live-search="true" data-required="true" data-validation-message="Team members are Required !">
+                                {if(isset($users) && count($users)>0)}
+                                    {foreach $row in $users}
+                                        <option value="{echo $row['id']}" {if(in_array($row['id'],explode(',',$team['team_members_ids'])))} selected {/if}>{echo $row['first_name'] . ' ' . $row['last_name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Team Leaders
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="leaders" class="form-control bs-select" title="Select a User ..." name="team-leaders[]" multiple data-actions-box="true" data-live-search="true" data-required="true" data-validation-message="Team leaders are Required !">
+                                {if(isset($users) && count($users)>0)}
+                                    {foreach $row in $users}
+                                        <option value="{echo $row['id']}" {if(in_array($row['id'],explode(',',$team['team_leaders_ids'])))} selected {/if}>{echo $row['first_name'] . ' ' . $row['last_name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="name" data-model="Team" data-row-id="{echo $team['id']}" data-package="Production"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

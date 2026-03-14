@@ -1,0 +1,58 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add Brands</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <div class="form-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="note note-info">
+                        <h4 class="caption"><i class="icon-info"></i> How to updload brands :</h4>
+                        <p> 
+                            - First of all , all brands should be in zip files , which means for every domain there is a zip file contains its landing page .
+                            <br/> - Second thing is that zip files should be named after the domain replacing dots with underscores that you want to link to ( eg : for domain.com => domain_com.zip )
+                            <br/> - Last but not index.html file should be renamed to home.html ( that's so important )
+                            <br/> - PS : if you want to replace our default brand website just rename the file to default.zip
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="brands-upload" action="{echo $app['base_url']}/domains/upload-brands.html" method="POST" enctype="multipart/form-data">
+                        <div class="row fileupload-buttonbar">
+                            <div class="col-lg-7">
+                                <span class="btn btn-outline green fileinput-button">
+                                    <i class="fa fa-plus"></i>
+                                    <span> Add files... </span>
+                                    <input id="file" type="file" name="files[]" multiple=""> </span>
+                                <button type="submit" class="btn btn-outline blue start">
+                                    <i class="fa fa-upload"></i>
+                                    <span> Start upload </span>
+                                </button>
+                                <button type="reset" class="btn btn-outline warning cancel">
+                                    <i class="fa fa-ban-circle"></i>
+                                    <span> Cancel upload </span>
+                                </button>
+                                <span class="fileupload-process"> </span>
+                            </div>
+                            <div class="col-lg-5 fileupload-progress fade">
+                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-success" style="width:0%;"> </div>
+                                </div>
+                                <div class="progress-extended"> &nbsp; </div>
+                            </div>
+                        </div>
+                        <table role="presentation" class="table table-striped clearfix">
+                            <tbody class="files"> </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            {echo $scripts}
+        </div>
+    </div>
+</div>

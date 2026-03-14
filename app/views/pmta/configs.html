@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Manage PowerMta Main Configs</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="pmta-config-form" action="#" class="horizontal-form" method="POST">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Server Selection
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="servers" class="form-control bs-select" title="Select a Server ..." data-live-search="true"> 
+                                        {if(isset($servers) && count($servers)>0)}
+                                            {foreach $row in $servers}
+                                                <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Parameters
+                                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                            </label>
+                                            <select id="parameters" class="form-control bs-select configs-type" data-type="parameters" title="Select a Config ..." data-live-search="true" disabled> 
+                                                <option value="pmta_accounting">Accounting Files Config</option>
+                                                <option value="pmta_isps">ISPs Config</option>
+                                                <option value="pmta_bounce_rules">Bounce Rules Config</option>
+                                                <option value="pmta_http">Http Config</option>
+                                                <option value="pmta_log">Logs Config</option>
+                                                <option value="pmta_mail_access">Mail Access Config</option>
+                                                <option value="pmta_smtp_listener">Smtp Listeners Config</option>
+                                                <option value="pmta_sources">Sources Config</option>
+                                                <option value="pmta_spool">Spool Config</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Result Config</label>
+                                            <textarea id="parameters-result" class="form-control" style="height: 500px!important;color: #fff;background: #000;font-family: monospace" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="javascript:;" class="btn btn-outline dark pull-right update-config" data-type="parameters"><i class="fa fa-refresh"></i> Update Config</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label full-width">
+                                                Vmtas
+                                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                            </label>
+                                            <select id="vmtas" class="form-control bs-select configs-type" data-type="vmtas" title="Select a Vmta ..." data-live-search="true" disabled> 
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Result Config</label>
+                                            <textarea id="vmtas-result" class="form-control" style="height: 500px!important;color: #fff;background: #000;font-family: monospace" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="javascript:;" class="btn btn-outline dark pull-right update-config" data-type="vmtas"><i class="fa fa-refresh"></i> Update Config</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

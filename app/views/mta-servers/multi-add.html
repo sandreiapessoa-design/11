@@ -1,0 +1,59 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add Multiple Mta Servers</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="management-servers-form" action="{echo $app['base_url']}/mta-servers/multi-save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Server Prefix Name</label>
+                            <input id="server-prefix-name" type="text" name="server-prefix-name" class="form-control" data-required="true" data-validation-message="Server Prefix Name is Required !" placeholder="Enter Prefix Server Name">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Server Provider</label> 
+                            <select id="server-provider" class="form-control bs-select" data-required="true" data-validation-message="Server Provider is Required !" title="Select a Server Provider ..." name="server-provider"> 
+                                {if(isset($serversProviders) && count($serversProviders)>0)}
+                                    {foreach $row in $serversProviders}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Username</label>
+                            <input id="server-username" type="text" name="server-username" class="form-control" placeholder="Enter Username" data-required="true" data-validation-message="Servers SSH User is Required !" value="root">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input id="server-password" type="password" name="server-password" class="form-control" placeholder="Enter Password" data-required="true" data-validation-message="Servers SSH Password is Required !">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Main IPs List ( Separated by lines )</label>
+                            <textarea id="main-ips" name="main-ips" class="form-control" style="height: 250px!important" data-required="true" data-validation-message="Servers Main IPs is Required !"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit User : <span class="bold">{echo $user['first_name']} {echo $user['last_name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="users-form" action="{echo $app['base_url']}/users/save.html" class="horizontal-form validate" method="POST"  enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{echo $user['id']}"/>
+            <div class="form-body">
+                <div class="row" style="margin-bottom: 30px">
+                    <div class="col-md-2">
+                        <label class="control-label">Avatar Image</label>
+                        <br/>
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;"> </div>
+                            <div>
+                                <span class="btn btn-outline default btn-file pull-right">
+                                    <span class="fileinput-new"> Select image </span>
+                                    <span class="fileinput-exists"> Change </span>
+                                    <input type="file" name="avatar-image"> </span>
+                                <a href="javascript:;" class="btn btn-outline red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Production Id</label>
+                                    <input type="text" name="production-id" class="form-control" data-required="true" data-validation-message="Production Id is Required !" placeholder="Enter Production Id" value="{echo $user['production_id']}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">First Name</label>
+                                    <input type="text" name="first-name" class="form-control" data-required="true" data-validation-message="First Name is Required !" placeholder="Enter First Name" value="{echo $user['first_name']}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Last Name</label>
+                                    <input type="text" name="last-name" class="form-control" data-required="true" data-validation-message="Last Name is Required !" placeholder="Enter Last Name" value="{echo $user['last_name']}">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Super User Status</label>
+                                    <select class="form-control bs-select" title="Select a Super User Status ..." name="superuser-status">
+                                        <option value="Enabled" {if($user['master_access'] == 'Enabled')} selected {/if} >Enabled</option>
+                                        <option value="Disabled" {if($user['master_access'] == 'Disabled')} selected {/if} >Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                        <option value="Activated" {if($user['status'] == 'Activated')} selected {/if} >Activated</option>
+                                        <option value="Inactivated" {if($user['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input type="text" name="email" class="form-control" data-required="true" data-validation-message="Email is Required !" placeholder="Enter Email" value="{echo $user['email']}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Password</label>
+                                    <input type="password" name="password" class="form-control" placeholder="Enter New Password To Update it">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="production_id|email" data-input-ids="production-id|email" data-model="User" data-row-id="{echo $user['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

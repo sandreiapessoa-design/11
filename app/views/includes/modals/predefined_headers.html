@@ -1,0 +1,30 @@
+<div id="headers-display" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Select Headers</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Predefined Headers</label>
+                            <select id="predefined-headers" class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select a Predefined Headers ...">
+                                {if(isset($headers) && count($headers) > 0)}
+                                    {foreach $header in $headers}
+                                        <option value="{echo $header['id']}" data-header-content="{echo $header['header']}">{echo $header['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="apply-headers" href="javascript:;" class="btn btn-outline blue btn-outline">Apply</a>
+                <button type="button" data-dismiss="modal" class="btn btn-outline dark btn-outline">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

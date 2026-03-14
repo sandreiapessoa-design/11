@@ -1,0 +1,53 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Namecom Account <span class="bold">{echo $account['name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="namecom-accounts-form" action="{echo $app['base_url']}/namecom-accounts/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="id" value="{echo $account['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Namecom Account Name</label>
+                            <input type="text" name="namecom-name" class="form-control" data-required="true" data-validation-message="Namecom Account Name is Required !" placeholder="Enter Namecom Account Name" value="{echo $account['name']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="namecom-status">
+                                <option value="Activated" {if($account['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($account['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Namecom User</label>
+                            <input type="text" name="namecom-user" class="form-control" data-required="true" data-validation-message="Namecom User is Required !" placeholder="Enter Namecom User" value="{echo $account['username']}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Namecom API Key</label>
+                            <input type="text" name="namecom-api-key" class="form-control" data-required="true" data-validation-message="Namecom API Key is Required !" placeholder="Enter Namecom API Key" value="{echo $account['api_key']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Namecom Whitelist IP</label>
+                            <input type="text" name="namecom-whitelised-ip" class="form-control" data-required="true" data-validation-message="Namecom Whitelist IP is Required !" placeholder="Enter Namecom Whitelist IP" value="{echo $account['white_listed_ip']}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="namecom-name" data-model="Namecom" data-row-id="{echo $account['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

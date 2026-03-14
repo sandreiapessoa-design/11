@@ -1,0 +1,66 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Vultr Account</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="vultr-accounts-form" action="{echo $app['base_url']}/vultr-accounts/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Vultr Account Name</label>
+                            <input type="text" name="vultr-name" class="form-control" data-required="true" data-validation-message="Vultr Account Name is Required !" placeholder="Enter Vultr Account Name">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="vultr-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="control-label">Vultr Api key</label>
+                            <input type="text" name="vultr-token" class="form-control" data-required="true" data-validation-message="Vultr Api key is Required !" placeholder="Enter Vultr Api key">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Vultr Proxy IP</label>
+                            <input type="text" name="vultr-proxy-ip" class="form-control" placeholder="Enter Vultr Proxy IP (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Vultr Proxy Port</label>
+                            <input type="text" name="vultr-proxy-port" class="form-control input-number" placeholder="Enter Vultr Proxy Port (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Vultr Proxy Username</label>
+                            <input type="text" name="vultr-proxy-username" class="form-control" placeholder="Enter Vultr Username (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Vultr Proxy Password</label>
+                            <input type="text" name="vultr-proxy-password" class="form-control" placeholder="Enter Vultr Password (Optional)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="vultr-name" data-model="VultrAccount" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

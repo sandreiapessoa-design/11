@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />  
+    <title>{echo $app['name']}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="IR Team" name="author" />
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <!-- BEGIN GLOBAL FONTS STYLES -->
+    {include includes/core_fonts.html}
+    <!-- END GLOBAL FONTS STYLES -->
+
+    <!-- BEGIN PAGE GLOBAL STYLES -->
+    {include includes/core_styles.html}
+    <!-- END PAGE GLOBAL STYLES -->
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    {include $__page/includes/styles.html}
+    <!-- END PAGE LEVEL STYLES -->
+
+    <!-- BEGIN FAVICON -->
+    <link rel="shortcut icon" href="{echo $app['base_url']}/images/logos/iresponse_icon.ico" /> 
+    <!-- END FAVICON -->  
+</head>
+<body class=" login">
+    <!-- BEGIN PRE-LOADER -->
+    <section class="wrapper" style="opacity: 0.7 !important;">
+        <div class="spinner"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </section>
+    <!-- END PRE-LOADER -->
+    <!-- BEGIN LOGIN -->
+    <div class="content" style="display: none;">
+        <!-- BEGIN LOGIN FORM -->
+        <form class="login-form validate" action="{echo $app['base_url']}/auth/login.html" method="post">
+            <h3 class="form-title"><img src="{echo $app['base_url']}/images/logos/iresponse-black.png" alt="{echo $app['name']}"/></h3>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Email</label>
+                <div class="input-icon"><i class="fa fa-user" style="margin-top: 7px;margin-left: 6px;"></i><input class="form-control placeholder-no-fix" data-validation-message="Email is Required !" data-required="true" type="text" autocomplete="off" placeholder="Your Email" name="email" /> </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <div class="input-icon"><i class="fa fa-lock" style="margin-top: 7px;margin-left: 6px;"></i><input class="form-control placeholder-no-fix" data-validation-message="Password is Required !" data-required="true" type="password" autocomplete="off" placeholder="Password" name="password" /> </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary  submit-loading"><i class="fas fa-sign-in-alt"></i> Login </button>
+            </div>
+        </form>
+        <!-- END LOGIN FORM -->
+    </div>
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright" style="display: none;"> 
+        {echo $app['name']} {echo FW_RELEASE_DATE} ( {echo $app['company']} )
+    </div>
+    <!-- END COPYRIGHT -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- BEGIN CORE PLUGINS -->   
+    {include includes/core_plugins.html}
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN CORE PLUGINS -->   
+    {include includes/core_scripts.html}
+    <!-- END CORE PLUGINS -->
+    <!-- END JAVASCRIPTS -->
+    <!-- BEGIN PREV MESSAGE -->
+    {if(isset($prev_action_message))}
+        {echo $prev_action_message}
+    {/if}
+    <!-- END PREV MESSAGE -->
+    <!-- BEGIN PRE-LOADER REMOVER -->
+    <script>
+    $(function(){ 
+        $("section.wrapper").fadeOut(500);
+        $(".logo").css("display","block");
+        $(".content").css("display","block");
+        $(".copyright").css("display","block");
+        $(".page-content").css("min-height", ($(window).height() - 170) + "px"); 
+    }); 
+    </script>
+    <!-- END PRE-LOADER REMOVER -->
+</body>
+</html>

@@ -1,0 +1,399 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Create AWS EC2 Instances</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="amazon-accounts-form" action="#" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Accounts</label>
+                            <select id="aws-accounts" class="form-control bs-select" data-live-search="true"> 
+                                {if(isset($accounts) && count($accounts)>0)}
+                                    {foreach $row in $accounts}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Number Of Instances</label>
+                            <input id="aws-nb-of-instances" type="text" class="form-control input-number" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Region</label>
+                            <select id="aws-regions" class="form-control bs-select" title="Select a Region ..." data-actions-box="true" data-live-search="true" multiple>
+                                <option value="us-east-1">US East (N. Virginia)</option>
+                                <option value="us-east-2" selected>US East (Ohio)</option>
+                                <option value="us-west-1">US West (N. California)</option>
+                                <option value="us-west-2">US West (Oregon)</option>
+                                <option value="ap-east-1">Asia Pacific (Hong Kong)</option>
+                                <option value="ap-south-1">Asia Pacific (Mumbai)</option>
+                                <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+                                <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+                                <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+                                <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+                                <option value="ca-central-1">Canada (Central)</option>
+                                <option value="eu-central-1">EU (Frankfurt)</option>
+                                <option value="eu-west-1">EU (Ireland)</option>
+                                <option value="eu-west-2">EU (London)</option>
+                                <option value="eu-west-3">EU (Paris)</option>
+                                <option value="eu-north-1">EU (Stockholm)</option>
+                                <option value="me-south-1">Middle East (Bahrain)</option>
+                                <option value="sa-east-1">South America (São Paulo)</option> 
+                            </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Private Ips</label>
+                            <input id="aws-instance-nb-ips" type="text" class="form-control input-number" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Storage (GB)</label>
+                            <input id="aws-instance-storage" type="text" class="form-control input-number" value="8">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                DNS Account
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="accounts" class="form-control bs-select" title="Select Account ..." name="account-id" data-live-search="true" data-required="true" data-validation-message="Account is Required !">
+                                <option value="none|0">None</option>
+                                {if(isset($dnsaccounts) && count($dnsaccounts))}
+                                    {foreach $account in $dnsaccounts}
+                                        <option value="{echo $account['type']}|{echo $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Domains
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="aws-domains" class="form-control bs-select" data-live-search="true" data-actions-box="true" data-live-search="true" multiple> 
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Operating System</label>
+                            <select id="aws-os" class="form-control bs-select" title="Select an Operating System ...">
+                                <option value="centos-6" selected>CentOS 6</option>
+                                <option value="centos-7">CentOS 7</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Instance Type</label>
+                            <select id="aws-instance-type" class="form-control bs-select" title="Select a Type ..." data-live-search="true">
+                                <option value="T1Micro" selected>T1Micro</option>
+                                <option value="T2Nano" >T2Nano</option>
+                                <option value="T2Micro" >T2Micro</option>
+                                <option value="T2Small" >T2Small</option>
+                                <option value="T2Medium" >T2Medium</option>
+                                <option value="T2Large" >T2Large</option>
+                                <option value="T2Xlarge" >T2Xlarge</option>
+                                <option value="T22xlarge" >T22xlarge</option>
+                                <option value="T3Nano" >T3Nano</option>
+                                <option value="T3Micro" >T3Micro</option>
+                                <option value="T3Small" >T3Small</option>
+                                <option value="T3Medium" >T3Medium</option>
+                                <option value="T3Large" >T3Large</option>
+                                <option value="T3Xlarge" >T3Xlarge</option>
+                                <option value="T32xlarge" >T32xlarge</option>
+                                <option value="T3aNano" >T3aNano</option>
+                                <option value="T3aMicro" >T3aMicro</option>
+                                <option value="T3aSmall" >T3aSmall</option>
+                                <option value="T3aMedium" >T3aMedium</option>
+                                <option value="T3aLarge" >T3aLarge</option>
+                                <option value="T3aXlarge" >T3aXlarge</option>
+                                <option value="T3a2xlarge" >T3a2xlarge</option>
+                                <option value="M1Small" >M1Small</option>
+                                <option value="M1Medium" >M1Medium</option>
+                                <option value="M1Large" >M1Large</option>
+                                <option value="M1Xlarge" >M1Xlarge</option>
+                                <option value="M3Medium" >M3Medium</option>
+                                <option value="M3Large" >M3Large</option>
+                                <option value="M3Xlarge" >M3Xlarge</option>
+                                <option value="M32xlarge" >M32xlarge</option>
+                                <option value="M4Large" >M4Large</option>
+                                <option value="M4Xlarge" >M4Xlarge</option>
+                                <option value="M42xlarge" >M42xlarge</option>
+                                <option value="M44xlarge" >M44xlarge</option>
+                                <option value="M410xlarge" >M410xlarge</option>
+                                <option value="M416xlarge" >M416xlarge</option>
+                                <option value="M2Xlarge" >M2Xlarge</option>
+                                <option value="M22xlarge" >M22xlarge</option>
+                                <option value="M24xlarge" >M24xlarge</option>
+                                <option value="Cr18xlarge" >Cr18xlarge</option>
+                                <option value="R3Large" >R3Large</option>
+                                <option value="R3Xlarge" >R3Xlarge</option>
+                                <option value="R32xlarge" >R32xlarge</option>
+                                <option value="R34xlarge" >R34xlarge</option>
+                                <option value="R38xlarge" >R38xlarge</option>
+                                <option value="R4Large" >R4Large</option>
+                                <option value="R4Xlarge" >R4Xlarge</option>
+                                <option value="R42xlarge" >R42xlarge</option>
+                                <option value="R44xlarge" >R44xlarge</option>
+                                <option value="R48xlarge" >R48xlarge</option>
+                                <option value="R416xlarge" >R416xlarge</option>
+                                <option value="R5Large" >R5Large</option>
+                                <option value="R5Xlarge" >R5Xlarge</option>
+                                <option value="R52xlarge" >R52xlarge</option>
+                                <option value="R54xlarge" >R54xlarge</option>
+                                <option value="R58xlarge" >R58xlarge</option>
+                                <option value="R512xlarge" >R512xlarge</option>
+                                <option value="R516xlarge" >R516xlarge</option>
+                                <option value="R524xlarge" >R524xlarge</option>
+                                <option value="R5Metal" >R5Metal</option>
+                                <option value="R5aLarge" >R5aLarge</option>
+                                <option value="R5aXlarge" >R5aXlarge</option>
+                                <option value="R5a2xlarge" >R5a2xlarge</option>
+                                <option value="R5a4xlarge" >R5a4xlarge</option>
+                                <option value="R5a8xlarge" >R5a8xlarge</option>
+                                <option value="R5a12xlarge" >R5a12xlarge</option>
+                                <option value="R5a16xlarge" >R5a16xlarge</option>
+                                <option value="R5a24xlarge" >R5a24xlarge</option>
+                                <option value="R5dLarge" >R5dLarge</option>
+                                <option value="R5dXlarge" >R5dXlarge</option>
+                                <option value="R5d2xlarge" >R5d2xlarge</option>
+                                <option value="R5d4xlarge" >R5d4xlarge</option>
+                                <option value="R5d8xlarge" >R5d8xlarge</option>
+                                <option value="R5d12xlarge" >R5d12xlarge</option>
+                                <option value="R5d16xlarge" >R5d16xlarge</option>
+                                <option value="R5d24xlarge" >R5d24xlarge</option>
+                                <option value="R5dMetal" >R5dMetal</option>
+                                <option value="R5adLarge" >R5adLarge</option>
+                                <option value="R5adXlarge" >R5adXlarge</option>
+                                <option value="R5ad2xlarge" >R5ad2xlarge</option>
+                                <option value="R5ad4xlarge" >R5ad4xlarge</option>
+                                <option value="R5ad8xlarge" >R5ad8xlarge</option>
+                                <option value="R5ad12xlarge" >R5ad12xlarge</option>
+                                <option value="R5ad16xlarge" >R5ad16xlarge</option>
+                                <option value="R5ad24xlarge" >R5ad24xlarge</option>
+                                <option value="X116xlarge" >X116xlarge</option>
+                                <option value="X132xlarge" >X132xlarge</option>
+                                <option value="X1eXlarge" >X1eXlarge</option>
+                                <option value="X1e2xlarge" >X1e2xlarge</option>
+                                <option value="X1e4xlarge" >X1e4xlarge</option>
+                                <option value="X1e8xlarge" >X1e8xlarge</option>
+                                <option value="X1e16xlarge" >X1e16xlarge</option>
+                                <option value="X1e32xlarge" >X1e32xlarge</option>
+                                <option value="I2Xlarge" >I2Xlarge</option>
+                                <option value="I22xlarge" >I22xlarge</option>
+                                <option value="I24xlarge" >I24xlarge</option>
+                                <option value="I28xlarge" >I28xlarge</option>
+                                <option value="I3Large" >I3Large</option>
+                                <option value="I3Xlarge" >I3Xlarge</option>
+                                <option value="I32xlarge" >I32xlarge</option>
+                                <option value="I34xlarge" >I34xlarge</option>
+                                <option value="I38xlarge" >I38xlarge</option>
+                                <option value="I316xlarge" >I316xlarge</option>
+                                <option value="I3Metal" >I3Metal</option>
+                                <option value="I3enLarge" >I3enLarge</option>
+                                <option value="I3enXlarge" >I3enXlarge</option>
+                                <option value="I3en2xlarge" >I3en2xlarge</option>
+                                <option value="I3en3xlarge" >I3en3xlarge</option>
+                                <option value="I3en6xlarge" >I3en6xlarge</option>
+                                <option value="I3en12xlarge" >I3en12xlarge</option>
+                                <option value="I3en24xlarge" >I3en24xlarge</option>
+                                <option value="I3enMetal" >I3enMetal</option>
+                                <option value="Hi14xlarge" >Hi14xlarge</option>
+                                <option value="Hs18xlarge" >Hs18xlarge</option>
+                                <option value="C1Medium" >C1Medium</option>
+                                <option value="C1Xlarge" >C1Xlarge</option>
+                                <option value="C3Large" >C3Large</option>
+                                <option value="C3Xlarge" >C3Xlarge</option>
+                                <option value="C32xlarge" >C32xlarge</option>
+                                <option value="C34xlarge" >C34xlarge</option>
+                                <option value="C38xlarge" >C38xlarge</option>
+                                <option value="C4Large" >C4Large</option>
+                                <option value="C4Xlarge" >C4Xlarge</option>
+                                <option value="C42xlarge" >C42xlarge</option>
+                                <option value="C44xlarge" >C44xlarge</option>
+                                <option value="C48xlarge" >C48xlarge</option>
+                                <option value="C5Large" >C5Large</option>
+                                <option value="C5Xlarge" >C5Xlarge</option>
+                                <option value="C52xlarge" >C52xlarge</option>
+                                <option value="C54xlarge" >C54xlarge</option>
+                                <option value="C59xlarge" >C59xlarge</option>
+                                <option value="C512xlarge" >C512xlarge</option>
+                                <option value="C518xlarge" >C518xlarge</option>
+                                <option value="C524xlarge" >C524xlarge</option>
+                                <option value="C5Metal" >C5Metal</option>
+                                <option value="C5dLarge" >C5dLarge</option>
+                                <option value="C5dXlarge" >C5dXlarge</option>
+                                <option value="C5d2xlarge" >C5d2xlarge</option>
+                                <option value="C5d4xlarge" >C5d4xlarge</option>
+                                <option value="C5d9xlarge" >C5d9xlarge</option>
+                                <option value="C5d18xlarge" >C5d18xlarge</option>
+                                <option value="C5nLarge" >C5nLarge</option>
+                                <option value="C5nXlarge" >C5nXlarge</option>
+                                <option value="C5n2xlarge" >C5n2xlarge</option>
+                                <option value="C5n4xlarge" >C5n4xlarge</option>
+                                <option value="C5n9xlarge" >C5n9xlarge</option>
+                                <option value="C5n18xlarge" >C5n18xlarge</option>
+                                <option value="Cc14xlarge" >Cc14xlarge</option>
+                                <option value="Cc28xlarge" >Cc28xlarge</option>
+                                <option value="G22xlarge" >G22xlarge</option>
+                                <option value="G28xlarge" >G28xlarge</option>
+                                <option value="G34xlarge" >G34xlarge</option>
+                                <option value="G38xlarge" >G38xlarge</option>
+                                <option value="G316xlarge" >G316xlarge</option>
+                                <option value="G3sXlarge" >G3sXlarge</option>
+                                <option value="Cg14xlarge" >Cg14xlarge</option>
+                                <option value="P2Xlarge" >P2Xlarge</option>
+                                <option value="P28xlarge" >P28xlarge</option>
+                                <option value="P216xlarge" >P216xlarge</option>
+                                <option value="P32xlarge" >P32xlarge</option>
+                                <option value="P38xlarge" >P38xlarge</option>
+                                <option value="P316xlarge" >P316xlarge</option>
+                                <option value="P3dn24xlarge" >P3dn24xlarge</option>
+                                <option value="D2Xlarge" >D2Xlarge</option>
+                                <option value="D22xlarge" >D22xlarge</option>
+                                <option value="D24xlarge" >D24xlarge</option>
+                                <option value="D28xlarge" >D28xlarge</option>
+                                <option value="F12xlarge" >F12xlarge</option>
+                                <option value="F14xlarge" >F14xlarge</option>
+                                <option value="F116xlarge" >F116xlarge</option>
+                                <option value="M5Large" >M5Large</option>
+                                <option value="M5Xlarge" >M5Xlarge</option>
+                                <option value="M52xlarge" >M52xlarge</option>
+                                <option value="M54xlarge" >M54xlarge</option>
+                                <option value="M58xlarge" >M58xlarge</option>
+                                <option value="M512xlarge" >M512xlarge</option>
+                                <option value="M516xlarge" >M516xlarge</option>
+                                <option value="M524xlarge" >M524xlarge</option>
+                                <option value="M5Metal" >M5Metal</option>
+                                <option value="M5aLarge" >M5aLarge</option>
+                                <option value="M5aXlarge" >M5aXlarge</option>
+                                <option value="M5a2xlarge" >M5a2xlarge</option>
+                                <option value="M5a4xlarge" >M5a4xlarge</option>
+                                <option value="M5a8xlarge" >M5a8xlarge</option>
+                                <option value="M5a12xlarge" >M5a12xlarge</option>
+                                <option value="M5a16xlarge" >M5a16xlarge</option>
+                                <option value="M5a24xlarge" >M5a24xlarge</option>
+                                <option value="M5dLarge" >M5dLarge</option>
+                                <option value="M5dXlarge" >M5dXlarge</option>
+                                <option value="M5d2xlarge" >M5d2xlarge</option>
+                                <option value="M5d4xlarge" >M5d4xlarge</option>
+                                <option value="M5d8xlarge" >M5d8xlarge</option>
+                                <option value="M5d12xlarge" >M5d12xlarge</option>
+                                <option value="M5d16xlarge" >M5d16xlarge</option>
+                                <option value="M5d24xlarge" >M5d24xlarge</option>
+                                <option value="M5dMetal" >M5dMetal</option>
+                                <option value="M5adLarge" >M5adLarge</option>
+                                <option value="M5adXlarge" >M5adXlarge</option>
+                                <option value="M5ad2xlarge" >M5ad2xlarge</option>
+                                <option value="M5ad4xlarge" >M5ad4xlarge</option>
+                                <option value="M5ad8xlarge" >M5ad8xlarge</option>
+                                <option value="M5ad12xlarge" >M5ad12xlarge</option>
+                                <option value="M5ad16xlarge" >M5ad16xlarge</option>
+                                <option value="M5ad24xlarge" >M5ad24xlarge</option>
+                                <option value="H12xlarge" >H12xlarge</option>
+                                <option value="H14xlarge" >H14xlarge</option>
+                                <option value="H18xlarge" >H18xlarge</option>
+                                <option value="H116xlarge" >H116xlarge</option>
+                                <option value="Z1dLarge" >Z1dLarge</option>
+                                <option value="Z1dXlarge" >Z1dXlarge</option>
+                                <option value="Z1d2xlarge" >Z1d2xlarge</option>
+                                <option value="Z1d3xlarge" >Z1d3xlarge</option>
+                                <option value="Z1d6xlarge" >Z1d6xlarge</option>
+                                <option value="Z1d12xlarge" >Z1d12xlarge</option>
+                                <option value="Z1dMetal" >Z1dMetal</option>
+                                <option value="U6tb1Metal" >U6tb1Metal</option>
+                                <option value="U9tb1Metal" >U9tb1Metal</option>
+                                <option value="U12tb1Metal" >U12tb1Metal</option>
+                                <option value="A1Medium" >A1Medium</option>
+                                <option value="A1Large" >A1Large</option>
+                                <option value="A1Xlarge" >A1Xlarge</option>
+                                <option value="A12xlarge" >A12xlarge</option>
+                                <option value="A14xlarge" >A14xlarge</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Subnets Filter ( Sep By | )</label>
+                            <input id="aws-subnets-filter" type="text" class="form-control" value="" placeholder="0.0.0.0/24 | 0.0.0.0/22">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark create-aws-instances"><i class="fa fa-plus"></i> Create Instances</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">AWS Instances Creation Processes List</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm red stop-process"><i class="fa fa-stop"></i> Stop Process</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="ec2-processes" action="{echo $app['base_url']}/amazon-instances/get-processes.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#ec2-processes .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

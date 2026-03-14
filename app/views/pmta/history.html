@@ -1,0 +1,63 @@
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-grey-mint"></i>
+            <span class="caption-subject font-grey-mint uppercase">Pmta Commands History</span>
+        </div>
+        <div class="actions">
+            <div class="btn-group">
+                <a class="btn grey-mint btn-outline" href="javascript:;" data-toggle="dropdown">
+                    <i class="fa fa-cogs"></i>
+                    <span class="hidden-xs"> Tools </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu pull-right data-list-tools">
+                    <li><a href="javascript:;" data-action="0" data-table-id="history" class="tool-action"><i class="icon-printer"></i> Print</a></li>
+                    <li><a href="javascript:;" data-action="1" data-table-id="history" class="tool-action"><i class="icon-check"></i> Copy</a></li>
+                    <li><a href="javascript:;" data-action="2" data-table-id="history" class="tool-action"><i class="icon-doc"></i> PDF</a></li>
+                    <li><a href="javascript:;" data-action="4" data-table-id="history" class="tool-action"><i class="icon-cloud-upload"></i> CSV</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-sm btn-outline red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="history" action="{echo $app['base_url']}/pmta/get.html" order="DESC">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#history .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-grey-mint filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,308 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Offer {echo $offer['name']}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="offers-form" action="{echo $app['base_url']}/offers/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden"id="offer-id"  name="id" value="{echo $offer['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Offer Name</label>
+                            <input id="offer-name" type="text" class="form-control"  name="offer-name" data-required="true" data-validation-message="Offer Name is Required !" placeholder="Enter Offer Name" value="{echo $offer['name']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Offer Production Id</label>
+                            <input type="text" name="production-id" class="form-control" placeholder="Enter Offer Production ID" data-required="true" data-validation-message="Offer Production Id is Required !" value="{echo $offer['production_id']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Offer Campaign Id</label>
+                            <input type="text" name="campaign-id" class="form-control" placeholder="Enter Offer Campaign ID" data-required="true" data-validation-message="Offer Production Id is Required !" value="{echo $offer['campaign_id']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="offer-status">
+                                <option value="Activated" {if($offer['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($offer['status'] == 'Inactivated')} selected {/if}>Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Network</label>
+                            <select class="form-control bs-select" title="Select a Affiliate Network ..." name="affiliate-network-id" data-required="true" data-validation-message="Offer Affiliate Network is Required !">
+                                {if(isset($affiliateNetworks) && count($affiliateNetworks) > 0)}
+                                    {foreach $affiliateNetwork in $affiliateNetworks}
+                                        <option value="{echo $affiliateNetwork['id']}" {if($offer['affiliate_network_id'] == $affiliateNetwork['id'])} selected {/if}>{echo $affiliateNetwork['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Verticals
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select Verticals ..." name="vertical-ids[]" data-required="true" data-validation-message="Offer Vertical is Required !">
+                                {if(isset($verticals) && count($verticals) > 0)}
+                                    {foreach $vertical in $verticals}
+                                        <option value="{echo $vertical['id']}" {if(in_array($vertical['id'],explode(',',$offer['verticals_ids'])))} selected {/if}>{echo $vertical['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Countries
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="countries" class="form-control bs-select" data-countries="{echo $offer['countries']}" multiple data-actions-box="true" data-live-search="true" title="Select Countries ..." name="countries[]" data-required="true" data-validation-message="Offer Country is Required !">
+                                {include includes/countries.html}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Available Days</label>
+                            <select class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select Days ..." name="days[]" data-required="true" data-validation-message="Offer Days is Required !">
+                                <option value="mon" {if(in_array('mon',explode(',',$offer['available_days'])))} selected {/if}>Monday</option>
+                                <option value="tue" {if(in_array('tue',explode(',',$offer['available_days'])))} selected {/if}>Tuesday</option>
+                                <option value="wed" {if(in_array('wed',explode(',',$offer['available_days'])))} selected {/if}>Wednesday</option>
+                                <option value="thu" {if(in_array('thu',explode(',',$offer['available_days'])))} selected {/if}>Thursday</option>
+                                <option value="fri" {if(in_array('fri',explode(',',$offer['available_days'])))} selected {/if}>Friday</option>
+                                <option value="sat" {if(in_array('sat',explode(',',$offer['available_days'])))} selected {/if}>Saturday</option>
+                                <option value="sun" {if(in_array('sun',explode(',',$offer['available_days'])))} selected {/if}>Sunday</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <textarea class="form-control" style="height: 200px !important;" name="description" spellcheck="false">{echo htmlentities(base64_decode($offer['description']))}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Rules</label>
+                            <textarea class="form-control" style="height: 200px !important;" name="rules" spellcheck="false">{echo htmlentities(base64_decode($offer['rules']))}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Payout Type</label>
+                            <select class="form-control bs-select" title="Select a Payout Type ..." name="payout-type">
+                                <option value="CPA" {if($offer['type'] == 'CPA')} selected {/if} >CPA</option>
+                                <option value="CPC" {if($offer['type'] == 'CPC')} selected {/if}>CPC</option>
+                                <option value="CPC" {if($offer['type'] == 'REVSHARE')} selected {/if}>REVSHARE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Payout Amount</label>
+                            <input type="text" name="payout-amount" class="form-control" placeholder="Enter Payout Amount" data-required="true" data-validation-message="Offer Pay-out is Required !" value="{echo $offer['payout']}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"> 
+                            <label class="control-label">Expiration Date</label>
+                            <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                                <input id="offer-expiration-date" type="text" class="form-control" readonly name="expiration-date" data-required="true" data-validation-message="Expiration Date is Required !" value="{echo $offer['expiration_date']}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-outline default" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">Default Suppression Link</label>
+                            <input type="text" name="default-suppression-link" class="form-control" placeholder="Enter Suppression Link" value="{echo $offer['default_suppression_link']}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                 <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="offer-name" data-model="Offer" data-row-id="{echo $offer['id']}" data-package="Affiliate"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">{echo $offer['name']} From Lines</span>
+        </div>
+        <div class="actions">
+            <a href="{echo $app['base_url']}/offers/names/add/{echo $offer['id']}.html" class="btn btn-outline dark"><i class="fa fa-plus"></i> Add New From Line</a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm green table-group-action-submit" data-table-group-action="activate"><i class="fa fa-check"></i> Activate</button>
+                <button class="btn btn-outline btn-sm yellow table-group-action-submit" data-table-group-action="Inactivate"><i class="fa fa-ban"></i> Inactivate</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="offer-from-names" action="{echo $app['base_url']}/offers/names/get/{echo $offer['id']}.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#offer-from-names .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $fromNamesColumns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $fromNamesFilters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">{echo $offer['name']} Subject Lines</span>
+        </div>
+        <div class="actions">
+            <a href="{echo $app['base_url']}/offers/subjects/add/{echo $offer['id']}.html" class="btn btn-outline dark"><i class="fa fa-plus"></i> Add New Subject Line</a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm green table-group-action-submit" data-table-group-action="activate"><i class="fa fa-check"></i> Activate</button>
+                <button class="btn btn-outline btn-sm yellow table-group-action-submit" data-table-group-action="Inactivate"><i class="fa fa-ban"></i> Inactivate</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="offer-subjects" action="{echo $app['base_url']}/offers/subjects/get/{echo $offer['id']}.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#offer-subjects .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $subjectsColumns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $subjectsFilters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">{echo $offer['name']} Creatives</span>
+        </div>
+        <div class="actions">
+            <a href="{echo $app['base_url']}/offers/creatives/add/{echo $offer['id']}.html" class="btn btn-outline dark"><i class="fa fa-plus"></i> Add New Creative</a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm green table-group-action-submit" data-table-group-action="activate"><i class="fa fa-check"></i> Activate</button>
+                <button class="btn btn-outline btn-sm yellow table-group-action-submit" data-table-group-action="Inactivate"><i class="fa fa-ban"></i> Inactivate</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="offer-creatives" action="{echo $app['base_url']}/offers/creatives/get/{echo $offer['id']}.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#offer-creatives .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $creativesColumns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $creativesFilters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

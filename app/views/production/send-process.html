@@ -1,0 +1,768 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-envelope-open font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Production Send Page</span>
+        </div>
+        <div class="actions">   
+            <input id="smtp-mta-switcher" type="checkbox" checked class="make-switch pull-right" data-on-text="&nbsp;MTA&nbsp;" data-off-text="&nbsp;SMTP&nbsp;">
+        </div>
+    </div>
+    <div class="portlet-body form">  
+        <form id="send-process-form" action="#" class="horizontal-form validate" method="POST">
+            <input id="negative-path" name="negative-file" value="" type="hidden"/>
+            <input id="process-id" type="hidden" value="{echo $processId}"/>
+            <input id="process-type" type="hidden" value="{echo $processType}"/>
+            <input id="pmta-port" type="hidden" value="{echo $app['pmta_http_port']}"/> 
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-7" style="width: 67%;">
+                        <div class="row">
+                            <div class="col-md-2" style="width: 16%;">
+                                <div class="form-group"> 
+                                    <label class="control-label full-width">
+                                        Servers 
+                                        <span class="options-sum" style="margin-left: 5px;float:right;">( 0 Selected )</span><br/>
+                                        <a class="pull-right tooltips refresh-servers" data-container="body" data-placement="top" data-original-title="Refresh servers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-refresh"></i></a>
+                                        <a class="pull-right tooltips copy-selected-servers" data-container="body" data-placement="top" data-original-title="Copy selected servers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                        <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".servers-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                        <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".servers-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                    </label>
+                                    <select id="servers" class="form-control servers-selection select-actions" multiple="multiple" name="servers[]"  style="height: 271px !important;">
+                                        {if(isset($servers) && count($servers)>0)}
+                                            {foreach $row in $servers}
+                                                <option value="{echo $row['id']}" data-main-ip="{echo $row['main_ip']}">{echo $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="width: 32%;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"> 
+                                            <label class="control-label full-width"> 
+                                                <span class="available-vmta-user-label" style="float:left;">Available Vmtas</span>
+                                                <span class="options-sum" style="margin-left: 5px;float:right;">( 0 Selected )</span><br/>
+                                                <a class="pull-right tooltips move-selected-ips" data-from="available-vmtas" data-to="selected-vmtas" data-container="body" data-placement="top" data-original-title="Move selected ips"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-arrow-right"></i></a>
+                                                <a class="pull-right tooltips copy-selected-rdns" data-target="available-vmtas" data-container="body" data-placement="top" data-original-title="Copy selected rdns" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                                <a class="pull-right tooltips copy-selected-ips" data-target="available-vmtas" data-container="body" data-placement="top" data-original-title="Copy selected ips" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                                <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                <a class="pull-right tooltips select-all-v4-ips" data-target="available-vmtas" data-container="body" data-placement="top" data-original-title="Select all v4 ips"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                <a class="pull-right tooltips select-all-v6-ips" data-target="available-vmtas" data-container="body" data-placement="top" data-original-title="Select all v6 ips"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                            </label>
+                                            <select id="available-vmtas" class="form-control vmtas-selection select-actions" multiple="multiple" name="available-vmtas[]"  style="height: 271px !important;overflow-x: scroll">  
+                                            </select>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="width: 32%;">
+                                <div class="form-group"> 
+                                    <label class="control-label full-width">
+                                        <span class="selected-vmta-user-label" style="float:left;">Selected Vmtas</span>
+                                        <span class="options-sum" style="margin-left: 5px;float:right;">( 0 Selected )</span><br/>
+                                        <a class="pull-right tooltips copy-selected-rdns" data-target="selected-vmtas" data-container="body" data-placement="top" data-original-title="Copy selected rdns" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                        <a class="pull-right tooltips copy-selected-ips" data-target="selected-vmtas" data-container="body" data-placement="top" data-original-title="Copy selected ips" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                        <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                        <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                        <a class="pull-right tooltips select-all-v4-ips" data-target="selected-vmtas" data-container="body" data-placement="top" data-original-title="Select all v4 ips"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                        <a class="pull-right tooltips select-all-v6-ips" data-target="selected-vmtas" data-container="body" data-placement="top" data-original-title="Select all v6 ips"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                        <a class="pull-right tooltips move-selected-ips" data-from="selected-vmtas" data-to="available-vmtas" data-container="body" data-placement="top" data-original-title="Move selected ips"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-arrow-left"></i></a>
+                                    </label>
+                                    <select id="selected-vmtas" class="form-control vmtas-selection select-actions" multiple="multiple" name="selected-vmtas[]"  style="height: 228px !important;overflow-x: scroll">  
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group"> 
+                                            <select id="vmta-send-type" name="vmta-send-type" class="form-control bs-select"> 
+                                                <option value="default-vmtas" selected="true">Default Vmtas</option>
+                                                <option value="custom-vmtas">Custom Vmtas</option>
+                                                <option value="merged-vmtas">Merged Vmtas</option>
+                                                <option value="smtp-vmtas">SMTP Vmtas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input id="vmta-rotation" type="text" title="Vmtas Rotation" class="form-control input-number" name="vmta-rotation" value="1">
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="width: 20%;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"> 
+                                            <label class="control-label full-width">
+                                                Filter Select
+                                                <a class="pull-right tooltips filter-selection" data-container="body" data-placement="top" data-original-title="Filter selection" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-tasks"></i></a>
+                                            </label>
+                                            <textarea id="filter-select-text" class="form-control" style="height: 244px !important;" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group"> 
+                                            <select id="filter-select-type" class="form-control bs-select"> 
+                                                <option value="servers-by-name">Servers</option>
+                                                <option value="servers-by-name-cont">Servers (Contains)</option>
+                                                <option value="servers-by-name-rev">Servers (Opposite)</option>
+                                                <option value="vmtas-by-ip" selected>Ips</option>
+                                                <option value="vmtas-by-ip-rev">Ips (Opposite)</option>
+                                                <option value="vmtas-by-rdns">Rdns</option>
+                                                <option value="vmtas-by-rdns-rev">Rdns (Opposite)</option>
+                                                <option value="vmtas-by-domain">Domain</option>
+                                                <option value="vmtas-by-domain-rev">Domain (Opposite)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="width: 33%;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Affiliate Networks
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="affiliate-networks" class="form-control bs-select" title="Select an Affiliate Network ..." name="affiliate-network-id" data-live-search="true">
+                                        {if(isset($affiliateNetworks) && count($affiliateNetworks)>0)}
+                                            {foreach $row in $affiliateNetworks}
+                                                <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Offers
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="offers" class="form-control bs-select" title="Select a Offer ..." name="offer-id" data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        FromNames
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips copy-selected-from-name" data-container="body" data-placement="top" data-original-title="Copy Selected Offer From Name" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                    </label>
+                                    <select id="from-names" class="form-control bs-select" title="Select a Offer From Name ..." name="from-name-id" data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        FromNames Encoding
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="from-names-encoding" class="form-control bs-select" title="Select Encoding ..." name="from-name-encoding">
+                                        <option value="plain" selected>Plain Text</option>
+                                        <option value="b64">Base64</option>
+                                        <option value="uni">Unicode</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Subjects
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips copy-selected-subject" data-container="body" data-placement="top" data-original-title="Copy Selected Offer From Name" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                    </label>
+                                    <select id="subjects" class="form-control bs-select" title="Select a Offer Subject ..." name="subject-id" data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Subjects Encoding
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="subjects-encoding" class="form-control bs-select" title="Select Encoding ..." name="subject-encoding">
+                                        <option value="plain" selected>Plain Text</option>
+                                        <option value="b64">Base64</option>
+                                        <option value="uni">Unicode</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Creatives
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="creatives" class="form-control bs-select" title="Select a Offer Creative ..." name="creative-id" data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Link Type
+                                        <a class="pull-right tooltips bs-deselect-all" bs-target="links-encoding" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="link-type" class="form-control bs-select" name="link-type" title="Select an Option ..." data-live-search="true"> 
+                                        <option value="routing" selected>Routing</option>
+                                        <option value="routing-encrypted">Encrypted Routing</option>
+                                        <option value="routing-gcloud">Google Storage Routing</option>
+                                        <option value="routing-bitly">Bitly ShortLink Routing</option>
+                                        <option value="routing-tinyurl">TinyURL ShortLink Routing</option>
+                                        <option value="attr">Attr Based</option>
+                                        <option value="attr-encrypted">Encrypted Attr Based</option>
+                                        <option value="attr-gcloud">Google Storage Attr Based</option>
+                                        <option value="attr-bitly">Bitly ShortLink Attr Based</option>
+                                        <option value="attr-tinyurl">TinyURL ShortLink Attr Based</option>
+                                    </select>
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        AutoResponders
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="auto-responders" class="form-control bs-select" title="Select an AutoResponder ..." name="auto-responders-ids[]" data-actions-box="true" data-live-search="true" multiple>
+                                        {if(isset($autoResponders) && count($autoResponders)>0)}
+                                            {foreach $row in $autoResponders}
+                                                <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Track Opens</label>
+                                    <select id="track-opens" class="form-control bs-select" name="track-opens"> 
+                                        <option value="enabled" selected>Enabled</option>
+                                        <option value="disabled">Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Static Domain</label>
+                                    <input id="static-domain" type="text" class="form-control" name="static-domain" value="[domain]"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Headers Rotation</label>
+                                    <input id="headers-rotation" type="text" class="form-control input-number" name="headers-rotation" value="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Return Path</label>
+                                    <input id="return-path" type="text" class="form-control" name="return-path" value="return@[domain]"/>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Content Type
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="creatives-content-type" class="form-control bs-select" title="Select a Content Type ..." name="creative-content-type">
+                                        <option value="text/html" selected>text/html</option>
+                                        <option value="text/plain">text/plain</option>
+                                        <option value="multipart/alternative">multipart/alternative</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Charset
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="creatives-charset" class="form-control bs-select" title="Select a Content Type ..." name="creative-charset">
+                                        <option value="UTF-8" selected>UTF-8</option>
+                                        <option value="UTF-7">UTF-7</option>
+                                        <option value="UTF-16">UTF-16</option>
+                                        <option value="UTF-32">UTF-32</option>
+                                        <option value="UTF-32BE">UTF-32BE</option>
+                                        <option value="UTF-32LE">UTF-32LE</option>
+                                        <option value="UTF-16BE">UTF-16BE</option>
+                                        <option value="UTF-16LE">UTF-16LE</option>
+                                        <option value="UTF7-IMAP">UTF7-IMAP</option>
+                                        <option value="ASCII">ASCII</option>
+                                        <option value="UCS-4">UCS-4</option>
+                                        <option value="Windows-1252">Windows-1252</option>
+                                        <option value="Windows-1254">Windows-1254</option>
+                                        <option value="ISO-8859-1">ISO-8859-1</option>
+                                        <option value="ISO-8859-2">ISO-8859-2</option>
+                                        <option value="ISO-8859-3">ISO-8859-3</option>
+                                        <option value="ISO-8859-4">ISO-8859-4</option>
+                                        <option value="ISO-8859-5">ISO-8859-5</option>
+                                        <option value="ISO-8859-6">ISO-8859-6</option>
+                                        <option value="ISO-8859-7">ISO-8859-7</option>
+                                        <option value="ISO-8859-8">ISO-8859-8</option>
+                                        <option value="ISO-8859-9">ISO-8859-9</option>
+                                        <option value="ISO-8859-10">ISO-8859-10</option>
+                                        <option value="ISO-8859-13">ISO-8859-13</option>
+                                        <option value="ISO-8859-14">ISO-8859-14</option>
+                                        <option value="ISO-8859-15">ISO-8859-15</option>
+                                        <option value="ISO-8859-16">ISO-8859-16</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Transf Enc
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="creatives-content-transfert-encoding" class="form-control bs-select" title="Select a Content Type ..." name="creative-content-transfert-encoding">
+                                        <option value="7bit" selected>7bit</option>
+                                        <option value="8bit">8bit</option>
+                                        <option value="quoted-printable">Quoted-Printable</option>
+                                        <option value="base64">Base64</option>
+                                        <option value="binary">Binary</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label full-width" style="margin-bottom: 12px;"> Headers <span id="headers-count">( 1 header found )</span>
+                                     <a class="pull-right tooltips reset-headers" data-original-mta-header="{echo base64_encode($mtaHeader)}" data-original-smtp-header="{echo base64_encode($smtpHeader)}" data-container="body" data-placement="top" data-original-title="Reset headers" title="Reset headers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-power-off"></i></a>
+                                     <a class="pull-right tooltips randomize-headers-lines" data-container="body" data-placement="top" data-original-title="Randomize the header" title="Randomize the header" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-random"></i></a>
+                                     <a class="pull-right tooltips upload-headers" data-container="body" data-placement="top" data-original-title="Upload headers" title="Upload headers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-upload"></i></a>
+                                     <a class="pull-right tooltips add-headers" data-container="body" data-placement="top" data-original-title="Add headers" title="Add headers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-plus"></i></a>
+                                     <a class="pull-right tooltips select-predefined-headers" data-container="body" data-placement="top" data-original-title="Select Predefined Headers" title="Select Predefined Headers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                 </label>
+                                <div id="headers-tabs" class="tabbable tabbable-tabdrop"> 
+                                     <ul class="nav nav-tabs">
+                                         <li class="tab active" data-index="1">
+                                             <a id="tab-click-1" href="#tab1" data-toggle="tab">Header 1</a>
+                                         </li>
+                                     </ul>
+                                     <div class="tab-content">
+                                         <div class="tab-pane active" id="tab1" data-index="1"> 
+                                             <textarea id="header1" data-widearea="enable" class="form-control" style="height: 300px;" name="headers[]" spellcheck="false" wrap="off">{echo $mtaHeader}</textarea>
+                                         </div>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width"> 
+                                <span id="body-label">Email Body </span>
+                                <a class="pull-right tooltips upload-negative" data-container="body" data-placement="top" data-original-title="Upload Negative" title="Upload Negative" href="javascript:;" style="color :#525e64;"><i class="fa fa-upload"></i></a>
+                                <a class="pull-right tooltips generate-links" data-container="body" data-placement="top" data-original-title="Generate Links" title="Generate Links" href="javascript:;" style="margin-right: 15px;color :#525e64;"><i class="fa fa-link"></i></a>
+                                <a class="pull-right tooltips display-creative" data-container="body" data-placement="top" data-original-title="Display Creative" title="Display Creative" href="javascript:;" style="margin-right: 15px;color :#525e64;"><i class="fa fa-desktop"></i></a>
+                            </label>
+                            <textarea id="body" data-widearea="enable" class="form-control" style="height: 420px;" name="body" spellcheck="false" wrap="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Process Type</label>
+                            <select id="vmtas-emails-process" class="form-control bs-select" name="vmtas-emails-process"> 
+                                <option value="vmtas-rotation" selected="true">Batch / x-Delay</option>
+                                <option value="emails-per-period">Emails Per Period</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Batch</label>
+                            <input id="batch" type="text" class="form-control input-number" name="batch" value="1000">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label" title="X-Delay is in Milliseconds">X-Delay (Ms)</label>
+                            <input id="x-delay" type="text" class="form-control input-number" name="x-delay" value="1000"> 
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Emails</label>
+                            <input id="number-of-emails" type="text" class="form-control input-number" name="number-of-emails" value="1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Period</label>
+                            <input id="emails-period-value" type="text" class="form-control input-number" name="emails-period-value" value="1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Unit</label>
+                            <select id="emails-period-type" class="form-control bs-select" name="emails-period-type" disabled> 
+                                <option value="milliseconds">Milliseconds</option>
+                                <option value="seconds" selected="true">Seconds</option>
+                                <option value="minutes">Minutes</option>
+                                <option value="hours">Hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Test After</label>
+                            <input id="test-after" type="text" class="form-control input-number" name="test-after" value="1000">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Test Threads</label>
+                            <select id="test-threads" class="form-control bs-select" name="test-threads"> 
+                                <option value="multithread-servers" selected="true">MultiThreaded Servers</option>
+                                <option value="queued-servers">Queued Servers</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Rcpt Rotation</label>
+                                    <input id="rcpt-rotation" type="text" name="rcpt-rotation" class="form-control input-number" value="1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Combination</label>
+                                    <br/>
+                                    <input id="rcpt-combination" type="checkbox" name="rcpt-combination" class="make-switch" data-size="normal" data-on-text="ON" data-off-text="OFF" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Recipients ( Separated By Line )
+                                        <span class="lines-sum" style="margin-left: 5px;">( 0 Lines )</span>
+                                        <a class="pull-right tooltips randomize-lines" data-randomize-target="rcpts" data-container="body" data-placement="top" data-original-title="Randomize the rcpts" title="Randomize the rcpts" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-random"></i></a>
+                                    </label>
+                                    <textarea id="rcpts" type="text" name="rcpts" class="form-control calculate-lines" style="height: 300px" spellcheck="off"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label full-width" style="margin-bottom: 12px;"> Placeholders <span id="placeholders-count">( 1 placeholder(s) found )</span>
+                                     <a class="pull-right tooltips reset-placeholders" data-container="body" data-placement="top" data-original-title="Reset placeholders" title="Reset placeholders" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-power-off"></i></a>
+                                     <a class="pull-right tooltips randomize-placeholders-lines" data-container="body" data-placement="top" data-original-title="Randomize the placeholder" title="Randomize the placeholder" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-random"></i></a>
+                                     <a class="pull-right tooltips add-placeholders" data-container="body" data-placement="top" data-original-title="Add placeholders" title="Add placeholders" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-plus"></i></a>
+                                 </label>
+                                <div id="placeholders-tabs" class="tabbable tabbable-tabdrop"> 
+                                     <ul class="nav nav-tabs">
+                                         <li class="tab active" data-index="1">
+                                             <a id="placeholders-tab-click-1" href="#placeholders-tab1" data-toggle="tab">Placeholder 1</a>
+                                         </li>
+                                     </ul>
+                                     <div class="tab-content">
+                                         <div class="tab-pane active" id="placeholders-tab1" data-index="1">
+                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label full-width">Placeholder Rotation</label>
+                                                        <input id="placeholder-rotation1" type="text" class="form-control input-number placeholders-rotation" value="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Combination</label>
+                                                        <br/>
+                                                        <input id="placeholder-combination1" type="checkbox" class="make-switch placeholders-combination" data-on-text="ON" data-off-text="OFF" data-size="normal" style="width: 100%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label full-width">
+                                                            Placeholders ( Separated By Line )
+                                                            <span class="lines-sum" style="margin-left: 5px;">( 0 Lines )</span>
+                                                        </label>
+                                                        <textarea id="placeholder1" type="text" name="placeholders[]" class="form-control calculate-lines" style="height: 223px" spellcheck="off"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Activate AutoReply</label>
+                                    <br/>
+                                    <input id="auto-reply-combination" type="checkbox" name="auto-reply-activated" class="make-switch" data-size="normal" data-on-text="ON" data-off-text="OFF" style="width: 100%">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">AutoReply Rotation</label>
+                                    <input id="auto-reply-rotation" type="text" name="auto-reply-rotation" class="form-control input-number" value="1" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        AutoReply Mailboxes ( Separated By Line )
+                                        <span class="lines-sum" style="margin-left: 5px;">( 0 Lines )</span>
+                                        <a class="pull-right tooltips randomize-lines" data-randomize-target="auto-reply-mailboxes" data-container="body" data-placement="top" data-original-title="Randomize the mailboxes" title="Randomize the mailboxes" href="javascript:;" style="margin-left: 15px;color :#525e64;" disabled><i class="fa fa-random"></i></a>
+                                    </label>
+                                    <textarea id="auto-reply-mailboxes" type="text" name="auto-reply-mailboxes" class="form-control calculate-lines" style="height: 300px" spellcheck="off" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Data Provider
+                                <a class="pull-right tooltips bs-deselect-all" bs-target="data-providers-ids" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="data-providers-ids" class="form-control bs-select" name="data-providers-ids[]" title="Select an Data Provider ..." data-actions-box="true" data-live-search="true" multiple> 
+                                {if(isset($dataProviders) && count($dataProviders)>0)}
+                                    {foreach $row in $dataProviders}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Isps
+                                <a class="pull-right tooltips bs-deselect-all" bs-target="isps" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="isps" class="form-control bs-select" name="isp-id" title="Select an Isp ..." data-live-search="true"> 
+                                {if(isset($isps) && count($isps)>0)}
+                                    {foreach $row in $isps}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Countries
+                                <a class="pull-right tooltips bs-deselect-all" bs-target="countries" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="countries" class="form-control bs-select" name="countries[]" title="Select Countries ..." data-actions-box="true" data-live-search="true" multiple > 
+                                {include includes/countries.html}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Verticals
+                                <a class="pull-right tooltips bs-deselect-all" bs-target="verticals" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="verticals" class="form-control bs-select" name="verticals[]" title="Select Verticals ..." data-actions-box="true" data-live-search="true" multiple> 
+                                {if(isset($verticals) && count($verticals)>0)}
+                                    {foreach $row in $verticals}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Emails Split</label>
+                            <select id="emails-split-type" class="form-control bs-select" name="emails-split-type"> 
+                                <option value="servers" selected="true">Servers</option>
+                                <option value="vmtas">VMTAs</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Start</label>
+                            <input id="data-start" type="text" class="form-control input-number" data-val="0" name="data-start" value="0">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Count</label>
+                            <input id="data-count" type="text" class="form-control input-number" name="data-count" value="0">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Duplicate Data</label>
+                            <input id="data-duplicate" type="text" class="form-control input-number" name="data-duplicate" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">Email List Filters</label>
+                            <div id="data-types" class="data-list-checks" style="border: 1px #ccc solid;height: 297px; overflow: hidden; width: auto;padding: 0px; margin: 0px;"> 
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Fresh</label>
+                                            <div style="float: right;">
+                                                <input id="fresh-filter" name="fresh-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Clean</label>
+                                            <div style="float: right;">
+                                                <input id="clean-filter" name="clean-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Openers</label>
+                                            <div style="float: right;">
+                                                <input id="openers-filter" name="openers-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Clickers</label>
+                                            <div style="float: right;">
+                                                <input id="clickers-filter" name="clickers-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Leaders</label>
+                                            <div style="float: right;">
+                                                <input id="leaders-filter" name="leaders-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Unsubscribers</label>
+                                            <div style="float: right;">
+                                                <input id="unsubs-filter" name="unsubs-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">OptOuts</label>
+                                            <div style="float: right;">
+                                                <input id="optouts-filter" name="optouts-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">Seeds</label>
+                                            <div style="float: right;"> 
+                                                <input id="seeds-filter" name="seeds-filter" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Email Lists <span id="data-lists-sum" style="margin-left: 5px;" data-actual-count="0">( 0 Email List(s) Selected , 0 Emails Selected )</span> 
+                                <a class="pull-right tooltips deselect-all-lists" data-container="body" data-placement="top" data-original-title="Deselect All Email Lists" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                <a class="pull-right tooltips select-all-lists" data-container="body" data-placement="top" data-original-title="Select all Email Lists" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                <a class="pull-right tooltips refresh-data-lists" data-container="body" data-placement="top" data-original-title="Refresh Email Lists" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-refresh"></i></a>
+                            </label>
+                            <div id="data-lists" class="data-list-checks scroller" style="height:297px;border: 1px #ccc solid;padding-right: 0;" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label full-width"> Send Statistics</label>
+                            <div id="send-stats" class="scroller" style="height:297px;border: 1px #ccc solid;" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <input id="headers-file" type="file" class="hide" multiple/>
+        <input id="negative-file" type="file" class="hide"/>
+    </div>
+</div>
+
+<!-- MODALS -->
+    {include includes/modals/creative_display.html}
+    {include includes/modals/mta_drops_help.html}
+    {include includes/modals/generate_links.html}
+    {include includes/modals/mta_send_menu.html}
+    {include includes/modals/send_hover_buttons.html} 
+    {include includes/modals/predefined_headers.html}
+<!-- MODALS -->

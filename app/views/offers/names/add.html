@@ -1,0 +1,29 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New From Names For <span class="bold">{echo $offer['name']}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="{echo $app['base_url']}/offers/names/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" value="{echo $offer['id']}" name="offer-id" />
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">From Names List ( Seperated By Lines )</label>
+                            <textarea data-required="true" data-validation-message="Offer From Names are Required !" name="from-names" class="form-control" rows="15"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+        
+        <!-- END FORM-->
+    </div>
+</div>

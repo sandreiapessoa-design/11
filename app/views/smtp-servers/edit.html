@@ -1,0 +1,147 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Edit Smtp Server : {echo $server['name']}</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="servers-form" action="{echo $app['base_url']}/smtp-servers/save.html" class="horizontal-form validate" method="POST">
+                    <input type="hidden" name="id" value="{echo $server['id']}"/>
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Server Name</label>
+                                    <input id="name" type="text" name="server-name" class="form-control" data-required="true" data-validation-message="Server Name is Required !" placeholder="Enter Server Name" value="{echo $server['name']}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Host</label>
+                                    <input id="main-ip" type="text" name="host" class="form-control" placeholder="Enter Host" data-required="true" data-validation-message="Server Host is Required !" value="{echo $server['host_name']}">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Port</label>
+                                    <input id="ssh-port" type="text" name="port" class="form-control" placeholder="Enter Port" data-required="true" data-validation-message="Server Port is Required !" value="{echo $server['smtp_port']}">
+                                </div>
+                            </div>
+                           <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Encryption</label>
+                                    <select class="form-control bs-select" title="Select a Encryption ..." name="encryption">
+                                        <option value="None" {if($server['encryption_type'] == 'None')} selected {/if} >None</option>
+                                        <option value="TCP" {if($server['encryption_type'] == 'TCP')} selected {/if} >TCP</option>
+                                        <option value="SSL" {if($server['encryption_type'] == 'SSL')} selected {/if} >SSL</option>
+                                        <option value="TLS" {if($server['encryption_type'] == 'TLS')} selected {/if} >TLS</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                        <option value="Activated" {if($server['status'] == 'Activated')} selected {/if} >Activated</option>
+                                        <option value="Inactivated" {if($server['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Server Provider</label>
+                                    <select id="provider" class="form-control bs-select" name="server-provider" data-required="true" data-validation-message="Server Provider is Required !" title="Select a Server Provider ..."> 
+                                        {if(isset($serversProviders) && count($serversProviders)>0)}
+                                            {foreach $row in $serversProviders}
+                                                <option value="{echo $row['id']}" {if($server['provider_id'] == $row['id'])} selected {/if} >{echo $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group"> 
+                                    <label class="control-label">Expiration Date</label>
+                                    <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                                        <input id="expiration-date" type="text" class="form-control" readonly name="expiration-date" data-required="true" data-validation-message="Expiration Date is Required !" value="{echo $server['expiration_date']}">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-outline default" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions right">
+                        <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="server-name" data-model="SmtpServer" data-row-id="{echo $server['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+                        <a href="javascript:;" class="btn btn-outline dark check-smtp-server" server-id="{echo $server['id']}"><i class="fa fa-refresh"></i> Check Server</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit portlet-datatable bordered  ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">{echo $server['name']} Users List</span>
+                </div>
+                <div class="actions">
+                    <a href="{echo $app['base_url']}/smtp-servers/users/add/{echo $server['id']}.html" class="btn btn-outline dark"><i class="fa fa-plus"></i> Add New Smtp User</a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-container">
+                    <div class="table-actions-wrapper">
+                    <button class="btn btn-outline btn-sm green table-group-action-submit" data-table-group-action="activate"><i class="fa fa-check"></i> Activate</button>
+                    <button class="btn btn-outline btn-sm yellow table-group-action-submit" data-table-group-action="Inactivate"><i class="fa fa-ban"></i> Inactivate</button>
+                    <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+                </div>
+                    <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="smtp-users" action="{echo $app['base_url']}/smtp-servers/users/get/{echo $server['id']}.html">
+                        <thead>
+                            <tr role="row" class="heading">
+                                <th width="2%">
+                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                        <input type="checkbox" class="group-checkable" data-set="#smtp-users .checkboxes" />
+                                        <span></span>
+                                    </label>
+                                </th>
+                                <th width="5%">Id</th>
+                                {echo $columns}
+                                <th width="2%"> 
+                                </th>
+                            </tr>
+                            <tr role="row" class="filter">
+                                <td>
+                                    <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                        <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                                    </div>
+                                </td>
+                                <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                                {echo $filters}
+                                <td>
+                                    <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                        <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody> 
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

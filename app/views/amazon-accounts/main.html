@@ -1,0 +1,95 @@
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Amazon Accounts List</span>
+        </div>
+        <div class="actions">
+            <a href="{echo $app['base_url']}/amazon-accounts/add.html" class="btn btn-outline dark"><i class="fa fa-plus"></i> Add New Amazon Account</a>
+            <a class="btn btn-outline btn-sm dark aws-show-processes"><i class="fa fa-terminal"></i> Show Processes</a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control pull-right" title="Select an Action ..." id="account-action">
+                            <option value="" selected>Select an Action ...</option>
+                            <option value="aws-fetch-eips">Fetch Elastic Ips</option>
+                            <option value="aws-start-restarts">Start normal Restarts</option>
+                            <option value="aws-start-rotates-restarts">Start Rotates/Restarts</option>
+                            <option value="aws-refresh-instances-ips">Refresh Instances IPs</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control pull-right" title="Select a Region ..." id="account-region">
+                            <option value="" selected>Select a Region ...</option>
+                            <option value="us-east-1">US East (N. Virginia)</option>
+                            <option value="us-east-2">US East (Ohio)</option>
+                            <option value="us-west-1">US West (N. California)</option>
+                            <option value="us-west-2">US West (Oregon)</option>
+                            <option value="ap-east-1">Asia Pacific (Hong Kong)</option>
+                            <option value="ap-south-1">Asia Pacific (Mumbai)</option>
+                            <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+                            <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+                            <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+                            <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+                            <option value="ca-central-1">Canada (Central)</option>
+                            <option value="eu-central-1">EU (Frankfurt)</option>
+                            <option value="eu-west-1">EU (Ireland)</option>
+                            <option value="eu-west-2">EU (London)</option>
+                            <option value="eu-west-3">EU (Paris)</option>
+                            <option value="eu-north-1">EU (Stockholm)</option>
+                            <option value="me-south-1">Middle East (Bahrain)</option>
+                            <option value="sa-east-1">South America (São Paulo)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <button class="btn btn-outline btn-sm red table-group-action-submit pull-right" data-table-group-action="delete" style="margin-left: 5px;"><i class="fa fa-close"></i> Delete</button>
+                        <button class="btn btn-outline btn-sm yellow table-group-action-submit pull-right" data-table-group-action="Inactivate" style="margin-left: 5px;"><i class="fa fa-ban"></i> Inactivate</button>
+                        <button class="btn btn-outline btn-sm green table-group-action-submit pull-right" data-table-group-action="activate" style="margin-left: 5px;"><i class="fa fa-check"></i> Activate</button>
+                        <button class="btn btn-outline btn-sm blue-madison aws-execute-action pull-right" style="margin-left: 5px;"><i class="fa fa-terminal"></i></button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="amazon-accounts" action="{echo $app['base_url']}/amazon-accounts/get.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#amazon-accounts .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

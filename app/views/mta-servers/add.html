@@ -1,0 +1,124 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Mta Server</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="management-servers-form" action="{echo $app['base_url']}/mta-servers/save.html" class="horizontal-form validate" method="POST" enctype="multipart/form-data">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Server Name</label>
+                            <input id="server-name" type="text" name="server-name" class="form-control" data-required="true" data-validation-message="Server Name is Required !" placeholder="Enter Server Name">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="server-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Server Provider</label>
+                            <select id="server-provider" class="form-control bs-select" data-required="true" data-validation-message="Server Provider is Required !" title="Select a Server Provider ..." name="server-provider"> 
+                                {if(isset($serversProviders) && count($serversProviders)>0)}
+                                    {foreach $row in $serversProviders}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"> 
+                            <label class="control-label">Expiration Date</label>
+                            <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                                <input id="server-expiration-date" type="text" class="form-control" value="{echo date('Y-m-d', strtotime('+1 month'))}" readonly name="expiration-date" data-required="true" data-validation-message="Expiration Date is Required !">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-outline default" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Hostname</label>
+                            <input id="server-main-host" type="text" name="server-hostname" class="form-control" placeholder="Enter Hostname ( Optional , Leave blank for auto-generating )">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Main IP</label>
+                            <input id="server-main-ip" type="text" name="server-ip" class="form-control" placeholder="Enter Main IP" data-required="true" data-validation-message="Server Main IP is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">SSH Port</label>
+                            <input id="server-ssh-port" type="text" name="server-ssh-port" class="form-control" placeholder="Enter Port" value="22" data-required="true" data-validation-message="Server SSH Port is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Login Type</label>
+                            <select id="server-login-type" class="form-control bs-select" title="Select a Login Type ..." name="server-login-type">
+                                <option value="user-pass" selected >Username/Password</option>
+                                <option value="pem">Pem File</option>
+                                <option value="rsa">RSA Connection</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Username</label>
+                            <input id="server-username" type="text" name="server-username" class="form-control" placeholder="Enter Username" data-required="true" data-validation-message="Server SSH User is Required !" value="root">
+                        </div>
+                    </div>
+                    <div class="col-md-6 srv-user-pass">
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input id="server-password" type="password" name="server-password" class="form-control" placeholder="Enter Password">
+                        </div>
+                    </div>
+                    <div class="col-md-2 srv-passphrase hide">
+                        <div class="form-group">
+                            <label class="control-label">Passphrase</label>
+                            <input id="server-private-key" type="text" name="server-passphrase" class="form-control" placeholder="Enter Passphrase ( Optional )">
+                        </div>
+                    </div>
+                    <div class="col-md-2 srv-pem hide">
+                        <div class="form-group">
+                            <label class="control-label">PEM File</label>
+                            <br/>
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-outline dark btn-file">
+                                    <span class="fileinput-new"> Select PEM File </span>
+                                    <span class="fileinput-exists"> Change </span>
+                                    <input id="pem-file" type="file" name="server-pem-file"> 
+                                </span>
+                                <span class="fileinput-filename"> </span> &nbsp;
+                                <a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name|main_ip" data-input-ids="server-name|server-ip" data-model="MtaServer" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

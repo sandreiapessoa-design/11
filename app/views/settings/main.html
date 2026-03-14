@@ -1,0 +1,193 @@
+<div class="portlet light bordered"> 
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Application Settings</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="{echo $app['base_url']}/settings.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <h4 class="caption"> General Settings</h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Company Name</label>
+                            <input type="text" name="company" data-required="true" data-validation-message="Company Name is Required !" class="form-control" value="{echo htmlspecialchars($app['company'])}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Application Name</label>
+                            <input type="text" name="name" class="form-control" data-required="true" data-validation-message="Application Name is Required !" value="{echo htmlspecialchars($app['name'])}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group"> 
+                            <label class="control-label">Application Version</label>
+                            <input type="text" name="version" class="form-control" data-required="true" data-validation-message="Application Version is Required !" value="{echo htmlspecialchars($app['version'])}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Page Open Behavious</label>
+                            <select class="form-control bs-select" title="Select a Behaviour ..." data-live-search="true" name="new-tab-open"> 
+                                <option value="same" {if($app['new_tab_open'] == 'same')} selected {/if}>Open In Same Tab</option>
+                                <option value="new" {if($app['new_tab_open'] == 'new')} selected {/if}>Open In New Tab</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Menu Behaviour</label>
+                            <select class="form-control bs-select" title="Select a Behaviour ..." data-live-search="true" name="sidebar-behaviour"> 
+                                <option value="closed" {if($app['sidebar_behaviour'] == 'closed')} selected {/if}>Closed</option>
+                                <option value="expended" {if($app['sidebar_behaviour'] == 'expended')} selected {/if}>Expended</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="caption"> Application Settings</h4>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Upload Center Server
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select class="form-control bs-select" title="Select a Server ..." data-live-search="true" name="upload-center-id"> 
+                                {if(isset($servers) && count($servers)>0)}
+                                    {foreach $row in $servers}
+                                        <option value="{echo $row['id']}" {if($app['upload_center_id'] == $row['id'])} selected {/if}>{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                WebMail Server
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select class="form-control bs-select" title="Select a Server ..." data-live-search="true" name="webmail-server-id"> 
+                                {if(isset($servers) && count($servers)>0)}
+                                    {foreach $row in $servers}
+                                        <option value="{echo $row['id']}" {if($app['webmail_server_id'] == $row['id'])} selected {/if}>{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Suppression Interval</label>
+                            <select class="form-control bs-select" title="Select a Timer ..." data-live-search="true" name="suppression-timer"> 
+                                <option value="1" {if($app['suppression_timer'] == '1')} selected {/if}>1 Day</option>
+                                <option value="5" {if($app['suppression_timer'] == '5')} selected {/if}>5 Days</option>
+                                <option value="7" {if($app['suppression_timer'] == '7')} selected {/if}>7 Days</option>
+                                <option value="10" {if($app['suppression_timer'] == '10')} selected {/if}>10 Days</option>
+                                <option value="15" {if($app['suppression_timer'] == '15')} selected {/if}>15 Days</option>
+                                <option value="20" {if($app['suppression_timer'] == '20')} selected {/if}>20 Days</option>
+                                <option value="30" {if($app['suppression_timer'] == '30')} selected {/if}>30 Days</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Tracking Encryption Key ( 64 Chars )</label>
+                            <input type="text" name="tracking-enc-key" class="form-control" data-required="true" data-validation-message="Tracking Encryption Key is Required !" value="{echo htmlspecialchars($app['tracking_enc_key'])}">
+                        </div>
+                    </div>
+                </div>
+                <h4 class="caption"> Production Settings</h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Optizmo Token</label>
+                            <input type="text" name="optizmo-token" class="form-control" value="{echo $app['optizmo_token']}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Bitly Token</label>
+                            <input type="text" name="bit-api-token" class="form-control" value="{echo $app['bit_shortlinks_token']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">SSL Email</label>
+                            <input type="text" name="ssl-email" class="form-control" value="{echo $app['ssl_email']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">G-Cloud Bucket Size</label>
+                            <input type="text" name="gcloud-bucket-size" class="form-control input-number" value="{echo $app['gcloud_bucket_size']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">G-Cloud Object Size</label>
+                            <input type="text" name="gcloud-object-size" class="form-control input-number" value="{echo $app['gcloud_object_size']}">
+                        </div>
+                    </div>
+                </div>
+                <h4 class="caption"> Production</h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">PMTA Config Type</label>
+                                    <select class="form-control bs-select" title="Select a Config Type ..." data-live-search="true" name="pmta-config-type"> 
+                                        <option value="default" {if($app['pmta_config_type'] == 'default')} selected {/if}>Default</option>
+                                        <option value="custom" {if($app['pmta_config_type'] == 'custom')} selected {/if}>Custom</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">PMTA Http Port</label>
+                                    <input type="text" name="pmta-http-port" class="form-control" data-required="true" data-validation-message="PowerMta Http Port is Required !" value="{echo $app['pmta_http_port']}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Pmta Firewall Ips/Domains</label>
+                                    <textarea type="text" name="pmta-firewall-ips-domains" class="form-control" style="height: 200px;" wrap="off">{echo $app['pmta_firewall_ips_domains']}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Default MTA Header</label>
+                            <textarea type="text" name="mta-header" class="form-control" style="height: 265px;" wrap="off">{echo $mtaHeader}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Default SMTP Header</label>
+                            <textarea type="text" name="smtp-header" class="form-control" style="height: 265px;" wrap="off">{echo $smtpHeader}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Google Cloud Certificate File ( Click <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey"target="__blank" class="dark">here</a> to generate it )</label>
+                            <textarea type="text" name="gcloud-cert" class="form-control" style="height: 265px;" wrap="off">{echo $gcloudCert}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-check"></i> Update</button>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>

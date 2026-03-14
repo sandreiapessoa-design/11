@@ -1,0 +1,63 @@
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">MTA Drops Monitor</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm red mta-bounce-logs" data-target="drops-processes" data-type="md" title="Bounce Logs"><i class="fa fa-cog"></i></button>
+                <button class="btn btn-outline btn-sm green resend-process" data-target="drops-processes" data-type="md" title="ReSend Process"><i class="fa fa-recycle"></i></button>
+                <button class="btn btn-outline btn-sm dark show-process-details" data-target="drops-processes" data-type="md" title="Show Process Details"><i class="fa fa-desktop"></i></button>
+                <button class="btn btn-outline btn-sm blue execute-process-actions" data-target="drops-processes" data-type="md" data-action-type="resume" title="Resume Process"><i class="fa fa-play"></i></button>
+                <button class="btn btn-outline btn-sm yellow execute-process-actions" data-target="drops-processes" data-type="md" data-action-type="pause" title="Pause Process"><i class="fa fa-pause"></i></button>
+                <button class="btn btn-outline btn-sm red execute-process-actions" data-target="drops-processes" data-type="md" data-action-type="stop" title="Stop Process"><i class="fa fa-stop"></i></button>
+                {if($connectedUser->getMasterAccess() == 'Enabled')}
+                    <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete" title="Delete Process"><i class="fa fa-close"></i></button>
+                {/if}
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" style="width:142%" order="desc" id="drops-processes" action="{echo $app['base_url']}/production/get-mta-drops.html" total="10,11,12,13,14,15,16,17" total-type="int" responsive="false">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th style="width: 0.5%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#drops-processes .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th style="width: 0.5%">Id</th>
+                        {echo $columns}
+                        <th style="width: 0.5%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+                <tfoot> 
+                    <tr>{echo $footer}</tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+{include includes/modals/data_lists.html}
+{include includes/modals/servers_names.html}

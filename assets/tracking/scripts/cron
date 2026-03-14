@@ -1,0 +1,2 @@
+*/30 * * * * php /var/www/scripts/stats.php >> /var/log/iresponse/stats.log 2>> /var/log/iresponse/stats.log
+0 */4 * * * php /var/www/scripts/gc.php >> /var/log/iresponse/gc.log 2>> /var/log/iresponse/gc.log

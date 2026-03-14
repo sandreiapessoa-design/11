@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Manage PowerMta Global Vmtas</span>
+                </div>
+                <div class="actions">
+                    <a href="#servers-filter" data-toggle="modal" class="btn btn-outline dark servers-filter"><i class="fa fa-filter"></i> Filter Select </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="pmta-config-form" action="#" class="horizontal-form" method="POST">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Server Selection
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                    </label>
+                                    <select id="vmta-servers" class="form-control bs-select filter-servers" title="Select Servers ..." multiple data-actions-box="true" data-live-search="true"> 
+                                        {if(isset($servers) && count($servers)>0)}
+                                            {foreach $row in $servers}
+                                                <option value="{echo $row['id']}" data-main-ip="{echo $row['main_ip']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        ISP
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="isps" class="form-control bs-select" data-live-search="true" title="Select an ISP ...">
+                                        {if(isset($isps) && count($isps)>0)}
+                                            {foreach $row in $isps}
+                                                <option {if($row_i == 0)} selected="selected" {/if}value="{echo $row['id']}">{echo $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Vmta Domain
+                                    </label>
+                                    <input id="domain" type="text" class="form-control"  value=""  placeholder="New Vmtas Domain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions right">
+                        <a href="javascript:;" class="btn btn-outline dark update-global-vmtas"><i class="fa fa-terminal"></i> Update Vmtas</a>
+                        <a href="javascript:;" class="btn btn-outline red reset-global-vmtas"><i class="fa fa-close"></i> Reset Vmtas</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS -->
+{include includes/modals/servers_filter.html}
+<!-- MODALS -->

@@ -1,0 +1,35 @@
+#install deps
+wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O jq
+chmod +x ./jq
+cp ./jq /usr/bin
+echo "Installed jq..."
+
+# setting credentials
+aws configure set aws_access_key_id $p_access_key
+aws configure set aws_secret_access_key $p_secret_key
+
+## assign IP addresses
+macaddress=$(curl http://169.254.169.254/latest/meta-data/mac)
+interfaceId=$(curl "http://169.254.169.254/latest/meta-data/network/interfaces/macs/$macaddress/interface-id")
+region=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq .region -r)
+
+aws ec2 assign-private-ip-addresses --allow-reassignment --region $region --network-interface-id $interfaceId --secondary-private-ip-address-count $p_nb_ips
+
+privateIpAddresses=$(aws ec2 describe-network-interfaces --region $region --network-interface-ids $interfaceId | jq '.NetworkInterfaces' | jq '.[]' | ./jq '.PrivateIpAddresses' | jq 'map(select(.Primary != true))' | jq '.[]' | jq '.PrivateIpAddress')
+
+i=0
+for value in $privateIpAddresses
+do
+echo $value
+echo $i
+cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth0:$i
+  DEVICE=eth0:$i
+  BOOTPROTO=none
+  IPADDR=$value
+  ONBOOT=yes
+  NETMASK=255.255.255.255
+EOF
+i=$(($i + 1))
+done
+
+/etc/init.d/network restart

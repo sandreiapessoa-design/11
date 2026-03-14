@@ -1,0 +1,167 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Mailboxes Extractor</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="mailboxes-form" class="horizontal-form">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Mailboxes List (email password (ip port))</label>
+                                    <textarea id="mailboxes" class="form-control" style="height: 262px !important"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="extractor-params-container" class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Folder
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="folder" class="form-control bs-select" title="Select a Folder .." data-live-search="true"> 
+                                        <option value="inbox" selected>Inbox</option>
+                                        <option value="spam">Spam</option>
+                                        <option value="sent">Sent</option>
+                                        <option value="trash">Trash / Deleted</option>
+                                        <option value="archive">Archive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Max Emails Number</label>
+                                    <input id="max-emails-number" type="text" class="form-control input-number" value="10">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Emails Order
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="emails-order" class="form-control bs-select" title="Select a Folder .." data-live-search="true"> 
+                                        <option value="new-to-old" selected>New To Old</option>
+                                        <option value="old-to-new">Old To New</option>
+                                    </select>
+                                 </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group"> 
+                                    <label class="control-label">Filter Date</label>
+                                    <div class="input-group defaultrange pull-right" show-default="false" id="defaultrange">
+                                        <input id="date-range" type="text" name="date-range" value="" class="form-control" readonly>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-outline default date-range-toggle" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Return Type
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="return-type" class="form-control bs-select" title="Select a Folder .." data-live-search="true"> 
+                                        <option value="full-source" selected>Full Source</option>
+                                        <option value="full-header">Full Header</option>
+                                        <option value="header-value">Header Value</option>
+                                        <option value="full-body">Full Body</option>
+                                    </select>
+                                 </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="control-label full-width">Header Value </label>
+                                <input id="return-header-key" type="text" name="return-header-key" disabled class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label full-width">Results Separator </label>
+                                <input id="results-separator" type="text" class="form-control" value="_SEPARATOR_">
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Filter Combination
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="filter-type" class="form-control bs-select" title="Select a Type .." data-live-search="true"> 
+                                        <option value="and" selected>AND</option>
+                                        <option value="or">OR</option>
+                                    </select>
+                                 </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="caption" style="display: inline-block;width: 91%;">Filter Options</h4>
+                                <a href="javascript:;" class="btn btn-outline dark pull-right filtering-add" style="margin-top: 20px;" data-template="PGRpdiBjbGFzcz0iY29sLW1kLTEyIGZpbHRlcmluZy1pdGVtIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY29sLW1kLTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmb3JtLWdyb3VwIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBmdWxsLXdpZHRoIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBIZWFkZXIgUGFyYW1ldGVyCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2xhYmVsPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9InRleHQiIGNsYXNzPSJmb3JtLWNvbnRyb2wgZmlsdGVycy1oZWFkZXItcGFyYW1ldGVyIiBkYXRhLWluZGV4PSIwIiAvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtNCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCBmdWxsLXdpZHRoIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEZpbHRlciBUeXBlCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0icHVsbC1yaWdodCB0b29sdGlwcyBicy1kZXNlbGVjdC1hbGwiIGRhdGEtY29udGFpbmVyPSJib2R5IiBkYXRhLXBsYWNlbWVudD0idG9wIiBkYXRhLW9yaWdpbmFsLXRpdGxlPSJDbGVhciBTZWxlY3Rpb25zIiAgaHJlZj0iamF2YXNjcmlwdDo7IiBzdHlsZT0ibWFyZ2luLWxlZnQ6IDE1cHg7bWFyZ2luLXJpZ2h0OiA1cHg7Y29sb3IgOiM1MjVlNjQ7Ij48aSBjbGFzcz0iZmEgZmEtcmVtb3ZlIj48L2k+PC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2xhYmVsPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c2VsZWN0IGNsYXNzPSJmb3JtLWNvbnRyb2wgYnMtc2VsZWN0IGZpbHRlcnMtdHlwZSIgZGF0YS1pbmRleD0iMCIgdGl0bGU9IlNlbGVjdCBhIFR5cGUgLi4iIGRhdGEtbGl2ZS1zZWFyY2g9InRydWUiPiAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9ImVxdWFscyIgc2VsZWN0ZWQ+RXF1YWxzPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJub3QtZXF1YWxzIj5Ob3QgRXF1YWxzPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJjb250YWlucyI+Q29udGFpbnM8L29wdGlvbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9Im5vdC1jb250YWlucyI+Tm90IENvbnRhaW5zPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc2VsZWN0PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC0zIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3M9ImNvbnRyb2wtbGFiZWwgZnVsbC13aWR0aCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSGVhZGVyIFBhcmFtZXRlcgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbnB1dCB0eXBlPSJ0ZXh0IiBjbGFzcz0iZm9ybS1jb250cm9sIGZpbHRlcnMtaGVhZGVyLXZhbHVlIiBkYXRhLWluZGV4PSIwIiAvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtMSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzPSJjb250cm9sLWxhYmVsIiBzdHlsZT0iZGlzcGxheTogYmxvY2s7Ij4mbmJzcDs8L2xhYmVsPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iamF2YXNjcmlwdDo7IiBjbGFzcz0iYnRuIGJ0bi1kYW5nZXIgZmlsdGVyaW5nLXJlbW92ZSI+PGkgY2xhc3M9ImZhIGZhLWNsb3NlIj48L2k+PC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4=">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <div class="row filtering-container">
+                                    <div class="col-md-12 filtering-item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label full-width">
+                                                        Header Parameter
+                                                    </label>
+                                                    <input type="text" class="form-control filters-header-parameter" data-index="0"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label full-width">
+                                                    Filter Type
+                                                    <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                                </label>
+                                                <select class="form-control bs-select filters-type" title="Select a Type .." data-live-search="true" data-index="0"> 
+                                                    <option value="equals" selected>Equals</option>
+                                                    <option value="not-equals">Not Equals</option>
+                                                    <option value="contains">Contains</option>
+                                                    <option value="not-contains">Not Contains</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="control-label full-width">
+                                                        Header Value
+                                                    </label>
+                                                    <input type="text" class="form-control filters-header-value" data-index="0" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <label class="control-label" style="display: block;">&nbsp;</label>
+                                                    <a href="javascript:;" class="btn btn-outline btn-danger filtering-remove"><i class="fa fa-close"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark extract-mailbox" data-extract-type="file"><i class="fa fa-list"></i> Extract in one file</a>
+                <a href="javascript:;" class="btn btn-outline dark extract-mailbox" data-extract-type="zip"><i class="fa fa-briefcase"></i> Extract as zip</a>
+            </div>
+        </form>
+    </div>
+</div>

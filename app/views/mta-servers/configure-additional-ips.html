@@ -1,0 +1,50 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-mint"></i>
+            <span class="caption-subject font-dark uppercase">Configure Additional Ips</span>
+        </div>
+    </div> 
+    <div class="portlet-body form">
+        <form id="addIps-form" class="horizontal-form">
+            <div class="form-body">
+                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="note note-info">
+                            <h4 class="caption"><i class="icon-info"></i> How to configure ips :</h4>
+                            <p> If you want to configure ips you should enter a list of ips line by line ((ip|netmask|gateway) and gateway is optional )</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Server Selection
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="servers-ips" class="form-control bs-select" title="Select a Server ..." data-live-search="true"> 
+                                {if(isset($servers) && count($servers) > 0)}
+                                    {foreach $row in $servers}
+                                        <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Lines</label>
+                            <textarea id="lines" name="lines" class="form-control" style="height: 250px!important"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+               <a href="javascript:;" class="btn btn-outline dark configure-additional-ips"><i class="fa fa-check"></i> Configure </a>
+            </div>
+        </form>
+    </div>
+</div>

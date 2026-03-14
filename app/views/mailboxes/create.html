@@ -1,0 +1,68 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Create Mailboxes</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="verticals-form" action="{echo $app['base_url']}/mailboxes/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        DNS Account
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="accounts" class="form-control bs-select" title="Select Account ..." name="account-id" data-live-search="true" data-required="true" data-validation-message="Account is Required !">
+                                        {if(isset($accounts) && count($accounts))}
+                                            {foreach $account in $accounts}
+                                                <option value="{echo $account['type']}|{echo $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Domains
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                    </label>
+                                    <select id="domains" class="form-control bs-select" title="Select Domain ..." name="domains[]" multiple data-actions-box="true" data-live-search="true" data-required="true" data-validation-message="Domain is Required !"> 
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                        <option value="Activated" selected >Activated</option>
+                                        <option value="Inactivated">Inactivated</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Email Prefixes ( prefix@domain.com )</label>
+                            <textarea id="domain-names" name="mailboxes-prefixes" class="form-control" style="height: 157px !important"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-at"></i> Create</button>
+            </div>
+        </form>
+    </div>
+</div>

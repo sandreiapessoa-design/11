@@ -1,0 +1,191 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Amazon Account</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="amazon-accounts-form" action="{echo $app['base_url']}/amazon-accounts/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Account Name</label>
+                            <input type="text" name="amazon-name" class="form-control" data-required="true" data-validation-message="Amazon Account Name is Required !" placeholder="Enter Amazon Account Name">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="amazon-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Access Key</label>
+                            <input type="text" name="amazon-access-key" class="form-control" data-required="true" data-validation-message="Amazon Access Key is Required !" placeholder="Enter Amazon Access Key">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Secret Key</label>
+                            <input type="text" name="amazon-secret-key" class="form-control" data-required="true" data-validation-message="Amazon Secret Key is Required !" placeholder="Enter Amazon Secret Key">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Proxy IP</label>
+                            <input type="text" name="amazon-proxy-ip" class="form-control" placeholder="Enter Amazon Proxy IP (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Proxy Port</label>
+                            <input type="text" name="amazon-proxy-port" class="form-control input-number" placeholder="Enter Amazon Proxy Port (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Proxy Username</label>
+                            <input type="text" name="amazon-proxy-username" class="form-control" placeholder="Enter Amazon Proxy Username (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Amazon Proxy Password</label>
+                            <input type="text" name="amazon-proxy-password" class="form-control" placeholder="Enter Amazon Proxy Password (Optional)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h4 class="caption">Default Regions AMI Images :</h4>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">US East (N. Virginia)</label>
+                            <input type="text" name="amazon-us-east-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">US East (Ohio)</label>
+                            <input type="text" name="amazon-us-east-2-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">US West (N. California)</label>
+                            <input type="text" name="amazon-us-west-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">US West (Oregon)</label>
+                            <input type="text" name="amazon-us-west-2-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Asia Pacific (Hong Kong)</label>
+                            <input type="text" name="amazon-ap-east-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Asia Pacific (Mumbai)</label>
+                            <input type="text" name="amazon-ap-south-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Asia Pacific (Seoul)</label>
+                            <input type="text" name="amazon-ap-northeast-2-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Asia Pacific (Singapore)</label>
+                            <input type="text" name="amazon-ap-southeast-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Asia Pacific (Sydney)</label>
+                            <input type="text" name="amazon-ap-southeast-2-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Asia Pacific (Tokyo)</label>
+                            <input type="text" name="amazon-ap-northeast-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Canada (Central)</label>
+                            <input type="text" name="amazon-ca-central-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">EU (Frankfurt)</label>
+                            <input type="text" name="amazon-eu-central-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">EU (Ireland)</label>
+                            <input type="text" name="amazon-eu-west-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">EU (London)</label>
+                            <input type="text" name="amazon-eu-west-2-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">EU (Paris)</label>
+                            <input type="text" name="amazon-eu-west-3-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">EU (Stockholm)</label>
+                            <input type="text" name="amazon-eu-north-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Middle East (Bahrain)</label>
+                            <input type="text" name="amazon-me-south-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">South America (São Paulo)</label>
+                            <input type="text" name="amazon-sa-east-1-image" class="form-control" placeholder="Enter Default Image (Optional)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="amazon-name" data-model="AwsAccount" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

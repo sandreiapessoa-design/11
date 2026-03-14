@@ -1,0 +1,50 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Mta Servers Tools</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="servers-form" action="#" class="horizontal-form" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Server Selection
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="actions-servers" class="form-control bs-select" title="Select Servers ..." data-actions-box="true" data-live-search="true" multiple> 
+                                {if(isset($servers) && count($servers)>0)}
+                                    {foreach $row in $servers}
+                                        <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Result Log</label>
+                            <textarea id="log-result" class="form-control" style="height: 500px !important;background: #333;color: #fff;font-family: monospace" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right"> 
+                <a href="javascript:;" class="btn btn-outline blue-madison server-actions-trigger" data-action="get-info"><i class="fa fa-list"></i> Get Servers Info </a>
+                <a href="javascript:;" class="btn btn-outline blue-madison server-actions-trigger" data-action="get-ips"><i class="fa fa-globe"></i> Get Servers Ips </a>
+                <a href="javascript:;" class="btn btn-outline green server-actions-trigger" data-action="reboot-server"><i class="fa fa-power-off"></i> Reboot Servers </a>
+                <a href="javascript:;" class="btn btn-outline purple server-actions-trigger" data-action="refresh-ram"><i class="fa fa-database"></i> Refresh RAM & Cache </a>
+                <a href="javascript:;" class="btn btn-outline dark server-actions-trigger" data-action="clean-logs"><i class="fa fa-list"></i> Clear Logs </a>
+                <a href="javascript:;" class="btn btn-outline red server-actions-trigger" data-action="stop-apache"><i class="fa fa-stop"></i> Stop Apache </a>
+                <a href="javascript:;" class="btn btn-outline blue server-actions-trigger" data-action="start-apache"><i class="fa fa-play"></i> Start Apache </a>
+                <a href="javascript:;" class="btn btn-outline yellow server-actions-trigger" data-action="restart-apache"><i class="fa fa-refresh"></i> Restart Apache </a>
+            </div>
+        </form>
+    </div>
+</div>

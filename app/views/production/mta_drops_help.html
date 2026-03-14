@@ -1,0 +1,96 @@
+<div id="mta-drops-helper" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Tags Help</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <b style="text-decoration: underline;color: #32c5d2 !important;">Main Tags :</b><br/><br/>
+                        <b>[ip]</b> : The Current IP <br/>
+                        <b>[rdns]</b> : The Current IP's RDNS <br/>
+                        <b>[domain]</b> : The Current IP's Domain <br/>
+                        <b>[custom_domain]</b> : The Custom Vmta's Domain <br/>
+                        <b>[static_domain]</b> : The Static Domain <br/>
+                        <b>[smtp_user]</b> : Smtp Username ( Smtp Process Only ) <br/>
+                        <b>[server]</b> : Server Name <br/>
+                        <b>[email_id]</b> : Destinator Email Id<br/>
+                        <b>[email]</b> : Destinator Email <br/>
+                        <b>[first_name]</b> : Destinator First Name <br/>
+                        <b>[last_name]</b> : Destinator Last Name <br/>
+                        <b>[return_path]</b> : Return Path <br/>
+                        <b>[from_name]</b> : From Name <br/>
+                        <b>[subject]</b> : Subject <br/>
+                        <b>[mail_date]</b> : Current Date <br/>
+                        <b>[message_id]</b> : Generated Message ID <br/>
+                        <b>[negative]</b> : Negative file content ( if any ) <br/>
+                        <b>[placeholder1]</b> : The Current placeholder 1 value <br/>
+                        <b>[placeholder2]</b> : The Current placeholder 2 value <br/>
+                        <b>[placeholder3]</b> : The Current placeholder 3 value <br/><br/><br/>
+                    </div>
+                    <div class="col-md-3">
+                        <b style="text-decoration: underline;color: #32c5d2 !important;">Unique Random Tags : <br/>(eg: [uan_12] for fixed size and [uan_5_15] for random ranged size)</b><br/><br/>
+                        <b>[ua]</b> : Unique Alpha Random <br/>
+                        <b>[ual]</b> : Unique Alpha Lowercase Random <br/>
+                        <b>[uau]</b> : Unique Alpha Uppercase Random <br/>
+                        <b>[uan]</b> : Unique Alphanumeric Random <br/>
+                        <b>[uanl]</b> : Unique Alphanumeric Lowercase Random <br/>
+                        <b>[uanu]</b> : Unique Alphanumeric Uppercase Random <br/>
+                        <b>[un]</b> : Unique Numeric Random  <br/>      
+                        <b>[uhu]</b> : Unique Uppercase Hex Random  <br/>
+                        <b>[uhl]</b> : Unique Lowercase Hex Random  <br/><br/><br/> 
+                        
+                        <b style="text-decoration: underline;color: #32c5d2 !important;">Random Tags : <br/>(eg: [an_12] for fixed size and [an_5_15] for random ranged size)</b><br/><br/>
+                        <b>[a]</b> : Alpha Random <br/>
+                        <b>[al]</b> : Alpha Lowercase Random <br/>
+                        <b>[au]</b> : Alpha Uppercase Random <br/>
+                        <b>[an]</b> : Alphanumeric Random <br/>
+                        <b>[anl]</b> : Alphanumeric Lowercase Random <br/>
+                        <b>[anu]</b> : Alphanumeric Uppercase Random <br/>
+                        <b>[n]</b> : Numeric Random  <br/>      
+                        <b>[hu]</b> : Uppercase Hex Random  <br/>
+                        <b>[hl]</b> : Lowercase Hex Random  <br/><br/><br/> 
+                    </div>
+                    <div class="col-md-3">
+                        <b style="text-decoration: underline;color: #32c5d2 !important;">Links Tags :</b><br/><br/>
+                        <b>[open]</b> : Open Link , eg : http://[domain]/[open] <br/>
+                        <b>[url]</b> : Click Link , eg : http://[domain]/[url] <br/>
+                        <b>[unsub]</b> : Unsub Link , eg : http://[domain]/[unsub] <br/>
+                        <b>[optout]</b> : OptOut Link , eg : http://[domain]/[optout] <br/><br/><br/>
+                        
+                        <b style="text-decoration: underline;color: #32c5d2 !important;">Short Links Tags : (No need for domain tag and no need for http://)</b><br/><br/>
+                        <b>[short_open]</b> : Open Link , eg : [short_open] <br/>
+                        <b>[short_url]</b> : Click Link , eg : [short_url] <br/>
+                        <b>[short_unsub]</b> : Unsub Link , eg : [short_unsub] <br/>
+                        <b>[short_optout]</b> : OptOut Link , eg : [short_optout] <br/><br/><br/>
+                    </div>
+                    <div class="col-md-3">
+                        <b style="text-decoration: underline;color: #32c5d2 !important;">VMTAS Types :</b><br/><br/>
+                        <br/><b>Default Vmta : </b><br/> 
+                        Sends with default vmtas <br/> 
+                        [rdns] : will have default rdns <br/> 
+                        [domain] : will have default domain <br/> 
+                        [custom_domain] : will be empty <br/><br/><br/> 
+                        <b>Custom Vmta : </b>
+                        <br/> Sends with custom created vmtas (IF ANY)<br/> 
+                        [rdns] : will have custom domain <br/> 
+                        [domain] : will have custom domain <br/> 
+                        [custom_domain] : will have custom domain <br/><br/><br/> 
+                        <b>Merged Vmta : </b>
+                        <br/> Sends with custom created vmtas (IF ANY)<br/> 
+                        [rdns] : will have default rdns <br/> 
+                        [domain] : will have default domain <br/> 
+                        [custom_domain] : will have custom domain <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline dark btn-outline">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

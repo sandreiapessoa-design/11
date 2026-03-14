@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Turn Mta Servers into Proxies Servers</span>
+                </div>
+                <div class="actions">
+                    <a href="#servers-filter" data-toggle="modal" class="btn btn-outline dark servers-filter"><i class="fa fa-filter"></i> Filter Select </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="pmta-config-form" action="#" class="horizontal-form" method="POST">
+                    <div class="form-body">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label full-width">
+                                            Select a Server to Install Proxies on
+                                            <a class="pull-right tooltips bs-deselect-all" bs-target="old-server-ips" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                            <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                        </label>
+                                        <select id="mta-servers" class="form-control bs-select filter-servers" title="Select a Server ..." multiple data-actions-box="true" data-live-search="true"> 
+                                            {if(isset($servers) && count($servers)>0)}
+                                                {foreach $row in $servers}
+                                                    <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                                {/foreach}
+                                            {/if}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Username</label>
+                                        <input id="proxy-username" type="text" class="form-control" placeholder="Enter Username ( Optional )">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Password</label>
+                                        <input id="proxy-password" type="password" class="form-control" placeholder="Enter Password ( Optional )">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="control-label">HTTP Port</label>
+                                        <input id="http-proxy-port" type="text" name="http-proxy-port" class="form-control" data-required="true" data-validation-message="Server Proxy Port is Required !" placeholder="Enter Server Proxy Port" value="3128">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="control-label">SOCKS Port</label>
+                                        <input id="socks-proxy-port" type="text" class="form-control" data-required="true" data-validation-message="Server Proxy Port is Required !" placeholder="Enter Server Proxy Port" value="9300">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions right">
+                        <button type="button" class="btn btn-outline dark install-proxy"><i class="fa fa-terminal"></i> Install Proxy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Proxy Servers List</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm blue copy-proxies" data-proxy-type="socks"><i class="fa fa-list"></i> Show SOCKS Proxies</button>
+                <button class="btn btn-outline btn-sm dark copy-proxies" data-proxy-type="http"><i class="fa fa-globe"></i> Show HTTP Proxies</button>
+                <button class="btn btn-outline btn-sm green table-group-action-submit" data-table-group-action="activate"><i class="fa fa-check"></i> Activate</button>
+                <button class="btn btn-outline btn-sm yellow table-group-action-submit" data-table-group-action="Inactivate"><i class="fa fa-ban"></i> Inactivate</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-trash"></i> Uninstall</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="proxy-servers" action="{echo $app['base_url']}/mta-servers/getProxyServers.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#proxy-servers .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- MODALS -->
+{include includes/modals/proxies_servers.html}
+{include includes/modals/servers_filter.html}
+<!-- MODALS -->

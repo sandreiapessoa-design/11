@@ -1,0 +1,60 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Manager Users Teams</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="users-teams-form" action="{echo $app['base_url']}/teams/users.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Users
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="teams-list" class="form-control bs-select" title="Select a Team ..." name="team-id">
+                                {if(isset($teams) && count($teams)>0)}
+                                    {foreach $row in $teams}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Not Affected Users 
+                                <a id="users-selector" class="pull-right tooltips selects-move" data-from="unaffected-users" data-to="affected-users" data-container="body" data-placement="top" data-original-title="Move Selected Vmtas In Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-right"></i></a> 
+                                <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".users-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".users-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                            </label>
+                            <select id="unaffected-users" class="form-control users-selection select-actions" name="unaffected-users[]" multiple="multiple" style="height: 300px !important;">
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Affected Users                        
+                                <a id="users-deselector" class="pull-right tooltips selects-move" data-from="affected-users" data-to="unaffected-users" data-container="body" data-placement="top" data-original-title="Move Selected Vmtas Out Of Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-left"></i></a> 
+                                <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".users-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".users-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                            </label>
+                            <select id="affected-users" class="form-control vmtas-selection select-actions" name="affected-users[]" multiple="multiple" style="height: 300px !important;"> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark update-affectation"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

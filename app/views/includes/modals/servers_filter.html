@@ -1,0 +1,44 @@
+<div id="servers-filter" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Servers Filter</h4>
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Filter Select Type</label>
+                                <select id="filter-select-type" class="form-control bs-select"> 
+                                    <option value="servers-by-name" selected="true">Select Servers By Name</option>
+                                    <option value="servers-by-name-rev">Select Servers By Name (Rev)</option>
+                                    <option value="vmtas-by-ip">Select Servers By Ips</option>
+                                    <option value="vmtas-by-ip-rev">Select Servers By Ips (Rev)</option>
+                                    <option value="vmtas-by-rdns">Select Servers By Rdns</option>
+                                    <option value="vmtas-by-rdns-rev">Select Servers By Rdns (Rev)</option>
+                                    <option value="vmtas-by-domain">Select Servers By Domain</option>
+                                    <option value="vmtas-by-domain-rev">Select Servers By Domain (Rev)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label class="control-label full-width">Filter Value</label>
+                                <textarea id="filter-select-text" class="form-control" style="height: 200px !important;" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline dark btn-outline">Close</button>
+                <button type="button" class="btn btn-outline dark apply-server-filter">Apply Filter</button>
+            </div>
+        </div>
+    </div>
+</div>
+

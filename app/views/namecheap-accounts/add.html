@@ -1,0 +1,52 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Namecheap Account</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="namecheap-accounts-form" action="{echo $app['base_url']}/namecheap-accounts/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Namecheap Account Name</label>
+                            <input type="text" name="namecheap-name" class="form-control" data-required="true" data-validation-message="Namecheap Account Name is Required !" placeholder="Enter Namecheap Account Name">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="namecheap-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Namecheap User</label>
+                            <input type="text" name="namecheap-user" class="form-control" data-required="true" data-validation-message="Namecheap User is Required !" placeholder="Enter Namecheap User">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Namecheap API Key</label>
+                            <input type="text" name="namecheap-api-key" class="form-control" data-required="true" data-validation-message="Namecheap API Key is Required !" placeholder="Enter Namecheap API Key">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Namecheap Whitelist IP</label>
+                            <input type="text" name="namecheap-whitelised-ip" class="form-control" data-required="true" data-validation-message="Namecheap Whitelist IP is Required !" placeholder="Enter Namecheap Whitelist IP">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+            <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="namecheap-name" data-model="Namecheap" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

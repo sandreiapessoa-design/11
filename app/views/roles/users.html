@@ -1,0 +1,54 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Manager Users Roles</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="users-roles-form" action="{echo $app['base_url']}/roles/users.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Users
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="users" class="form-control bs-select" title="Select a User ..." name="user-id">
+                                {if(isset($users) && count($users)>0)}
+                                    {foreach $row in $users}
+                                        <option value="{echo $row['id']}">{echo $row['first_name'] . ' ' . $row['last_name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group"> 
+                            <label class="control-label full-width">
+                                Users 
+                                <span class="options-sum" style="margin-left: 5px;">( 0 Roles Selected )</span>
+                                <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".roles-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".roles-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="roles" class="form-control roles-selection select-actions" data-object-name="Roles" multiple name="roles[]"  style="height: 310px !important;">
+                                {if(isset($roles) && count($roles)>0)}
+                                    {foreach $row in $roles}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

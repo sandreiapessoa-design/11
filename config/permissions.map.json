@@ -1,0 +1,887 @@
+{
+    "dashboard": {
+        "controller": "Dashboard",
+        "method": "main",
+        "parents": ""
+    },
+    "manage-settings": {
+        "controller": "Settings",
+        "method": "main",
+        "parents": "application-settings"
+    },
+    "show-frontend-logs": {
+        "controller": "Logs",
+        "method": "frontend",
+        "parents": "application-settings"
+    },
+    "show-backend-logs": {
+        "controller": "Logs",
+        "method": "backend",
+        "parents": "application-settings"
+    },
+    "show-auditlogs": {
+        "controller": "AuditLogs",
+        "method": "main",
+        "parents": "application-settings"
+    },
+    "show-users-sessions": {
+        "controller": "Sessions",
+        "method": "main",
+        "parents": "application-settings"
+    },
+    "kill-users-sessions": {
+        "controller": "Tools",
+        "method": "forceDisconnectUsers",
+        "parents": ""
+    },
+    "spf-lookup": {
+        "controller": "Tools",
+        "method": "spfLookup",
+        "parents": "application-tools"
+    },   
+    "blacklist-tools": {
+        "controller": "Tools",
+        "method": "blacklist",
+        "parents": "application-tools"
+    },
+    "mailbox-extractor": {
+        "controller": "Tools",
+        "method": "mailboxExtractor",
+        "parents": "application-tools"
+    },
+    "extractor-tools": {
+        "controller": "Tools",
+        "method": "extractor",
+        "parents": "application-tools"
+    },
+    "show-users": {
+        "controller": "Users",
+        "method": "main",
+        "parents": "users"
+    },
+    "add-users": {
+        "controller": "Users",
+        "method": "add",
+        "parents": "users"
+    },
+    "edit-users": {
+        "controller": "Users",
+        "method": "edit",
+        "parents": "users"
+    },
+    "delete-users": {
+        "controller": "Users",
+        "method": "delete",
+        "parents": "users"
+    },
+    "show-roles": {
+        "controller": "Roles",
+        "method": "main",
+        "parents": "roles"
+    },
+    "add-roles": {
+        "controller": "Roles",
+        "method": "add",
+        "parents": "roles"
+    },
+    "edit-roles": {
+        "controller": "Roles",
+        "method": "edit",
+        "parents": "roles"
+    },
+    "delete-roles": {
+        "controller": "Roles",
+        "method": "delete",
+        "parents": "roles"
+    },
+    "affect-roles": {
+        "controller": "Roles",
+        "method": "affect",
+        "parents": "roles"
+    },
+    "users-roles": {
+        "controller": "Roles",
+        "method": "users",
+        "parents": "roles"
+    },
+    "show-teams": {
+        "controller": "Teams",
+        "method": "main",
+        "parents": "teams"
+    },
+    "add-teams": {
+        "controller": "Teams",
+        "method": "add",
+        "parents": "teams"
+    },
+    "edit-teams": {
+        "controller": "Teams",
+        "method": "edit",
+        "parents": "teams"
+    },
+    "delete-teams": {
+        "controller": "Teams",
+        "method": "delete",
+        "parents": "teams"
+    },
+    "users-teams": {
+        "controller": "Teams",
+        "method": "users",
+        "parents": "teams"
+    },
+    "manage-teams-authorisations": {
+        "controller": "Teams",
+        "method": "authorisations",
+        "parents": "teams"
+    },
+    "show-servers-providers": {
+        "controller": "ServersProviders",
+        "method": "main",
+        "parents": "servers-management,servers-providers"
+    },
+    "add-servers-providers": {
+        "controller": "ServersProviders",
+        "method": "add",
+        "parents": "servers-management,servers-providers"
+    },
+    "edit-servers-providers": {
+        "controller": "ServersProviders",
+        "method": "edit",
+        "parents": "servers-management,servers-providers"
+    },
+    "delete-servers-providers": {
+        "controller": "ServersProviders",
+        "method": "delete",
+        "parents": "servers-management,servers-providers"
+    },
+    "show-management-servers": {
+        "controller": "ManagementServers",
+        "method": "main",
+        "parents": "servers-management,management-servers"
+    },
+    "add-management-servers": {
+        "controller": "ManagementServers",
+        "method": "add",
+        "parents": "servers-management,management-servers"
+    },
+    "edit-management-servers": {
+        "controller": "ManagementServers",
+        "method": "edit",
+        "parents": "servers-management,management-servers"
+    },
+    "delete-management-servers": {
+        "controller": "ManagementServers",
+        "method": "delete",
+        "parents": "servers-management,management-servers"
+    },
+    "show-mta-servers": {
+        "controller": "MtaServers",
+        "method": "main",
+        "parents": "servers-management,mta-servers"
+    },
+    "add-mta-servers": {
+        "controller": "MtaServers",
+        "method": "add",
+        "parents": "servers-management,mta-servers"
+    },
+    "edit-mta-servers": {
+        "controller": "MtaServers",
+        "method": "edit",
+        "parents": "servers-management,mta-servers"
+    },
+    "delete-mta-servers": {
+        "controller": "MtaServers",
+        "method": "delete",
+        "parents": "servers-management,mta-servers"
+    },
+    "install-mta-servers": {
+        "controller": "MtaServers",
+        "method": "install",
+        "parents": "servers-management,mta-servers"
+    },
+    "show-mta-servers-vmtas": {
+        "controller": "MtaServers",
+        "method": "vmtasList",
+        "parents": "servers-management,mta-servers"
+    },
+    "servers-actions": {
+        "controller": "MtaServers",
+        "method": "serversActions",
+        "parents": "servers-management,mta-servers"
+    },
+    "install-proxies-servers": {
+        "controller": "MtaServers",
+        "method": "proxies",
+        "parents": "servers-management,mta-servers"
+    },
+    "configure-additional-ips": {
+        "controller": "MtaServers",
+        "method": "configureAdditionalIps",
+        "parents": "servers-management,mta-servers"
+    },
+    "show-smtp-servers": {
+        "controller": "SmtpServers",
+        "method": "main",
+        "parents": "servers-management,smtp-servers"
+    },
+    "add-smtp-servers": {
+        "controller": "SmtpServers",
+        "method": "add",
+        "parents": "servers-management,smtp-servers"
+    },
+    "edit-smtp-servers": {
+        "controller": "SmtpServers",
+        "method": "edit",
+        "parents": "servers-management,smtp-servers"
+    },
+    "delete-smtp-servers": {
+        "controller": "SmtpServers",
+        "method": "delete",
+        "parents": "servers-management,smtp-servers"
+    },
+    "add-smtp-users": {
+        "controller": "SmtpServers",
+        "method": "add",
+        "parents": "servers-management,smtp-servers"
+    },
+    "edit-smtp-users": {
+        "controller": "SmtpServers",
+        "method": "edit",
+        "parents": "servers-management,smtp-servers"
+    },
+    "delete-smtp-users": {
+        "controller": "SmtpServers",
+        "method": "delete",
+        "parents": "servers-management,smtp-servers"
+    },
+    "smtp-bulk-check": {
+        "controller": "SmtpServers",
+        "method": "smtpBulkCheck",
+        "parents": "servers-management,smtp-servers"
+    },
+    "show-domains": {
+        "controller": "Domains",
+        "method": "main",
+        "parents": "dns-management,domains"
+    },
+    "add-domains": {
+        "controller": "Domains",
+        "method": "add",
+        "parents": "dns-management,domains"
+    },
+    "edit-domains": {
+        "controller": "Domains",
+        "method": "edit",
+        "parents": "dns-management,domains"
+    },
+    "delete-domains": {
+        "controller": "Domains",
+        "method": "delete",
+        "parents": "dns-management,domains"
+    },
+    "upload-brands": {
+        "controller": "Domains",
+        "method": "brands",
+        "parents": "dns-management,domains"
+    },
+    "manage-subdomains-names": {
+        "controller": "Domains",
+        "method": "subdomains",
+        "parents": "dns-management,domains"
+    },
+    "manage-domain-records": {
+        "controller": "Domains",
+        "method": "domainsRecords",
+        "parents": "dns-management,domains"
+    }, 
+    "manage-multi-records": {
+        "controller": "Domains",
+        "method": "multiRecords",
+        "parents": "dns-management,domains"
+    }, 
+    "add-namecheap-accounts": {
+        "controller": "NamecheapAccounts",
+        "method": "add",
+        "parents": "dns-management,namecheap-accounts"
+    },
+    "show-namecheap-accounts": { 
+        "controller": "NamecheapAccounts",
+        "method": "main",
+        "parents": "dns-management,namecheap-accounts"
+    },
+    "edit-namecheap-accounts": {
+        "controller": "NamecheapAccounts",
+        "method": "edit",
+        "parents": "dns-management,namecheap-accounts"
+    },
+    "delete-namecheap-accounts": {
+        "controller": "NamecheapAccounts",
+        "method": "delete",
+        "parents": "dns-management,namecheap-accounts"
+    },
+    "add-namecom-accounts": {
+        "controller": "NamecomAccounts",
+        "method": "add",
+        "parents": "dns-management,namecom-accounts"
+    },
+    "show-namecom-accounts": { 
+        "controller": "NamecomAccounts",
+        "method": "main",
+        "parents": "dns-management,namecom-accounts"
+    },
+    "edit-namecom-accounts": {
+        "controller": "NamecomAccounts",
+        "method": "edit",
+        "parents": "dns-management,namecom-accounts"
+    },
+    "delete-namecom-accounts": {
+        "controller": "NamecomAccounts",
+        "method": "delete",
+        "parents": "dns-management,namecom-accounts"
+    },
+    "show-godaddy-accounts" : {
+        "controller" : "GodaddyAccounts",
+        "method" : "main",
+        "parents" : "dns-management,godaddy-accounts"
+    },
+    "add-godaddy-accounts" : {
+        "controller" : "GodaddyAccounts",
+        "method" : "add",
+        "parents" : "dns-management,godaddy-accounts"
+    },
+    "edit-godaddy-accounts" : {
+        "controller" : "GodaddyAccounts",
+        "method" : "edit",
+        "parents" : "dns-management,godaddy-accounts"
+    },
+    "delete-godaddy-accounts" : {
+        "controller" : "GodaddyAccounts",
+        "method" : "delete",
+        "parents" : "dns-management,godaddy-accounts"
+    },
+    "pmta-commands": {
+        "controller": "Pmta",
+        "method": "commands",
+        "parents": "pmta-management"
+    },
+    "pmta-processes": {
+        "controller": "Pmta",
+        "method": "processes",
+        "parents": "pmta-management"
+    },
+    "global-vmtas": {
+        "controller": "Pmta",
+        "method": "globalVmtas",
+        "parents": "pmta-management"
+    },
+    "individual-vmtas": {
+        "controller": "Pmta",
+        "method": "individualVmtas",
+        "parents": "pmta-management"
+    },
+    "pmta-templates": {
+        "controller": "Pmta",
+        "method": "templates",
+        "parents": "pmta-management"
+    },
+    "pmta-configs": {
+        "controller": "Pmta",
+        "method": "configs",
+        "parents": "pmta-management"
+    },
+    "pmta-history": {
+        "controller": "Pmta",
+        "method": "history",
+        "parents": "pmta-management"
+    },
+    "show-affiliate-networks": {
+        "controller": "AffiliateNetworks",
+        "method": "main",
+        "parents": "affiliate-networks"
+    },
+    "add-affiliate-networks": {
+        "controller": "AffiliateNetworks",
+        "method": "add",
+        "parents": "affiliate-networks"
+    },
+    "edit-affiliate-networks": {
+        "controller": "AffiliateNetworks",
+        "method": "edit",
+        "parents": "affiliate-networks"
+    },
+    "delete-affiliate-networks": {
+        "controller": "AffiliateNetworks",
+        "method": "delete",
+        "parents": "affiliate-networks"
+    },
+    "auto-login-affiliate-networks": {
+        "controller": "AffiliateNetworks",
+        "method": "autoLogin",
+        "parents": "affiliate-networks"
+    },
+    "show-offers": {
+        "controller": "Offers",
+        "method": "main",
+        "parents": "offers"
+    },
+    "add-offers": {
+        "controller": "Offers",
+        "method": "add",
+        "parents": "offers"
+    },
+    "edit-offers": {
+        "controller": "Offers",
+        "method": "edit",
+        "parents": "offers"
+    },
+    "delete-offers": {
+        "controller": "Offers",
+        "method": "delete",
+        "parents": "offers"
+    },
+    "add-suppression-lists": {
+        "controller": "Offers",
+        "method": "suppression",
+        "parents": "offers"
+    },
+    "show-verticals": {
+        "controller": "Verticals",
+        "method": "main",
+        "parents": "verticals"
+    },
+    "add-verticals": {
+        "controller": "Verticals",
+        "method": "add",
+        "parents": "verticals"
+    },
+    "edit-verticals": {
+        "controller": "Verticals",
+        "method": "edit",
+        "parents": "verticals"
+    },
+    "delete-verticals": {
+        "controller": "Verticals",
+        "method": "delete",
+        "parents": "verticals"
+    },
+    "show-isps": {
+        "controller": "Isps",
+        "method": "main",
+        "parents": "emails-management,isps"
+    },
+    "add-isps": {
+        "controller": "Isps",
+        "method": "add",
+        "parents": "emails-management,isps"
+    },
+    "edit-isps": {
+        "controller": "Isps",
+        "method": "edit",
+        "parents": "emails-management,isps"
+    },
+    "delete-isps": {
+        "controller": "Isps",
+        "method": "delete",
+        "parents": "emails-management,isps"
+    },
+    "show-data-providers": {
+        "controller": "DataProviders",
+        "method": "main",
+        "parents": "emails-management,data-providers"
+    },
+    "add-data-providers": {
+        "controller": "DataProviders",
+        "method": "add",
+        "parents": "emails-management,data-providers"
+    },
+    "edit-data-providers": {
+        "controller": "DataProviders",
+        "method": "edit",
+        "parents": "emails-management,data-providers"
+    },
+    "delete-data-providers": {
+        "controller": "DataProviders",
+        "method": "delete",
+        "parents": "emails-management,data-providers"
+    },
+    "import-emails-lists": {
+        "controller": "DataLists",
+        "method": "main",
+        "parents": "emails-management,data-lists"
+    },
+    "delete-emails-lists": {
+        "controller": "DataLists",
+        "method": "delete",
+        "parents": "emails-management,data-lists"
+    },
+    "data-lists-duplicates": {
+        "controller": "DataLists",
+        "method": "duplicates",
+        "parents": "emails-management,data-lists"
+    },
+    "black-lists": {
+        "controller": "DataLists",
+        "method": "blacklists",
+        "parents": "emails-management,data-lists"
+    },
+    "data-lists-fetch": {
+        "controller": "DataLists",
+        "method": "emailsFetch",
+        "parents": "emails-management,data-lists"
+    },
+    "show-internal-mailboxes": {
+        "controller": "Mailboxes",
+        "method": "main",
+        "parents": "emails-management,internal-mailboxes"
+    },
+    "add-internal-mailboxes": {
+        "controller": "Mailboxes",
+        "method": "create",
+        "parents": "emails-management,internal-mailboxes" 
+    },
+    "open-internal-mailboxes": {
+        "controller": "Mailboxes",
+        "method": "open",
+        "parents": "emails-management,internal-mailboxes"
+    },
+    "delete-internal-mailboxes": {
+        "controller": "Mailboxes",
+        "method": "delete",
+        "parents": "emails-management,internal-mailboxes"
+    },
+    "send-mta-drops": {
+        "controller": "Production",
+        "method": "sendProcess",
+        "parents": "production"
+    },
+    "show-mta-drops": {
+        "controller": "Production",
+        "method": "mtaDrops",
+        "parents": "production"
+    },
+    "show-mta-tests": {
+        "controller": "Production",
+        "method": "mtaTests",
+        "parents": "production"
+    },
+    "show-smtp-drops": {
+        "controller": "Production",
+        "method": "smtpDrops",
+        "parents": "production"
+    }, 
+    "show-smtp-tests": {
+        "controller": "Production",
+        "method": "smtpTests",
+        "parents": "production"
+    },
+    "upload-images": {
+        "controller": "Production",
+        "method": "uploadImages",
+        "parents": "production"
+    },
+    "show-full-report": {
+        "controller": "Statistics",
+        "method": "fullReport",
+        "parents": "statistics"
+    },
+    "show-amazon-accounts": {
+        "controller": "AmazonAccounts",
+        "method": "main",
+        "parents": "cloud-management,aws-management,amazon-accounts"
+    },
+    "show-amazon-accounts-processes": {
+        "controller": "AmazonAccounts",
+        "method": "processes",
+        "parents": "cloud-management,aws-management,amazon-accounts"
+    },
+    "add-amazon-accounts": {
+        "controller": "AmazonAccounts",
+        "method": "add",
+        "parents": "cloud-management,aws-management,amazon-accounts"
+    },
+    "edit-amazon-accounts": {
+        "controller": "AmazonAccounts",
+        "method": "edit",
+        "parents": "cloud-management,aws-management,amazon-accounts"
+    },
+    "delete-amazon-accounts": {
+        "controller": "AmazonAccounts",
+        "method": "delete",
+        "parents": "cloud-management,aws-management,amazon-accounts"
+    },
+    "show-amazon-instances": {
+        "controller": "AmazonInstances",
+        "method": "main",
+        "parents": "cloud-management,aws-management,amazon-instances"
+    },
+    "create-amazon-instances": {
+        "controller": "AmazonInstances",
+        "method": "create",
+        "parents": "cloud-management,aws-management,amazon-instances"
+    },
+    "delete-amazon-instances": {
+        "controller": "AmazonInstances",
+        "method": "delete",
+        "parents": "cloud-management,aws-management,amazon-instances"
+    },
+    "show-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "main",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "add-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "add",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "edit-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "edit",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "delete-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "delete",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "show-digital-ocean-droplets": {
+        "controller": "DigitalOceanDroplets",
+        "method": "main",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-droplets"
+    },
+    "create-digital-ocean-droplets": {
+        "controller": "DigitalOceanDroplets",
+        "method": "create",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-droplets"
+    },
+    "delete-digital-ocean-droplets": {
+        "controller": "DigitalOceanDroplets",
+        "method": "delete",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-droplets"
+    },
+    "show-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "main",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "add-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "add",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "edit-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "edit",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "delete-digital-ocean-accounts": {
+        "controller": "DigitalOceanAccounts",
+        "method": "delete",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-accounts"
+    },
+    "show-digital-ocean-droplets": {
+        "controller": "DigitalOceanDroplets",
+        "method": "main",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-droplets"
+    },
+    "create-digital-ocean-droplets": {
+        "controller": "DigitalOceanDroplets",
+        "method": "create",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-droplets"
+    },
+    "delete-digital-ocean-droplets": {
+        "controller": "DigitalOceanDroplets",
+        "method": "delete",
+        "parents": "cloud-management,digital-ocean-management,digital-ocean-droplets"
+    },
+    "show-linode-accounts": {
+        "controller": "LinodeAccounts",
+        "method": "main",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "add-linode-accounts": {
+        "controller": "LinodeAccounts",
+        "method": "add",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "edit-linode-accounts": {
+        "controller": "LinodeAccounts",
+        "method": "edit",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "delete-linode-accounts": {
+        "controller": "LinodeAccounts",
+        "method": "delete",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "show-linode-instances": {
+        "controller": "LinodeInstances",
+        "method": "main",
+        "parents": "cloud-management,linode-management,linode-instances"
+    },
+    "create-linode-instances": {
+        "controller": "LinodeInstances",
+        "method": "create",
+        "parents": "cloud-management,linode-management,linode-instances"
+    },
+    "delete-linode-instances": {
+        "controller": "LinodeInstances",
+        "method": "delete",
+        "parents": "cloud-management,linode-management,linode-instances"
+    },
+    "show-hetzner-accounts": {
+        "controller": "HetznerAccounts",
+        "method": "main",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "add-hetzner-accounts": {
+        "controller": "HetznerAccounts",
+        "method": "add",
+        "parents": "cloud-management,hetzner-management,hetzner-accounts"
+    },
+    "edit-hetzner-accounts": {
+        "controller": "HetznerAccounts",
+        "method": "edit",
+        "parents": "cloud-management,hetzner-management,hetzner-accounts"
+    },
+    "delete-hetzner-accounts": {
+        "controller": "HetznerAccounts",
+        "method": "delete",
+        "parents": "cloud-management,hetzner-management,hetzner-accounts"
+    },
+    "show-hetzner-instances": {
+        "controller": "HetznerInstances",
+        "method": "main",
+        "parents": "cloud-management,hetzner-management,hetzner-instances"
+    },
+    "create-hetzner-instances": {
+        "controller": "HetznerInstances",
+        "method": "create",
+        "parents": "cloud-management,hetzner-management,hetzner-instances"
+    },
+    "delete-hetzner-instances": {
+        "controller": "HetznerInstances",
+        "method": "delete",
+        "parents": "cloud-management,hetzner-management,hetzner-instances"
+    },
+    "show-atlantic-accounts": {
+        "controller": "AtlanticAccounts",
+        "method": "main",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "add-atlantic-accounts": {
+        "controller": "AtlanticAccounts",
+        "method": "add",
+        "parents": "cloud-management,atlantic-management,atlantic-accounts"
+    },
+    "edit-atlantic-accounts": {
+        "controller": "AtlanticAccounts",
+        "method": "edit",
+        "parents": "cloud-management,atlantic-management,atlantic-accounts"
+    },
+    "delete-atlantic-accounts": {
+        "controller": "AtlanticAccounts",
+        "method": "delete",
+        "parents": "cloud-management,atlantic-management,atlantic-accounts"
+    },
+    "show-atlantic-instances": {
+        "controller": "AtlanticInstances",
+        "method": "main",
+        "parents": "cloud-management,atlantic-management,atlantic-instances"
+    },
+    "create-atlantic-instances": {
+        "controller": "AtlanticInstances",
+        "method": "create",
+        "parents": "cloud-management,atlantic-management,atlantic-instances"
+    },
+    "delete-atlantic-instances": {
+        "controller": "AtlanticInstances",
+        "method": "delete",
+        "parents": "cloud-management,atlantic-management,atlantic-instances"
+    },
+    "show-scaleway-accounts": {
+        "controller": "ScalewayAccounts",
+        "method": "main",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "add-scaleway-accounts": {
+        "controller": "ScalewayAccounts",
+        "method": "add",
+        "parents": "cloud-management,scaleway-management,scaleway-accounts"
+    },
+    "edit-scaleway-accounts": {
+        "controller": "ScalewayAccounts",
+        "method": "edit",
+        "parents": "cloud-management,scaleway-management,scaleway-accounts"
+    },
+    "delete-scaleway-accounts": {
+        "controller": "ScalewayAccounts",
+        "method": "delete",
+        "parents": "cloud-management,scaleway-management,scaleway-accounts"
+    },
+    "show-scaleway-instances": {
+        "controller": "ScalewayInstances",
+        "method": "main",
+        "parents": "cloud-management,scaleway-management,scaleway-instances"
+    },
+    "create-scaleway-instances": {
+        "controller": "ScalewayInstances",
+        "method": "create",
+        "parents": "cloud-management,scaleway-management,scaleway-instances"
+    },
+    "delete-scaleway-instances": {
+        "controller": "ScalewayInstances",
+        "method": "delete",
+        "parents": "cloud-management,scaleway-management,scaleway-instances"
+    },
+    "show-vultr-accounts": {
+        "controller": "VultrAccounts",
+        "method": "main",
+        "parents": "cloud-management,linode-management,linode-accounts"
+    },
+    "add-vultr-accounts": {
+        "controller": "VultrAccounts",
+        "method": "add",
+        "parents": "cloud-management,vultr-management,vultr-accounts"
+    },
+    "edit-vultr-accounts": {
+        "controller": "VultrAccounts",
+        "method": "edit",
+        "parents": "cloud-management,vultr-management,vultr-accounts"
+    },
+    "delete-vultr-accounts": {
+        "controller": "VultrAccounts",
+        "method": "delete",
+        "parents": "cloud-management,vultr-management,vultr-accounts"
+    },
+    "show-vultr-instances": {
+        "controller": "VultrInstances",
+        "method": "main",
+        "parents": "cloud-management,vultr-management,vultr-instances"
+    },
+    "create-vultr-instances": {
+        "controller": "VultrInstances",
+        "method": "create",
+        "parents": "cloud-management,vultr-management,vultr-instances"
+    },
+    "delete-vultr-instances": {
+        "controller": "VultrInstances",
+        "method": "delete",
+        "parents": "cloud-management,vultr-management,vultr-instances"
+    },
+    "show-auto-responders": {
+        "controller": "AutoResponders",
+        "method": "main",
+        "parents": "auto-responders"
+    },
+    "create-auto-responders": {
+        "controller": "AutoResponders",
+        "method": "create",
+        "parents": "auto-responders"
+    },
+    "delete-auto-responders": {
+        "controller": "AutoResponders",
+        "method": "delete",
+        "parents": "auto-responders"
+    }
+}

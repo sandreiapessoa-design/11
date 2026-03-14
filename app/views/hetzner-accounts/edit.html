@@ -1,0 +1,67 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Hetzner Account <span class="bold">{echo $account['name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="hetzner-accounts-form" action="{echo $app['base_url']}/hetzner-accounts/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="id" value="{echo $account['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Account Name</label>
+                            <input type="text" name="hetzner-name" class="form-control" data-required="true" data-validation-message="Hetzner Account Name is Required !" placeholder="Enter Hetzner Account Name" value="{echo $account['name']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="hetzner-status">
+                                <option value="Activated" {if($account['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($account['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Api Key</label>
+                            <input type="text" name="hetzner-api-key" class="form-control" data-required="true" data-validation-message="Hetzner API Key is Required !" placeholder="Enter Hetzner API Key" value="{echo $account['api_key']}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Proxy IP</label>
+                            <input type="text" name="hetzner-proxy-ip" class="form-control" placeholder="Enter Hetzner Proxy IP (Optional)" value="{echo $account['proxy_ip']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Proxy Port</label>
+                            <input type="text" name="hetzner-proxy-port" class="form-control input-number" placeholder="Enter Hetzner Proxy Port (Optional)" value="{echo $account['proxy_port']}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Proxy Username</label>
+                            <input type="text" name="hetzner-proxy-username" class="form-control" placeholder="Enter Hetzner Proxy Username (Optional)" value="{echo $account['proxy_username']}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Proxy Password</label>
+                            <input type="text" name="hetzner-proxy-password" class="form-control" placeholder="Enter Hetzner Proxy Password (Optional)" value="{echo $account['proxy_password']}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="hetzner-name" data-model="HetznerAccount" data-row-id="{echo $account['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

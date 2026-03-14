@@ -1,0 +1,67 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add Multiple Domains Records</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <div class="form-body">
+             <div class="row">
+                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label full-width">
+                            DNS Account
+                            <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                        </label>
+                        <select id="multi-accounts" class="form-control bs-select" title="Select Account ..." data-live-search="true" data-required="true" data-validation-message="Account is Required !">
+                            {if(count($accounts))}
+                                {foreach $account in $accounts}
+                                    <option value="{echo $account['type']}|{echo $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                {/foreach}
+                            {/if}
+                        </select>
+                    </div>
+                </div>
+                 <div class="col-md-6">
+                     <div class="form-group">
+                         <label class="control-label full-width">
+                             Domains
+                             <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                             <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                         </label>
+                         <select id="multi-domains" class="form-control bs-select" title="Select Domain ..." multiple data-actions-box="true" data-live-search="true"> 
+                         </select>
+                     </div>
+                 </div>
+             </div>
+         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Domain Records To Add</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row mapping-container" style="min-height: 100px">
+                   
+                </div>
+                <hr>
+                <a href="javascript:;" class="btn btn-outline blue-madison mapping-add" data-template="PGRpdiBjbGFzcz0iY29sLW1kLTEyIG1hcHBpbmctaXRlbSI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtMiI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCI+UmVjb3JkIFR5cGU8L2xhYmVsPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c2VsZWN0IGNsYXNzPSJmb3JtLWNvbnRyb2wgYnMtc2VsZWN0IHJlY29yZC10eXBlIiB0aXRsZT0iU2VsZWN0IGEgVHlwZSAuLi4iIGRhdGEtaW5kZXg9IjAiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT0iYSIgc2VsZWN0ZWQgPkEgUmVjb3JkPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJhYWFhIj5BQUFBIFJlY29yZDwvb3B0aW9uPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT0iY25hbWUiPkNOQU1FIFJlY29yZDwvb3B0aW9uPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT0idHh0Ij5UWFQgUmVjb3JkPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJucyI+TlMgUmVjb3JkPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJteCI+TVggUmVjb3JkPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc2VsZWN0PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtMyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCI+UmVjb3JkIEhvc3Q8L2xhYmVsPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW5wdXQgY2xhc3M9ImZvcm0tY29udHJvbCByZWNvcmQtaG9zdCIgdHlwZT0idGV4dCIgcGxhY2Vob2xkZXI9IkVudGVyIFJlY29yZCBIb3N0IiBkYXRhLWluZGV4PSIwIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY29sLW1kLTMiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3M9ImNvbnRyb2wtbGFiZWwiPlJlY29yZCBWYWx1ZTwvbGFiZWw+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbnB1dCBjbGFzcz0iZm9ybS1jb250cm9sIHJlY29yZC12YWx1ZSIgdHlwZT0idGV4dCIgcGxhY2Vob2xkZXI9IkVudGVyIFJlY29yZCBWYWx1ZSIgZGF0YS1pbmRleD0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC0zIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJmb3JtLWdyb3VwIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzPSJjb250cm9sLWxhYmVsIj5SZWNvcmQgVFRMPC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNlbGVjdCBjbGFzcz0iZm9ybS1jb250cm9sIGJzLXNlbGVjdCByZWNvcmQtdHRsIiB0aXRsZT0iU2VsZWN0IGEgUGVyaW9kIC4uLiIgZGF0YS1pbmRleD0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSI2MCIgc2VsZWN0ZWQgPjEgTWludXRlPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSIzMDAiPjUgTWludXRlczwvb3B0aW9uPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPG9wdGlvbiB2YWx1ZT0iNjAwIj4xMCBNaW51dGVzPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSIxMjAwIj4yMCBNaW51dGVzPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSIxODAwIj4zMCBNaW51dGVzPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSIzNjAwIj42MCBNaW51dGVzPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc2VsZWN0PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb2wtbWQtMSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzcz0iY29udHJvbC1sYWJlbCI+Jm5ic3A7PC9sYWJlbD48YnIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJqYXZhc2NyaXB0OjsiIGNsYXNzPSJidG4gcmVkIG1hcHBpbmctcmVtb3ZlIHB1bGwtcmlnaHQiPjxpIGNsYXNzPSJmYSBmYS1jbG9zZSI+PC9pPiBEZWxldGU8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+">
+                    <i class="fa fa-plus"></i> Add Record
+                </a>
+                <a href="javascript:;" class="btn btn-outline red mapping-delete-all">
+                    <i class="fa fa-close"></i> Delete All Record
+                </a>
+                <a href="javascript:;" class="btn btn-outline dark multi-records-save pull-right">
+                    <i class="fa fa-check"></i> Save Records
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

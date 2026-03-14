@@ -1,0 +1,35 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Server Provider <span class="bold">{echo $serverProvider['name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="servers-providers-form" action="{echo $app['base_url']}/servers-providers/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="id" value="{echo $serverProvider['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Provider Name</label>
+                            <input id="name" type="text" name="name" data-required="true" data-validation-message="Provider Name is Required !" class="form-control" placeholder="Enter Provider Name" value="{echo $serverProvider['name']}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" {if($serverProvider['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($serverProvider['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="name" data-model="ServerProvider" data-row-id="{echo $serverProvider['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

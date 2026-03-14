@@ -1,0 +1,378 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Details Of Mta Process N° : {echo $process['id']}</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="mta-process-details" class="horizontal-form">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Id</label>
+                                    <input type="text" class="form-control" value="{echo $process['id']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Type</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['type'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['status'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Mailer Id</label>
+                                    <input type="text" class="form-control" value="{echo $process['user_id']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Mailer Prod Id</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['user_production_id'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Mailer Name</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['user_full_name'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Start Time</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['start_time'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Finish Time</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['finish_time'])}" readonly/> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group"> 
+                                    <label class="control-label">Servers</label>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{if(isset($process['servers']) && count($process['servers'])>0)}{foreach $row in $process['servers']}{echo $row['name'] . "\n"}{/foreach}{/if}</textarea>
+                                </div>
+                            </div>
+                            {if($process['process_type'] == 'mta')}
+                                <div class="col-md-3">
+                                    <div class="form-group"> 
+                                        <label class="control-label">Vmtas</label>
+                                        <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{if(isset($process['vmtas']) && count($process['vmtas'])>0)}{foreach $row in $process['vmtas']}{echo $row['mta_server_name'] . ' => ' . $row['ip'] . ' => ' . $row['domain'] . "\n"}{/foreach}{/if}</textarea>
+                                    </div>
+                                </div>
+                            {/if}
+                            {else}
+                                <div class="col-md-3">
+                                    <div class="form-group"> 
+                                        <label class="control-label">SMTP Users</label>
+                                        <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{if(isset($process['smtp_users']) && count($process['smtp_users'])>0)}{foreach $row in $process['smtp_users']}{echo $row['smtp_server_name'] . ' => ' . $row['username'] . "\n"}{/foreach}{/if}</textarea>
+                                    </div>
+                                </div>
+                            {/else}
+                            <div class="col-md-2">
+                                <div class="form-group"> 
+                                    <label class="control-label">Test Emails</label>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{echo $process['test_emails']}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group"> 
+                                    <label class="control-label">Placeholders One</label>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{echo $process['placeholders_one']}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group"> 
+                                    <label class="control-label">Placeholders Two</label>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{echo $process['placeholders_two']}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group"> 
+                                    <label class="control-label">Placeholders Three</label>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 179px !important;overflow-x: scroll;" readonly>{echo $process['placeholders_three']}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Vmtas Rotation</label>
+                                    <input type="text" class="form-control" value="{echo $process['vmtas_rotation']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Test Rotation</label>
+                                    <input type="text" class="form-control" value="{echo $process['test_rotation']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Test After</label>
+                                    <input type="text" class="form-control" value="{echo $process['test_after']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Test Combo</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['test_emails_combination'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Ph 1 Rotation</label>
+                                    <input type="text" class="form-control" value="{echo $process['placeholders_one_rotation']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Ph 1 Combo</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['placeholders_one_combination'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Ph 2 Rotation</label>
+                                    <input type="text" class="form-control" value="{echo $process['placeholders_two_rotation']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Ph 2 Combo</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['placeholders_two_combination'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Ph 3 Rotation</label>
+                                    <input type="text" class="form-control" value="{echo $process['placeholders_three_rotation']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Ph 3 Combo</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['placeholders_three_combination'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Emails Split Type</label>
+                                    <input type="text" class="form-control" value="{echo $process['split_emails_type']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Process Type</label>
+                                    <input type="text" class="form-control" value="{echo $process['emails_process_type']}" readonly/> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Batch</label>
+                                    <input type="text" class="form-control" value="{echo $process['batch']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">X Delay</label>
+                                    <input type="text" class="form-control" value="{echo $process['x_delay']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Affiliate Network</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['affiliate_network_name'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Offer</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['offer_name'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">From Name</label>
+                                    <input type="text" class="form-control" value="{echo $process['from_name']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">From Encoding</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['from_name_encoding'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Subject</label>
+                                    <input type="text" class="form-control" value="{echo $process['subject']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Subject Encoding</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['subject_encoding'])}" readonly/> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Return Path</label>
+                                    <input type="text" class="form-control" value="{echo $process['return_path']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Static Domain</label>
+                                    <input type="text" class="form-control" value="{echo $process['static_domain']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Charset</label>
+                                    <input type="text" class="form-control" value="{echo $process['charset']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Content Type</label>
+                                    <input type="text" class="form-control" value="{echo $process['content_type']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Content Transfert Encoding</label>
+                                    <input type="text" class="form-control" value="{echo $process['content_transfer_encoding']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Link Type</label>
+                                    <input type="text" class="form-control" value="{echo ucfirst($process['link_type'])}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Data Duplicate</label>
+                                    <input type="text" class="form-control" value="{echo $process['data_duplicate']}" readonly/> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Isp</label>
+                                    <input type="text" class="form-control" value="{echo $process['isp_name']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Countries</label>
+                                    <input type="text" class="form-control" value="{echo $process['countries']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Data Start</label>
+                                    <input type="text" class="form-control" value="{echo $process['data_start']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Data Count</label>
+                                    <input type="text" class="form-control" value="{echo $process['data_count']}" readonly/> 
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Fresh</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_fresh'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Clean</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_clean'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Openers</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_openers'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Clickers</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_clickers'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Leads</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_leaders'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Unsubs</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_unsubs'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">OptOut</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_optouts'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="control-label">Seeds</label><br/>
+                                    <input type="checkbox" class="make-switch" data-size="small" {if($process['is_seeds'] == 'on')} checked {/if} disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label">Headers</label><br/>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 450px;" spellcheck="false" wrap="off" readonly>{echo $process['headers']}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label">Body</label><br/>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 450px;" spellcheck="false" wrap="off" readonly>{echo $process['body']}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group"> 
+                                    <label class="control-label">Data Lists</label>
+                                    <textarea data-widearea="enable" class="form-control" style="height: 450px !important;overflow-x: scroll;" readonly>{if(isset($process['lists']) && count($process['lists'])>0)}{foreach $row in $process['lists']}{echo $row['data_provider_name'] . ' => ' . $row['name'] . "\n"}{/foreach}{/if}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

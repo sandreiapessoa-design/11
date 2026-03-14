@@ -1,0 +1,265 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Manage Team Authorisations</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="authorisations-form" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Teams
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="teams" class="form-control bs-select" title="Select a Team ..." name="team-id">
+                                {if(isset($teams) && count($teams)>0)}
+                                    {foreach $row in $teams}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Members
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="members" class="form-control bs-select" title="Select a Team Member ..." name="team-member-id">
+                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="caption">Manage Authorisations</h4>
+                        <div class="tabbable tabbable-tabdrop">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#mta-server" data-toggle="tab">MTA Servers / Vmtas</a>
+                                </li>
+                                <li>
+                                    <a href="#smtp-server" data-toggle="tab">SMTP Servers</a>
+                                </li>
+                                <li>
+                                    <a href="#offers" data-toggle="tab">Affiliate Networks / Offers</a>
+                                </li>
+                                <li>
+                                    <a href="#data" data-toggle="tab">Data Providers / Data Lists</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="mta-server">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Servers Selection
+                                                    <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="mta-servers" class="form-control bs-select" title="Select a Server ..." multiple data-actions-box="true" data-live-search="true"> 
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Unauthorized Vmtas 
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 Vmtas Selected )</span>
+                                                    <a id="vmtas-selector" class="pull-right tooltips selects-move" data-from="unauthorized-vmtas" data-to="authorized-vmtas" data-container="body" data-placement="top" data-original-title="Move Selected Vmtas In Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-right"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                </label>
+                                                <select id="unauthorized-vmtas" class="form-control vmtas-selection select-actions" data-object-name="Vmtas" multiple="multiple" style="height: 300px !important;">
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Authorized Vmtas
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 Vmtas Selected )</span>
+                                                    <a class="pull-right tooltips copy-selected-ips" data-container="body" data-placement="top" data-original-title="Copy selected ips" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                                    <a id="vmtas-deselector" class="pull-right tooltips selects-move" data-from="authorized-vmtas" data-to="unauthorized-vmtas" data-container="body" data-placement="top" data-original-title="Move Selected Vmtas Out Of Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-left"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".vmtas-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                </label>
+                                                <select id="authorized-vmtas" class="form-control vmtas-selection select-actions" data-object-name="Vmtas" multiple="multiple" style="height: 300px !important;"> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group"> 
+                                                        <label class="control-label full-width">
+                                                            Filter Select Ips
+                                                            <a class="pull-right tooltips filter-ips-selection" data-container="body" data-placement="top" data-original-title="Filter ips selection" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-tasks"></i></a>
+                                                        </label>
+                                                        <textarea id="filter-select-text" class="form-control" style="height: 257px !important;" spellcheck="false"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group"> 
+                                                        <select id="filter-select-type" class="form-control bs-select"> 
+                                                            <option value="authorized-servers" selected="true">Authorized Servers</option>
+                                                            <option value="authorized" >Authorized Vmtas</option>
+                                                            <option value="unauthorized">Unauthorized Vmtas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="smtp-server">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Unauthorized SMTP Servers 
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 SMTP Servers Selected )</span>
+                                                    <a id="smtp-servers-selector" class="pull-right tooltips selects-move" data-from="unauthorized-smtp-servers" data-to="authorized-smtp-servers" data-container="body" data-placement="top" data-original-title="Move Selected SMTP Servers In Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-right"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".smtp-servers-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".smtp-servers-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="unauthorized-smtp-servers" class="form-control smtp-servers-selection select-actions" data-object-name="SMTP Servers" multiple="multiple" style="height: 300px !important;">
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Authorized SMTP Servers
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 SMTP Servers Selected )</span>
+                                                    <a id="smtp-servers-deselector" class="pull-right tooltips selects-move" data-from="authorized-smtp-servers" data-to="unauthorized-smtp-servers" data-container="body" data-placement="top" data-original-title="Move Selected SMTP Servers Out Of Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-left"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".smtp-servers-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".smtp-servers-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="authorized-smtp-servers" class="form-control smtp-servers-selection select-actions" data-object-name="SMTP Servers" multiple="multiple" style="height: 300px !important;"> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="offers">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Affiliate Networks Selection
+                                                    <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="affiliate-networks" class="form-control bs-select" title="Select a Affiliate Network ..." multiple data-actions-box="true" data-live-search="true"> 
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Unauthorized Offers 
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 Offers Selected )</span>
+                                                    <a id="offers-selector" class="pull-right tooltips selects-move" data-from="unauthorized-offers" data-to="authorized-offers" data-container="body" data-placement="top" data-original-title="Move Selected Offers In Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-right"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".offer-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".offer-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="unauthorized-offers" class="form-control offer-selection select-actions" data-object-name="Offers" multiple style="height: 300px !important;">
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Authorized Offers
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 Offers Selected )</span>
+                                                    <a id="offers-deselector" class="pull-right tooltips selects-move" data-from="authorized-offers" data-to="unauthorized-offers" data-container="body" data-placement="top" data-original-title="Move Selected Offers Out Of Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-left"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".offer-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".offer-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="authorized-offers" class="form-control offer-selection select-actions" data-object-name="Offers" multiple style="height: 300px !important;"> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="data">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Data Providers Selection
+                                                    <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="data-providers" class="form-control bs-select" title="Select a Data Provider ..." multiple data-actions-box="true" data-live-search="true"> 
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Unauthorized Data Lists 
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 Data Lists Selected )</span>
+                                                    <a id="data-lists-selector" class="pull-right tooltips selects-move" data-from="unauthorized-data-lists" data-to="authorized-data-lists" data-container="body" data-placement="top" data-original-title="Move Selected Data Lists In Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-right"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".data-list-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".data-list-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="unauthorized-data-lists" class="form-control data-list-selection select-actions" data-object-name="Data Lists" multiple="multiple" style="height: 300px !important;">
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label full-width">
+                                                    Authorized Data Lists
+                                                    <span class="options-sum" style="margin-left: 5px;">( 0 Data Lists Selected )</span>
+                                                    <a id="data-lists-deselector" class="pull-right tooltips selects-move" data-from="authorized-data-lists" data-to="unauthorized-data-lists" data-container="body" data-placement="top" data-original-title="Move Selected Data Lists Out Of Authorisation Selection" href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-arrow-left"></i></a> 
+                                                    <a class="pull-right tooltips deselect-all-options" data-container="body" data-placement="top" data-target=".data-list-selection" data-original-title="Deselect all options" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-ban"></i></a> 
+                                                    <a class="pull-right tooltips select-all-options" data-container="body" data-placement="top" data-target=".data-list-selection" data-original-title="Select all options"  href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-list"></i></a>
+                                                    <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                                </label>
+                                                <select id="authorized-data-lists" class="form-control data-list-selection select-actions" data-object-name="Data Lists" multiple="multiple" style="height: 300px !important;"> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button class="btn btn-outline dark update-team-authorisations"><i class="fa fa-key"></i> Update Authorisations</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODALS -->
+{include includes/modals/servers_filter.html}
+<!-- MODALS -->

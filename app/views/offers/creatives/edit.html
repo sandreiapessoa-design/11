@@ -1,0 +1,93 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark  uppercase">Edit Creative : {echo $creative['name']}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="offers-creatives-form" action="{echo $app['base_url']}/offers/creatives/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="offer-id" value="{echo $creative['offer_id']}">
+            <input type="hidden" name="id" value="{echo $creative['id']}">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label full-width"> 
+                                Creative
+                                <a class="pull-right tooltips display-creative" data-container="body" data-placement="top" data-original-title="Display Creative" title="Display Creative" href="javascript:;" style="margin-right: 15px;color :#525e64;"><i class="fa fa-desktop"></i></a>
+                            </label>
+                            <textarea id="creative" name="creative-html" data-widearea="enable" class="form-control" style="height: 500px;" spellcheck="false" wrap="off" data-required="true" data-validation-message="Creative is required !">{echo base64_decode($creative['value'])}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="caption">Creative Links</h4>
+                        <div class="form-group mt-repeater">
+                            <div data-repeater-list="group-c">
+                                {if(isset($links) && count($links)>0)}
+                                    {foreach $link in $links}
+                                        <div data-repeater-item class="mt-repeater-item">
+                                            <div class="row mt-repeater-row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Link Type</label>
+                                                    <select class="form-control" title="Select a Link Type ..." name="link-type" data-required="true" data-validation-message="Links Must NOT Be Without Type !">
+                                                        <option value="preview" {if($link['type'] == 'preview')} selected="selected" {/if} >Preview Link</option>
+                                                        <option value="unsub" {if($link['type'] == 'unsub')} selected="selected" {/if} >Unsubscribe Link</option>
+                                                        <option value="other" {if($link['type'] == 'other')} selected="selected" {/if} >Other Link</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="col-md-11">
+                                                            <label class="control-label">Link</label>
+                                                            <input type="text" name="link-value" class="form-control" data-required="true" data-validation-message="Links Must NOT Be Empty !" value="{echo $link['value']}">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <a href="javascript:;" data-repeater-delete class="btn btn-outline btn-danger mt-repeater-delete pull-right"><i class="fa fa-close"></i></a>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {/foreach}
+                                {/if}
+                                {else}
+                                    <div data-repeater-item class="mt-repeater-item">
+                                        <div class="row mt-repeater-row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Link Type</label>
+                                                <select class="form-control" title="Select a Link Type ..." name="link-type" data-required="true" data-validation-message="Links Must NOT Be Without Type !">
+                                                    <option value="preview" selected="true">Preview Link</option>
+                                                    <option value="unsub">Unsubscribe Link</option>
+                                                    <option value="other">Other Link</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-11">
+                                                        <label class="control-label">Link</label>
+                                                        <input type="text" name="link-value" class="form-control" data-required="true" data-validation-message="Links Must NOT Be Empty !">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-outline btn-danger mt-repeater-delete pull-right"><i class="fa fa-close"></i></a>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {/else}
+                            </div>
+                            <a href="javascript:;" data-repeater-create class="btn btn-outline btn-info mt-repeater-add"><i class="fa fa-plus"></i> Add Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- MODALS -->
+    {include includes/modals/creative_display.html}
+<!-- MODALS -->   

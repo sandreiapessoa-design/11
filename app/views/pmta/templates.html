@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Manage PowerMta Templates Configs</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="pmta-tmp-config-form" action="#" class="horizontal-form" method="POST">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Servers To Apply On ( Optional )
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                    </label>
+                                    <select id="tmp-servers" class="form-control bs-select" title="Select a Server ..." multiple data-actions-box="true" data-live-search="true"> 
+                                        {if(isset($servers) && count($servers)>0)}
+                                            {foreach $row in $servers}
+                                                <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Config Type
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="tmp-type" class="form-control bs-select" data-type="parameters" title="Select a Config Type ..." data-live-search="true"> 
+                                        <option value="default" selected>Default Config</option>
+                                        <option value="custom">Custom Config</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Parameters
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="tmp-parameters" class="form-control bs-select tmp-configs-type" data-type="parameters" title="Select a Config ..." data-live-search="true"> 
+                                        <option value="pmta_accounting">Accounting Files Config</option>
+                                        <option value="pmta_isps">ISPs Config</option>
+                                        <option value="pmta_bounce_rules">Bounce Rules Config</option>
+                                        <option value="pmta_http">Http Config</option>
+                                        <option value="pmta_log">Logs Config</option>
+                                        <option value="pmta_mail_access">Mail Access Config</option>
+                                        <option value="pmta_smtp_listener">Smtp Listeners Config</option>
+                                        <option value="pmta_sources">Sources Config</option>
+                                        <option value="pmta_spool">Spool Config</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Result Config</label>
+                                    <textarea id="tmp-parameters-result" class="form-control" style="height: 500px!important;color: #fff;background: #000;font-family: monospace" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="javascript:;" class="btn btn-outline dark pull-right update-tmp-config"><i class="fa fa-refresh"></i> Update Config</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

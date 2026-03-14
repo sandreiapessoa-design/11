@@ -1,0 +1,64 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Extract Values From Given Text</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="domains-form" action="{echo $app['base_url']}/tools/extractor.html" class="horizontal-form" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label full-width">
+                                    Extract Type
+                                    <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                </label>
+                                <select id="extractor" name="type" class="form-control bs-select" data-required="true" data-validation-message="Extract Type are Required !" title="Select an Extract Type ..." data-live-search="true"> 
+                                    <option value="all-ips">Ectract All Ips</option>
+                                    <option value="all-ips-v4">Ectract All Ips v4</option>
+                                    <option value="all-ips-v6">Ectract All Ips v6</option>
+                                    <option value="all-our-ips" selected>Ectract All Our Ips</option>
+                                    <option value="all-our-ips-v4">Ectract All Our Ips v4</option>
+                                    <option value="all-our-ips-v6">Ectract All Our Ips v6</option>
+                                    <option value="all-emails">Ectract All Emails</option>
+                                    <option value="all-senders">Ectract All Senders</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label full-width">
+                                    Extract Unique Values
+                                    <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                </label>
+                                <select id="unique" name="unique" class="form-control bs-select" data-required="true" data-validation-message="Extract Unique are Required !" title="Select an Extract Unique ..." data-live-search="true"> 
+                                    <option value="enabled" selected>Enabled</option>
+                                    <option value="disabled">Disabled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Text You Want To Extract From</label>
+                                    <textarea name="text" data-required="true" data-validation-message="Sub Names are Required !" class="form-control" style="height: 250px!important"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Results :</label>
+                            <textarea class="form-control" style="height: 315px !important;background: #333;color: #fff;font-family: monospace">{echo $result}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-exchange"></i> Extract</button>
+            </div>
+        </form>
+    </div>
+</div>

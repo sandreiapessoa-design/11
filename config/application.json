@@ -1,0 +1,28 @@
+{
+    "framework": "IR Framework",
+    "version": "1.3",
+    "author": "Amine Idrissi",
+    "year": "2020",
+    "application": {
+        "name": "iresponse gexm",
+        "company": "iresponse gexm",
+        "version": "1.0",
+        "default_db": "system",
+        "pmta_http_port": "5378",
+        "upload_center_id": "",
+        "new_tab_open": "same",
+        "webmail_server_id": "",
+        "pmta_config_type": "default",
+        "tracking_enc_key": "Im2%8Cr64>U^JX>tCT`&Vy+RR2M_nCbT)5NE_;fVBH{q;.y[a{Uq!LD#Tyc>hdop",
+        "bit_shortlinks_token": "",
+        "sidebar_behaviour": "expended",
+        "base_url": "http://gm",
+        "gcloud_bucket_size": "20",
+        "gcloud_object_size": "20",
+        "ssl_email": "",
+        "lamda_timer": "5m",
+        "suppression_timer": "7",
+        "optizmo_token": "",
+        "pmta_firewall_ips_domains": ""
+    }
+}

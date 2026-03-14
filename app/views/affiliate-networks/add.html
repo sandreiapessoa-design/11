@@ -1,0 +1,192 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Affiliate Network</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="affiliate-networks-form" action="{echo $app['base_url']}/affiliate-networks/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Id</label>
+                            <input id="affiliate-id" type="text" name="affiliate-id" class="form-control" placeholder="Enter Affiliate ID" data-required="true" data-validation-message="Affiliate Id is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Network Name</label>
+                            <input id="name" type="text" name="name" data-required="true" data-validation-message="Affiliate Network Name is Required !" class="form-control" placeholder="Enter Affiliate Network Name">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select id="status" class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Network Website</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                                <input id="website" type="text" name="website" class="form-control" placeholder="Enter Affiliate Network Website">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Username</label>
+                            <input id="username" type="text" name="username" class="form-control" placeholder="Enter Affiliate Network Username" data-required="true" data-validation-message="Affiliate Network Username is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input id="password" type="password" name="password" class="form-control" placeholder="Enter Affiliate Network Password" data-required="true" data-validation-message="Affiliate Network Password is Required !">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Api Platform</label>
+                            <select id="api-type" class="form-control bs-select" title="Select an API Platform ..." name="api-type">
+                                <option value="none" selected>None</option>
+                                <option value="cake">Cake Api</option>
+                                <option value="hitpath">HitPath Api</option>
+                                <option value="pullstat">PullStat Api</option>
+                                <option value="hasoffers">HasOffers Api</option>
+                                <option value="w4">W4 Api</option>
+                                <option value="everflow">EverFlow Api</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Network Id</label>
+                            <input id="network-id" type="text" name="network-id" class="form-control" placeholder="Enter Network Id ( Required only for Hasoffers )">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Company Name</label>
+                            <input id="company-name" type="text" name="company-name" class="form-control" placeholder="Enter Company Name ( Required only for Hasoffers )">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Network API Key</label>
+                            <input id="api-key" type="text" name="api-key" class="form-control" placeholder="Enter Affiliate Network API Key">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Sub 1</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_1[]" value="mailer_id" checked> Mailer Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_1[]" value="process_id"> Process Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_1[]" value="isp_id"> ISP Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_1[]" value="list_id"> List Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_1[]" value="email_id"> Email Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_1[]" value="vmta_id"> Vmta Id
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Sub 2</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_2[]" value="mailer_id"> Mailer Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_2[]" value="process_id" checked> Process Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_2[]" value="isp_id" checked> ISP Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_2[]" value="list_id"> List Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_2[]" value="email_id"> Email Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_2[]" value="vmta_id"> Vmta Id
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Sub 3</label>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_3[]" value="mailer_id"> Mailer Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_3[]" value="process_id"> Process Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_3[]" value="isp_id"> ISP Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_3[]" value="list_id" checked> List Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_3[]" value="email_id" checked> Email Id
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox" style="padding-top: 2px;">
+                                    <input type="checkbox" name="sub-prefix_3[]" value="vmta_id" checked> Vmta Id
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+            <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="name" data-model="AffiliateNetwork" data-row-id="0" data-package="Affiliate"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

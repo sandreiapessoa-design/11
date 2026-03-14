@@ -1,0 +1,325 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-envelope-open font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Create AutoResponder</span>
+        </div>
+        <div class="actions">   
+            <input id="smtp-mta-switcher" type="checkbox" checked class="make-switch pull-right" data-on-text="&nbsp;MTA&nbsp;" data-off-text="&nbsp;SMTP&nbsp;">
+        </div>
+    </div>
+    <div class="portlet-body form"> 
+        <form id="auto-responder-form" action="{echo $app['base_url']}/auto-responders/save.html" class="horizontal-form validate" method="POST">
+            <input id="auto-responder-id" name="id" type="hidden" value="{echo $id}"/>
+            <input id="auto-responder-type" name="type" type="hidden" value="mta"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">AutoResponder Name</label>
+                                    <input id="name" type="text" name="name" data-required="true" data-validation-message="AutoResponder Name is Required !" class="form-control" placeholder="Enter AutoResponder Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Servers
+                                        <a class="pull-right tooltips refresh-servers" data-container="body" data-placement="top" data-original-title="Refresh servers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-refresh"></i></a>
+                                    </label>
+                                    <select id="servers" class="form-control bs-select filter-servers" name="server-id" title="Select a Server ..." data-live-search="true" data-required="true" data-validation-message="Server is Required !" > 
+                                        {if(isset($servers) && count($servers)>0)}
+                                            {foreach $row in $servers}
+                                                <option value="{echo $row['id']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        <span class="vmta-user-label">Vmtas</span>
+                                    </label>
+                                    <select id="components" class="form-control bs-select" name="component-id" title="Select a Vmta ..." data-live-search="true" data-required="true" data-validation-message="Component is Required !"> 
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Return Path</label>
+                                    <input id="return-path" type="text" class="form-control" name="return-path" value="return@[domain]"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Content Type
+                                    </label>
+                                    <select id="content-type" name="content-type" class="form-control bs-select" title="Select a Content Type ..." name="creative-content-type">
+                                        <option value="text/html" selected>text/html</option>
+                                        <option value="text/plain">text/plain</option>
+                                        <option value="multipart/alternative">multipart/alternative</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Charset
+                                    </label>
+                                    <select id="charset" name="charset" class="form-control bs-select" title="Select a Content Type ..." name="creative-charset">
+                                        <option value="UTF-8" selected>UTF-8</option>
+                                        <option value="UTF-7">UTF-7</option>
+                                        <option value="UTF-16">UTF-16</option>
+                                        <option value="UTF-32">UTF-32</option>
+                                        <option value="UTF-32BE">UTF-32BE</option>
+                                        <option value="UTF-32LE">UTF-32LE</option>
+                                        <option value="UTF-16BE">UTF-16BE</option>
+                                        <option value="UTF-16LE">UTF-16LE</option>
+                                        <option value="UTF7-IMAP">UTF7-IMAP</option>
+                                        <option value="ASCII">ASCII</option>
+                                        <option value="UCS-4">UCS-4</option>
+                                        <option value="Windows-1252">Windows-1252</option>
+                                        <option value="Windows-1254">Windows-1254</option>
+                                        <option value="ISO-8859-1">ISO-8859-1</option>
+                                        <option value="ISO-8859-2">ISO-8859-2</option>
+                                        <option value="ISO-8859-3">ISO-8859-3</option>
+                                        <option value="ISO-8859-4">ISO-8859-4</option>
+                                        <option value="ISO-8859-5">ISO-8859-5</option>
+                                        <option value="ISO-8859-6">ISO-8859-6</option>
+                                        <option value="ISO-8859-7">ISO-8859-7</option>
+                                        <option value="ISO-8859-8">ISO-8859-8</option>
+                                        <option value="ISO-8859-9">ISO-8859-9</option>
+                                        <option value="ISO-8859-10">ISO-8859-10</option>
+                                        <option value="ISO-8859-13">ISO-8859-13</option>
+                                        <option value="ISO-8859-14">ISO-8859-14</option>
+                                        <option value="ISO-8859-15">ISO-8859-15</option>
+                                        <option value="ISO-8859-16">ISO-8859-16</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Transfert Encod
+                                    </label>
+                                    <select id="content-transfert-encoding" name="content-transfert-encoding" class="form-control bs-select" title="Select a Content Type ..." name="creative-content-transfert-encoding">
+                                        <option value="7bit" selected>7bit</option>
+                                        <option value="8bit">8bit</option>
+                                        <option value="quoted-printable">Quoted-Printable</option>
+                                        <option value="base64">Base64</option>
+                                        <option value="binary">Binary</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Affiliate Networks
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="affiliate-networks" name="affiliate-network-id" class="form-control bs-select" title="Select an Affiliate Network ..." name="affiliate-network-id" data-live-search="true">
+                                        {if(isset($affiliateNetworks) && count($affiliateNetworks)>0)}
+                                            {foreach $row in $affiliateNetworks}
+                                                <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Offers
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="offers" name="offer-id" class="form-control bs-select" title="Select a Offer ..." name="offer-id" data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width"> 
+                                        FromNames
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips copy-selected-from-name" data-container="body" data-placement="top" data-original-title="Copy Selected Offer From Name" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                    </label>
+                                    <select id="from-names" name="from-name-id" class="form-control bs-select" title="Select a Offer From Name ..." name="from-name-id" data-live-search="true">
+                                    </select>
+                                    <input id="from-name" name="from-name" type="hidden" value=""/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        FromNames Encoding
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="from-names-encoding" name="from-names-encoding" class="form-control bs-select" title="Select Encoding ..." name="from-name-encoding">
+                                        <option value="plain" selected>Plain Text</option>
+                                        <option value="b64">Base64</option>
+                                        <option value="uni">Unicode</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Subjects
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips copy-selected-subject" data-container="body" data-placement="top" data-original-title="Copy Selected Offer From Name" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-copy"></i></a>
+                                    </label>
+                                    <select id="subjects" name="subject-id" class="form-control bs-select" title="Select a Offer Subject ..." name="subject-id" data-live-search="true">
+                                    </select>
+                                    <input id="subject" name="subjects" type="hidden" value=""/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Subjects Encoding
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="subjects-encoding" name="subjects-encoding" class="form-control bs-select" title="Select Encoding ..." name="subject-encoding">
+                                        <option value="plain" selected>Plain Text</option>
+                                        <option value="b64">Base64</option>
+                                        <option value="uni">Unicode</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label full-width">Actions</label>
+                            <div id="data-types" class="data-list-checks" style="border: 1px #ccc solid;height: 149px; overflow: hidden; width: auto;padding: 0px; margin: 0px;"> 
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">On Open</label>
+                                            <div style="float: right;">
+                                                <input id="on-open" name="on-open" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">On Click</label>
+                                            <div style="float: right;">
+                                                <input id="on-click" name="on-click" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">On Unsub</label>
+                                            <div style="float: right;">
+                                                <input id="on-unsub" name="on-unsub" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 5px;padding-right: 5px;margin-left: -5px;border-bottom: 1px #ccc solid;height: 37px !important;">
+                                    <div class="col-md-12" style="height: 100%;">
+                                        <div class="form-group" style="margin-top: 8px;">
+                                            <label class="control-label" style="margin-top: 3px;">On Optout</label>
+                                            <div style="float: right;">
+                                                <input id="on-optout" name="on-optout" type="checkbox" class="make-switch data-filter" data-size="mini">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Creatives
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <select id="creatives" name="creative-id" class="form-control bs-select" title="Select a Offer Creative ..." name="creative-id" data-live-search="true">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Link Type
+                                    </label>
+                                    <select id="link-type" name="link-type" class="form-control bs-select" name="link-type" title="Select an Option ..." data-live-search="true"> 
+                                        <option value="routing" selected>Routing</option>
+                                        <option value="routing-encrypted">Encrypted Routing</option>
+                                        <option value="routing-gcloud">Google Storage Routing</option>
+                                        <option value="routing-bitly">Bitly ShortLink Routing</option>
+                                        <option value="routing-tinyurl">TinyURL ShortLink Routing</option>
+                                        <option value="attr">Attr Based</option>
+                                        <option value="attr-encrypted">Encrypted Attr Based</option>
+                                        <option value="attr-gcloud">Google Storage Attr Based</option>
+                                        <option value="attr-bitly">Bitly ShortLink Attr Based</option>
+                                        <option value="attr-tinyurl">TinyURL ShortLink Attr Based</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Static Domain</label>
+                                    <input id="static-domain" name="static-domain" type="text" class="form-control" name="static-domain" value="[domain]"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="control-label full-width" style="margin-bottom: 12px;"> Header</span>
+                                     <a class="pull-right tooltips reset-headers" data-original-mta-header="{echo base64_encode($mtaHeader)}" data-original-smtp-header="{echo base64_encode($smtpHeader)}" data-container="body" data-placement="top" data-original-title="Reset headers" title="Reset headers" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-power-off"></i></a>
+                                     <a class="pull-right tooltips randomize-lines" data-randomize-target="header" data-container="body" data-placement="top" data-original-title="Randomize the header" title="Randomize the header" href="javascript:;" style="margin-left: 15px;color :#525e64;"><i class="fa fa-random"></i></a>
+                                </label>
+                                <textarea id="header" name="header" data-widearea="enable" class="form-control" style="height: 348px;" name="headers[]" spellcheck="false" wrap="off">{echo $mtaHeader}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"> 
+                            <label class="control-label full-width"> 
+                                <span id="body-label">Email Body </span>
+                                <a class="pull-right tooltips display-creative" data-container="body" data-placement="top" data-original-title="Display Creative" title="Display Creative" href="javascript:;" style="margin-right: 15px;color :#525e64;"><i class="fa fa-desktop"></i></a>
+                            </label>
+                            <textarea id="body" name="body" data-widearea="enable" class="form-control" style="height: 420px;" name="body" spellcheck="false" wrap="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="name" data-model="AutoResponder" data-row-id="{echo $id}" data-package="Production"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODALS -->
+    {include includes/modals/creative_display.html}
+    {include includes/modals/mta_drops_help.html}
+    {include includes/modals/generate_links.html}
+<!-- MODALS -->

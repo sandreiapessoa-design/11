@@ -1,0 +1,66 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-grey-mint"></i>
+            <span class="caption-subject font-grey-mint uppercase">Edit User For <span class="bold">{echo $server['name']}</span></span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="servers-form" action="{echo $app['base_url']}/smtp-servers/users/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="server-id" value="{echo $server['id']}"/>
+            <input type="hidden" name="id" value="{echo $user['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Username</label>
+                            <input id="username" type="text" name="username" class="form-control" placeholder="Enter Username" value="{echo $user['username']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input id="password" type="text" name="password" class="form-control" placeholder="Enter Password" value="{echo $user['password']}">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" {if($user['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($user['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Proxy Ip</label>
+                            <input id="proxy-ip" type="text" name="proxy-ip" class="form-control" placeholder="Enter Proxy Ip" value="{echo $user['proxy_ip']}">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Proxy Port</label>
+                            <input id="proxy-port" type="text" name="proxy-port" class="form-control input-number" placeholder="Enter Port" value="{echo $user['proxy_port']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Proxy Username</label>
+                            <input id="proxy-username" type="text" name="proxy-username" class="form-control" placeholder="Enter Proxy Username" value="{echo $user['proxy_username']}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Proxy Password</label>
+                            <input id="proxy-password" type="password" name="proxy-password" class="form-control" placeholder="Enter Proxy Password" value="{echo $user['proxy_password']}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn grey-mint submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

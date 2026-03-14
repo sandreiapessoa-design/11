@@ -1,0 +1,230 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-blue-madison"></i>
+            <span class="caption-subject font-blue-madison uppercase">Add New Emails Lists ( Supports .txt / .csv )</span> 
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <div class="form-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label full-width">
+                            Data Provider
+                            <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                        </label>
+                        <select id="data-providers" class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select a Data Provider ...">
+                            {if(isset($dataProviders) && count($dataProviders)>0)}
+                                {foreach $row in $dataProviders}
+                                    <option {if($row_i == 0)} selected="selected" {/if}value="{echo $row['id']}">{echo $row['name']}</option>
+                                {/foreach}
+                            {/if}
+                        </select> 
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">List Name</label>
+                        <input id="name" type="text" class="form-control" placeholder="Enter List Name ..." value=""/> 
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label full-width">
+                            ISP
+                            <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                        </label>
+                        <select id="isps" class="form-control bs-select" data-live-search="true" title="Select an ISP ...">
+                            {if(isset($isps) && count($isps)>0)}
+                                {foreach $row in $isps}
+                                    <option {if($row_i == 0)} selected="selected" {/if}value="{echo $row['id']}">{echo $row['name']}</option>
+                                {/foreach}
+                            {/if}
+                        </select> 
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Countries</label>
+                        <select id="countries" class="form-control bs-select" data-live-search="true">
+                            {include includes/countries.html}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label full-width">
+                            Verticals
+                            <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                        </label>
+                        <select id="verticals" class="form-control bs-select" multiple title="Select Verticals ..." data-actions-box="true" data-live-search="true">
+                            {if(isset($verticals) && count($verticals)>0)}
+                                {foreach $row in $verticals}
+                                    <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                {/foreach}
+                            {/if}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Encrypt Emails</label>
+                        <select id="encrypt-emails" class="form-control bs-select">
+                            <option value="enabled">Enabled</option>
+                            <option value="disabled" selected>Disabled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Existing Lists ( To Update )</label>
+                        <select id="lists" class="form-control bs-select" data-actions-box="true" title="Select an List ...">
+                            <option value="" selected="true">None</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Initial Emails Type</label>
+                        <select id="initial-types" class="form-control bs-select">
+                            <option value="fresh" selected>Fresh List</option>
+                            <option value="clean">Clean List</option>
+                            <option value="openers">Openers List</option>
+                            <option value="clickers">Clickers List</option>
+                            <option value="leads">Leads List</option>
+                            <option value="unsubs">Unsubscribers List</option>
+                            <option value="seeds">Seeds List</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">File Type</label>
+                        <select id="file-types" class="form-control bs-select">
+                            <option value="email-by-line" selected>Email By Line</option>
+                            <option value="email-fname-lname">Email;FName;Lname (By Line)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="control-label">Devide List By</label>
+                        <input id="deviding-value" type="text" class="form-control input-number" value="0" title="Leave it 0 if you don't want to devide it">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="control-label">Duplicate</label>
+                        <input id="duplicate-value" type="text" class="form-control input-number" value="1">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Allow Duplicates</label>
+                        <select id="allow-duplicates" class="form-control bs-select">
+                            <option value="enabled">Enabled</option>
+                            <option value="disabled" selected>Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Filter Data</label>
+                        <select id="filter-data" class="form-control bs-select">
+                            <option value="enabled">Enabled</option>
+                            <option value="disabled" selected>Disabled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="datalists-upload" action="{echo $app['base_url']}/data-lists/save.html" method="POST" enctype="multipart/form-data">
+                        <div class="row fileupload-buttonbar">
+                            <div class="col-lg-7">
+                                <span class="btn btn-outline green fileinput-button">
+                                    <i class="fa fa-plus"></i>
+                                    <span> Add files... </span>
+                                    <input id="file" type="file" name="files[]" multiple=""> </span>
+                                <button type="submit" class="btn btn-outline blue start">
+                                    <i class="fa fa-upload"></i>
+                                    <span> Start upload </span>
+                                </button>
+                                <button type="reset" class="btn btn-outline warning cancel">
+                                    <i class="fa fa-ban-circle"></i>
+                                    <span> Cancel upload </span>
+                                </button>
+                                <span class="fileupload-process"> </span>
+                            </div>
+                            <div class="col-lg-5 fileupload-progress fade">
+                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-success" style="width:0%;"> </div>
+                                </div>
+                                <div class="progress-extended"> &nbsp; </div>
+                            </div>
+                        </div>
+                        <table role="presentation" class="table table-striped clearfix">
+                            <tbody class="files"> </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            {echo $scripts}
+        </div>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Data Lists</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm green table-group-action-submit" data-table-group-action="activate"><i class="fa fa-check"></i> Activate</button>
+                <button class="btn btn-outline btn-sm yellow table-group-action-submit" data-table-group-action="Inactivate"><i class="fa fa-ban"></i> Inactivate</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="data-lists" action="{echo $app['base_url']}/data-lists/get.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#data-lists .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th> 
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

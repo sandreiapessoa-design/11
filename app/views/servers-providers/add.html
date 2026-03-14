@@ -1,0 +1,36 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Servers Providers</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="servers-providers-form" action="{echo $app['base_url']}/servers-providers/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Servers Providers Names ( Separated by lines )</label>
+                            <textarea id="providers-names" name="providers-names" class="form-control" style="height: 250px!important" data-required="true" data-validation-message="Providers Names are Required !"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn grey-mint submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

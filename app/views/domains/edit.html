@@ -1,0 +1,49 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Edit Domain : {echo $domain['value']}</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="domains-form" action="{echo $app['base_url']}/domains/save.html" class="horizontal-form validate" method="POST">
+            <input type="hidden" name="id" value="{echo $domain['id']}"/>
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Domain Name</label>
+                            <input id="domain-name" type="text" name="domain-name" class="form-control" placeholder="Enter Server Name" value="{echo $domain['value']}" data-required="true" data-validation-message="Domain Name is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="domain-status">
+                                <option value="Activated" {if($domain['status'] == 'Activated')} selected {/if} >Activated</option>
+                                <option value="Inactivated" {if($domain['status'] == 'Inactivated')} selected {/if} >Inactivated</option>
+                                <option value="Special" {if($domain['status'] == 'Special')} selected {/if} >Special</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group"> 
+                            <label class="control-label">Expiration Date</label>
+                            <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                                <input id="domain-expiration-date" type="text" class="form-control" readonly name="expiration-date" value="{echo $domain['expiration_date']}" data-required="true" data-validation-message="Expiration Date is Required !">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-outline default" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="value" data-input-ids="domain-name" data-model="Domain" data-row-id="{echo $domain['id']}" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

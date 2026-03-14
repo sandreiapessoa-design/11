@@ -1,0 +1,52 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New GoDaddy Account</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="godaddy-accounts-form" action="{echo $app['base_url']}/godaddy-accounts/save.html" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">GoDaddy Account Name</label>
+                            <input type="text" name="godaddy-name" class="form-control" data-required="true" data-validation-message="GoDaddy Account Name is Required !" placeholder="Enter GoDaddy Account Name">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Account Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="godaddy-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">GoDaddy Customer Id</label>
+                            <input type="text" name="godaddy-customer-id" class="form-control" data-required="true" data-validation-message="GoDaddy Customer Id is Required !" placeholder="Enter GoDaddy Customer Id">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">GoDaddy Access Key</label>
+                            <input type="text" name="godaddy-access-key" class="form-control" data-required="true" data-validation-message="GoDaddy Access Key is Required !" placeholder="Enter GoDaddy Access Key">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">GoDaddy Secret Key</label>
+                            <input type="text" name="godaddy-secret-key" class="form-control" data-required="true" data-validation-message="GoDaddy Secret Key is Required !" placeholder="Enter GoDaddy Secret Key">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="godaddy-name" data-model="GoDaddy" data-row-id="0" data-package="Admin"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+    </div>
+</div>

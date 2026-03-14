@@ -1,0 +1,48 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Domains</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="domains-form" action="{echo $app['base_url']}/domains/save.html" class="horizontal-form" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="note note-info">
+                            <h4 class="caption"><i class="icon-info"></i> How to add domains :</h4>
+                            <p> If you select one account and left the domains area empty it will get all your domains from that account but if you put some domains there from your account it will get only these domains . </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Domain Names ( Separated by lines )</label>
+                            <textarea id="domain-names" name="domain-names" class="form-control" style="height: 250px!important"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">API Account</label>
+                            <select class="form-control bs-select" title="Select Account ..." name="account">
+                                <option value="" selected>None</option>
+                                {if(count($accounts))}
+                                    {foreach $account in $accounts}
+                                        <option value="{echo $account['type'] . '|' . $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-check"></i> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-list font-dark"></i>
+                    <span class="caption-subject font-dark uppercase">Manage PowerMta SMTP Vmtas</span>
+                </div>
+                <div class="actions">
+                    <a href="#servers-filter" data-toggle="modal" class="btn btn-outline dark servers-filter"><i class="fa fa-filter"></i> Filter Select </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="pmta-config-form" action="#" class="horizontal-form" method="POST">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        Server Selection
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                        <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                                    </label>
+                                    <select id="vmta-servers" class="form-control bs-select filter-servers" title="Select Servers ..." multiple data-actions-box="true" data-live-search="true"> 
+                                        {if(isset($servers) && count($servers)>0)}
+                                            {foreach $row in $servers}
+                                                <option value="{echo $row['id']}" data-main-ip="{echo $row['main_ip']}">{echo '(' . $row['provider_name'] . ') ' .  $row['name']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Encryption</label>
+                            <select id="vmta-encrtyption" class="form-control bs-select" title="Select a Encryption ..." name="encryption">
+                                <option value="none" selected >None</option>
+                                <option value="ssl">SSL</option>
+                                <option value="tls">TLS</option>
+                            </select>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label full-width">
+                                        SMTPs List ( host port username password )
+                                        <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                                    </label>
+                                    <textarea id="smtps-list" class="form-control" style="height: 250px!important"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions right">
+                        <a href="javascript:;" class="btn btn-outline dark create-smtp-vmtas"><i class="fa fa-terminal"></i> Create SMTP Vmtas</a>
+                        <a href="javascript:;" class="btn btn-outline red reset-smtp-vmtas"><i class="fa fa-close"></i> Reset SMTP Vmtas</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS -->
+{include includes/modals/servers_filter.html}
+<!-- MODALS -->

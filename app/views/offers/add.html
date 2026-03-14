@@ -1,0 +1,206 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Add New Offer</span>
+        </div>
+        <div class="actions">
+            <input id="offer-form-switcher" type="checkbox" checked class="make-switch pull-right" data-on-text="&nbsp;API&nbsp;" data-off-text="&nbsp;Manual&nbsp;">
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="offers-manual-form" action="{echo $app['base_url']}/offers/save.html" class="horizontal-form validate hide" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Offer Name</label>
+                            <input id="offer-name" type="text" class="form-control"  name="offer-name" data-required="true" data-validation-message="Offer Name is Required !" placeholder="Enter Offer Name">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Offer Production Id</label>
+                            <input type="text" name="production-id" class="form-control" placeholder="Enter Offer Production ID" data-required="true" data-validation-message="Offer Production Id is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Offer Campaign Id</label>
+                            <input type="text" name="campaign-id" class="form-control" placeholder="Enter Offer Campaign ID" data-required="true" data-validation-message="Offer Production Id is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            <select class="form-control bs-select" title="Select a Status ..." name="offer-status">
+                                <option value="Activated" selected >Activated</option>
+                                <option value="Inactivated">Inactivated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Network</label>
+                            <select class="form-control bs-select" title="Select a Affiliate Network ..." name="affiliate-network-id" data-required="true" data-validation-message="Offer Affiliate Network is Required !">
+                                {if(isset($affiliateNetworks) && count($affiliateNetworks) > 0)}
+                                    {foreach $affiliateNetwork in $affiliateNetworks}
+                                        <option value="{echo $affiliateNetwork['id']}" >{echo $affiliateNetwork['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Verticals
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select Verticals ..." name="vertical-ids[]" data-required="true" data-validation-message="Offer Vertical is Required !">
+                                {if(isset($verticals) && count($verticals) > 0)}
+                                    {foreach $vertical in $verticals}
+                                        <option value="{echo $vertical['id']}">{echo $vertical['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Countries
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select Countries ..." name="countries[]" data-required="true" data-validation-message="Offer Country is Required !">
+                                {include includes/countries.html}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Available Days</label>
+                            <select class="form-control bs-select" multiple data-actions-box="true" data-live-search="true" title="Select Days ..." name="days[]" data-required="true" data-validation-message="Offer Days is Required !">
+                                <option value="mon">Monday</option>
+                                <option value="tue">Tuesday</option>
+                                <option value="wed">Wednesday</option>
+                                <option value="thu">Thursday</option>
+                                <option value="fri">Friday</option>
+                                <option value="sat">Saturday</option>
+                                <option value="sun">Sunday</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <textarea class="form-control" style="height: 200px !important;" name="description" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Rules</label>
+                            <textarea class="form-control" style="height: 200px !important;" name="rules" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Payout Type</label>
+                            <select class="form-control bs-select" title="Select a Payout Type ..." name="payout-type">
+                                <option value="CPA" selected >CPA</option>
+                                <option value="CPC">CPC</option>
+                                <option value="CPC">REVSHARE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Payout Amount</label>
+                            <input type="text" name="payout-amount" class="form-control" placeholder="Enter Payout Amount" data-required="true" data-validation-message="Offer Pay-out is Required !">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group"> 
+                            <label class="control-label">Expiration Date</label>
+                            <div class="input-group date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                                <input id="server-expiration-date" type="text" class="form-control" readonly name="expiration-date" data-required="true" data-validation-message="Expiration Date is Required !">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-outline default" type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+            <a href="javascript:;" class="btn btn-outline dark check-before-submit data-validate" data-columns="name" data-input-ids="offer-name" data-model="Offer" data-row-id="0" data-package="Affiliate"><i class="fa fa-check"></i> Save</a>
+            </div>
+        </form>
+        <form id="offers-api-form" action="{echo $app['base_url']}/offers/import.html" class="horizontal-form" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Affiliate Network</label>
+                            <select class="form-control bs-select" title="Select a Affiliate Network ..." name="affiliate-network-id" data-required="true" data-validation-message="Affiliate Network is Required !">
+                                {if(isset($affiliateNetworks) && count($affiliateNetworks) > 0)}
+                                    {foreach $affiliateNetwork in $affiliateNetworks}
+                                        <option value="{echo $affiliateNetwork['id']}" >{echo $affiliateNetwork['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="mt-checkbox mt-checkbox-outline" style="padding-top: 2px;margin-bottom: 0px;">
+                                <input id="get-all-offers" type="checkbox" name="get-all"> Get All Offers
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Offers Production IDs ( Seperated By Lines )</label>
+                            <textarea id="production-ids" data-required="true" data-validation-message="Offers Ids are Required !" name="production-ids" class="form-control" rows="15"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Max Number Of Creatives</label>
+                            <input id="max-creatives" type="text" name="max-creatives" class="form-control input-number" placeholder="Enter Max Number Of Creatives" data-required="true" data-validation-message="Max Number Of Creatives is Required !" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">&nbsp;</label>
+                            <div class="mt-checkbox-inline" style="margin-top: -5px;">
+                                <label class="mt-checkbox">
+                                    <input id="get-all-creatives" type="checkbox" value="get-all-creatives"> Get All Creatives
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-download"></i> Get Offers</button>
+            </div>
+        </form>
+    </div>
+</div>

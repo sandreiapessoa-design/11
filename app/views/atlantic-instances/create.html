@@ -1,0 +1,185 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Create Atlantic Instances</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="atlantic-accounts-form" action="#" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Atlantic Accounts</label>
+                            <select id="atlantic-accounts" class="form-control bs-select" data-live-search="true"> 
+                                {if(isset($accounts) && count($accounts)>0)}
+                                    {foreach $row in $accounts}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Nb Of Instances</label>
+                            <input id="atlantic-nb-of-instances" type="text" class="form-control input-number" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Location</label>
+                            <select id="atlantic-region" class="form-control bs-select" title="Select a Location ..."data-live-search="true">
+                                <option value="USEAST3" selected>USA-East-3 (Ashburn, VA)</option>
+                                <option value="CAEAST1">Canada-East-1 (Toronto, ON)</option>
+                                <option value="EUWEST1">EU-West-1 (London, UK)</option>
+                                <option value="USCENTRAL1">USA-Central-1 (Dallas, TX)</option>
+                                <option value="USEAST2">USA-East-2 (New York City, NY)</option>
+                                <option value="USWEST1">USA-West-1 (San Francisco, CA)</option>
+                                <option value="USEAST1">USA-East-1 (Orlando, FL)</option>
+                            </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                DNS Account
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="accounts" class="form-control bs-select" title="Select Account ..." name="account-id" data-live-search="true" data-required="true" data-validation-message="Account is Required !">
+                                <option value="none|0">None</option>
+                                {if(isset($dnsaccounts) && count($dnsaccounts))} 
+                                    {foreach $account in $dnsaccounts} 
+                                        <option value="{echo $account['type']}|{echo $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Domains
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="atlantic-domains" class="form-control bs-select" data-live-search="true" data-actions-box="true" data-live-search="true" multiple> 
+                                 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Instance Type</label>
+                            <select id="atlantic-size" class="form-control bs-select" title="Select a Type ...">
+                                <option value="G2.32GB">G2.32GB ( 32GB RAM , 12 CPUs Cores )</option>
+                                <option value="M2.16GB">M2.16GB ( 16GB RAM , 2 CPUs Cores )</option>
+                                <option value="G2.4GB">G2.4GB ( 4GB RAM , 2 CPUs Cores )</option>
+                                <option value="G2.4GB">G2.4GB ( 4GB RAM , 2 CPUs Cores )</option>
+                                <option value="M2.64GB">M2.64GB ( 64GB RAM , 8 CPUs Cores )</option>
+                                <option value="C2.64GB">C2.64GB ( 64GB RAM , 20 CPUs Cores )</option>
+                                <option value="G2.8GB">G2.8GB ( 8GB RAM , 4 CPUs Cores )</option>
+                                <option value="S2.128GB">S2.128GB ( 128GB RAM , 16 CPUs Cores )</option>
+                                <option value="M2.32GB">M2.32GB ( 32GB RAM , 4 CPUs Cores )</option>
+                                <option value="M2.16GB">M2.16GB ( 16GB RAM , 2 CPUs Cores )</option>
+                                <option value="S2.64GB">S2.64GB ( 64GB RAM , 8 CPUs Cores )</option>
+                                <option value="S2.16GB">S2.16GB ( 16GB RAM , 2 CPUs Cores )</option>
+                                <option value="C2.8GB">C2.8GB ( 8GB RAM , 4 CPUs Cores )</option>
+                                <option value="S2.64GB">S2.64GB ( 64GB RAM , 8 CPUs Cores )</option>
+                                <option value="G2.2GB" selected>G2.2GB ( 2GB RAM , 2 CPUs Cores )</option>
+                                <option value="C2.16GB">C2.16GB ( 16GB RAM , 8 CPUs Cores )</option>
+                                <option value="S2.32GB">S2.32GB ( 32GB RAM , 4 CPUs Cores )</option>
+                                <option value="G2.64GB">G2.64GB ( 64GB RAM , 20 CPUs Cores )</option>
+                                <option value="S2.96GB">S2.96GB ( 96GB RAM , 12 CPUs Cores )</option>
+                                <option value="M2.128GB">M2.128GB ( 128GB RAM , 16 CPUs Cores )</option>
+                                <option value="G2.64GB">G2.64GB ( 64GB RAM , 20 CPUs Cores )</option>
+                                <option value="S2.128GB">S2.128GB ( 128GB RAM , 16 CPUs Cores )</option>
+                                <option value="G2.16GB">G2.16GB ( 16GB RAM , 8 CPUs Cores )</option>
+                                <option value="G2.1GB">G2.1GB ( 1GB RAM , 1 CPUs Cores )</option>
+                                <option value="G2.1GB">G2.1GB ( 1GB RAM , 1 CPUs Cores )</option>
+                                <option value="C2.32GB">C2.32GB ( 32GB RAM , 16 CPUs Cores )</option>
+                                <option value="G2.16GB">G2.16GB ( 16GB RAM , 8 CPUs Cores )</option>
+                                <option value="C2.64GB">C2.64GB ( 64GB RAM , 20 CPUs Cores )</option>
+                                <option value="G2.32GB">G2.32GB ( 32GB RAM , 12 CPUs Cores )</option>
+                                <option value="S2.16GB">S2.16GB ( 16GB RAM , 2 CPUs Cores )</option>
+                                <option value="S2.32GB">S2.32GB ( 32GB RAM , 4 CPUs Cores )</option>
+                                <option value="C2.32GB">C2.32GB ( 32GB RAM , 16 CPUs Cores )</option>
+                                <option value="G2.8GB">G2.8GB ( 8GB RAM , 4 CPUs Cores )</option>
+                                <option value="S2.96GB">S2.96GB ( 96GB RAM , 12 CPUs Cores )</option>
+                                <option value="G2.2GB">G2.2GB ( 2GB RAM , 2 CPUs Cores )</option>
+                                <option value="C2.8GB">C2.8GB ( 8GB RAM , 4 CPUs Cores )</option>
+                                <option value="M2.128GB">M2.128GB ( 128GB RAM , 16 CPUs Cores )</option>
+                                <option value="M2.32GB">M2.32GB ( 32GB RAM , 4 CPUs Cores )</option>
+                                <option value="C2.16GB">C2.16GB ( 16GB RAM , 8 CPUs Cores )</option>
+                                <option value="M2.64GB">M2.64GB ( 64GB RAM , 8 CPUs Cores )</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">OS</label>
+                            <select id="atlantic-os" class="form-control bs-select" title="Select an Operating System ...">
+                                <option value="centos-6" selected>CentOS 6</option>
+                                <option value="centos-7">CentOS 7</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark create-atlantic-instances"><i class="fa fa-plus"></i> Create Instances</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Atlantic Instances Creation Processes List</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm red stop-process"><i class="fa fa-stop"></i> Stop Process</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="atlantic-processes" action="{echo $app['base_url']}/atlantic-instances/get-processes.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#atlantic-processes .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

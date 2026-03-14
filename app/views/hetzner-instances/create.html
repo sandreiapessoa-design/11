@@ -1,0 +1,157 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Create Hetzner Instances</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="hetzner-accounts-form" action="#" class="horizontal-form validate" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Hetzner Accounts</label>
+                            <select id="hetzner-accounts" class="form-control bs-select" data-live-search="true"> 
+                                {if(isset($accounts) && count($accounts)>0)}
+                                    {foreach $row in $accounts}
+                                        <option value="{echo $row['id']}">{echo $row['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">Nb Of Instances</label>
+                            <input id="hetzner-nb-of-instances" type="text" class="form-control input-number" value="1">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Location</label>
+                            <select id="hetzner-region" class="form-control bs-select" title="Select a Location ..."data-live-search="true">
+                                <option value="fsn1">Falkenstein DC Park 1</option>
+                                <option value="nbg1">Nuremberg DC Park 1</option>
+                                <option value="hel1">Helsinki DC Park 1</option>
+                                
+                            </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                DNS Account
+                                <a class="pull-right tooltips bs-deselect-all" data-container="body" data-placement="top" data-original-title="Clear Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-remove"></i></a>
+                            </label>
+                            <select id="accounts" class="form-control bs-select" title="Select Account ..." name="account-id" data-live-search="true" data-required="true" data-validation-message="Account is Required !">
+                                <option value="none|0">None</option>
+                                {if(isset($dnsaccounts) && count($dnsaccounts))} 
+                                    {foreach $account in $dnsaccounts} 
+                                        <option value="{echo $account['type']}|{echo $account['id'] }">{echo ucwords($account['type']) . ' : ' . $account['name']}</option>
+                                    {/foreach}
+                                {/if}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label full-width">
+                                Domains
+                                <a class="pull-right tooltips bs-search-all" data-container="body" data-placement="top" data-original-title="Multi Search Selections"  href="javascript:;" style="margin-left: 15px;margin-right: 5px;color :#525e64;"><i class="fa fa-search"></i></a>
+                            </label>
+                            <select id="hetzner-domains" class="form-control bs-select" data-live-search="true" data-actions-box="true" data-live-search="true" multiple> 
+                                 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Instance Type</label>
+                            <select id="hetzner-size" class="form-control bs-select" title="Select a Type ...">
+                                <option value="cx11">CX11 ( 2.0 GB RAM , 1 CPU Cores )</option>
+                                <option value="cx11-ceph">CX11 Ceph Disk ( 2.0 GB RAM , 1 CPU Cores )</option>
+                                <option value="cx21">CX21 ( 4.0 GB RAM , 2 CPU Cores )</option>
+                                <option value="cx21-ceph">CX21 Ceph Disk ( 4.0 GB RAM , 2 CPU Cores )</option>
+                                <option value="cx31">CX31 ( 8.0 GB RAM , 2 CPU Cores )</option>
+                                <option value="cx31-ceph" selected>CX31 Ceph Disk ( 8.0 GB RAM , 2 CPU Cores )</option>
+                                <option value="cx41">CX41 ( 16.0 GB RAM , 4 CPU Cores )</option>
+                                <option value="cx41-ceph">CX41 Ceph Disk ( 16.0 GB RAM , 4 CPU Cores )</option>
+                                <option value="cx51">CX51 ( 32.0 GB RAM , 8 CPU Cores )</option>
+                                <option value="cx51-ceph">CX51 Ceph Disk ( 32.0 GB RAM , 8 CPU Cores )</option>
+                                <option value="ccx11">CCX11 Dedicated CPU ( 8.0 GB RAM , 2 CPU Cores )</option>
+                                <option value="ccx21">CCX21 Dedicated CPU ( 16.0 GB RAM , 4 CPU Cores )</option>
+                                <option value="ccx31">CCX31 Dedicated CPU ( 32.0 GB RAM , 8 CPU Cores )</option>
+                                <option value="ccx41">CCX41 Dedicated CPU ( 64.0 GB RAM , 16 CPU Cores )</option>
+                                <option value="ccx51">CCX51 Dedicated CPU ( 128.0 GB RAM , 32 CPU Cores )</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="control-label">OS</label>
+                            <select id="hetzner-os" class="form-control bs-select" title="Select an Operating System ...">
+                                <option value="centos-7" selected>CentOS 7</option>
+                                <option value="centos-8">CentOS 8</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <a href="javascript:;" class="btn btn-outline dark create-hetzner-instances"><i class="fa fa-plus"></i> Create Instances</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="portlet light portlet-fit portlet-datatable bordered  ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">Hetzner Instances Creation Processes List</span>
+        </div>
+        <div class="actions">
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-container">
+            <div class="table-actions-wrapper">
+                <button class="btn btn-outline btn-sm red stop-process"><i class="fa fa-stop"></i> Stop Process</button>
+                <button class="btn btn-outline btn-sm red table-group-action-submit" data-table-group-action="delete"><i class="fa fa-close"></i> Delete</button>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable data-ajax-list" id="hetzner-processes" action="{echo $app['base_url']}/hetzner-instances/get-processes.html">
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="2%">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#hetzner-processes .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th width="5%">Id</th>
+                        {echo $columns}
+                        <th width="2%"> 
+                        </th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-red filter-cancel margin-bottom"><i class="fa fa-eraser" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control form-filter input-sm" name="id"></td>
+                        {echo $filters}
+                        <td>
+                            <div class="margin-bottom-5" style="text-align: center;padding-top:8px;">
+                                <a class="font-dark filter-submit margin-bottom"><i class="fa fa-filter" style="font-size:13px"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody> 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

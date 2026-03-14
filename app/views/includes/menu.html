@@ -1,0 +1,1291 @@
+<div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-closed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <li class="sidebar-toggler-wrapper hide">
+            <div class="sidebar-toggler">
+                <span></span>
+            </div>
+        </li>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+        {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'dashboard') == true)}
+            <li class="nav-item start {if(isset($dashboard))}{echo 'active'}{/if}">
+                <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/dashboard.html">
+                    <i class="fa fa-tachometer-alt"></i> 
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-full-report') == true)}
+            <li class="nav-item start {if(isset($full_report))}{echo 'active'}{/if}">
+                <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/statistics/full-report.html" class="nav-link ">
+                    <i class="fa fa-dollar-sign"></i>
+                    <span class="title">Revenu Report</span>
+                </a>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'production') == true)}
+            <li class="nav-item  {if(isset($production))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-paper-plane"></i>
+                    <span class="title">Production </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'send-mta-drops') == true)}
+                        <li class="{if(isset($drops_mta_send))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/production/send-process.html" class="nav-link "> 
+                                <span class="title"> Send Page </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-mta-drops') == true)}
+                        <li class="{if(isset($drops_mta_drops))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/production/mta-drops.html" class="nav-link "> 
+                                <span class="title"> MTA Drops Monitor </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-mta-tests') == true)}
+                        <li class="{if(isset($drops_mta_tests))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/production/mta-tests.html" class="nav-link "> 
+                                <span class="title"> MTA Tests Monitor </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-smtp-drops') == true)}
+                        <li class="{if(isset($drops_smtp_drops))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/production/smtp-drops.html" class="nav-link "> 
+                                <span class="title"> SMTP Drops Monitor </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-smtp-tests') == true)}
+                        <li class="{if(isset($drops_smtp_tests))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/production/smtp-tests.html" class="nav-link "> 
+                                <span class="title"> SMTP Tests Monitor </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'upload-images') == true)}
+                        <li class="{if(isset($upload_images))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/production/upload-images.html" class="nav-link "> 
+                                <span class="title"> Upload Images </span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'headers') == true)}
+            <li class="nav-item  {if(isset($headers))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-list-alt"></i>
+                    <span class="title">Predefined Headers</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-headers') == true)}
+                        <li class="{if(isset($headers_add))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/headers/add.html" class="nav-link "> 
+                                <span class="title">Add Predefined Headers</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-headers') == true)}
+                        <li class="{if(isset($headers_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/headers.html" class="nav-link "> 
+                                <span class="title">Predefined Headers List</span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'auto-responders') == true)}
+            <li class="nav-item  {if(isset($auto_responders))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-rocket"></i>
+                    <span class="title">AutoResponders</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-auto-responders') == true)}
+                        <li class="{if(isset($auto_responders_create))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/auto-responders/create.html" class="nav-link "> 
+                                <span class="title">Create AutoResponders</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-auto-responders') == true)}
+                        <li class="{if(isset($auto_responders_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/auto-responders.html" class="nav-link "> 
+                                <span class="title">AutoResponders List</span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'application-settings') == true)}
+            <li class="nav-item  {if(isset($application))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">Settings</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-auditlogs') == true)}
+                        <li class="{if(isset($auditlogs))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/audit-logs.html"> 
+                                <span class="title"> Audit Logs </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'manage-settings') == true)}
+                        <li class="{if(isset($settings))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/settings.html"> 
+                                <span class="title"> Application Settings </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-frontend-logs') == true)}
+                        <li class="{if(isset($frontend_logs))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/logs/frontend.html"> 
+                                <span class="title"> Application Frontend Logs </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-backend-logs') == true)}
+                        <li class="{if(isset($backend_logs))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/logs/backend.html"> 
+                                <span class="title"> Application Backend Logs </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-users-sessions') == true)}
+                        <li class="{if(isset($sessions))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/sessions.html"> 
+                                <span class="title"> Manage Connected Users </span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'users') == true)}
+            <li class="nav-item  {if(isset($users))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-users"></i>
+                    <span class="title">Users</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-users') == true)}
+                        <li class="{if(isset($users_add))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/users/add.html" class="nav-link "> 
+                                <span class="title">Add Users</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-users') == true)}
+                        <li class="{if(isset($users_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/users.html" class="nav-link "> 
+                                <span class="title"> Users List</span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'roles') == true)}
+            <li class="nav-item {if(isset($roles))}{echo 'active'}{/if} ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fas fa-universal-access"></i>
+                    <span class="title">Application Roles</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-roles') == true)}
+                        <li class="{if(isset($roles_add))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/roles/add.html" class="nav-link "> 
+                                <span class="title"> Add Roles </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-roles') == true)}
+                        <li class="{if(isset($roles_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/roles.html" class="nav-link "> 
+                                <span class="title"> Roles List</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'affect-roles') == true)}
+                        <li class="{if(isset($roles_affect))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/roles/affect.html" class="nav-link "> 
+                                <span class="title"> Affect Roles To Users </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'users-roles') == true)}
+                        <li class="{if(isset($users_roles))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/roles/users.html" class="nav-link "> 
+                                <span class="title"> Affect Users To Roles </span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'teams') == true)}
+            <li class="nav-item {if(isset($teams))}{echo 'active'}{/if} ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-flag"></i>
+                    <span class="title">Teams</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-teams') == true)}
+                        <li class="{if(isset($teams_add))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/teams/add.html" class="nav-link "> 
+                                <span class="title"> Add Teams </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-teams') == true)}
+                        <li class="{if(isset($teams_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/teams.html" class="nav-link "> 
+                                <span class="title">Teams List</span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'manage-teams-authorisations') == true)}
+                        <li class="{if(isset($teams_authorisations))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/teams/authorisations.html" class="nav-link "> 
+                                <span class="title"> Manage Teams Authorisations </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'users-teams') == true)}
+                        <li class="{if(isset($users_teams))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/teams/users.html" class="nav-link "> 
+                                <span class="title"> Affect Users To Teams </span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'application-tools') == true)}
+            <li class="nav-item  {if(isset($tools))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fab fa-android"></i>
+                    <span class="title">Tools</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'spf-lookup') == true)}
+                        <li class="{if(isset($spfLookup))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/tools/spf-lookup.html"> 
+                                <span class="title"> Domains SPF Checker </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'blacklist-tools') == true)}
+                        <li class="{if(isset($blacklist))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/tools/blacklist.html"> 
+                                <span class="title"> Domains / Ips Reputation </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'mailbox-extractor') == true)}
+                        <li class="{if(isset($mailboxtractor))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/tools/mailbox-extractor.html"> 
+                                <span class="title"> Mailbox Extractor </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'extractor-tools') == true)}
+                        <li class="{if(isset($extractor))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/tools/extractor.html">
+                                <span class="title"> Extract Values </span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'affiliate-networks') == true)}
+            <li class="nav-item  {if(isset($affiliate_networks))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-briefcase"></i>
+                    <span class="title">AffiliateNetworks</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-affiliate-networks') == true)}
+                        <li class="{if(isset($affiliate_networks_add))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/affiliate-networks/add.html" class="nav-link "> 
+                                <span class="title"> Add AffiliateNetworks </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-affiliate-networks') == true)}
+                        <li class="{if(isset($affiliate_networks_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/affiliate-networks.html" class="nav-link "> 
+                                <span class="title">AffiliateNetworks List</span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'offers') == true)}
+            <li class="nav-item  {if(isset($offers))}{echo 'active'}{/if}">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="title">Offers</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-offers') == true)}
+                    <li class="{if(isset($offers_add))}{echo 'active'}{/if} ">
+                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/offers/add.html" class="nav-link "> 
+                            <span class="title"> Add Offers </span>
+                        </a>
+                    </li>
+                {/if}
+                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-offers') == true)}
+                    <li class="{if(isset($offers_show))}{echo 'active'}{/if} ">
+                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/offers.html" class="nav-link "> 
+                            <span class="title">Offers List</span>
+                        </a>
+                    </li>
+                {/if}
+                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-suppression-lists') == true)}
+                    <li class="{if(isset($offers_suppression))}{echo 'active'}{/if} ">
+                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/offers/suppression.html" class="nav-link "> 
+                            <span class="title"> Upload Offers Suppression </span>
+                        </a>
+                    </li>
+                {/if}
+            </ul>
+        </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'verticals') == true)}
+            <li class="nav-item  {if(isset($verticals))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-tag"></i>
+                    <span class="title">Verticals</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-verticals') == true)}
+                        <li class="{if(isset($verticals_add))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/verticals/add.html" class="nav-link "> 
+                                <span class="title"> Add Verticals </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-verticals') == true)}
+                        <li class="{if(isset($verticals_show))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/verticals.html" class="nav-link "> 
+                                <span class="title">Verticals List</span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'cloud-management') == true)}
+            <li class="nav-item  {if(isset($cloud_management))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fab fa-cloudversify"></i>
+                    <span class="title">Cloud APIs</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'aws-management') == true)}
+                        <li class="nav-item  {if(isset($aws_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fab fa-aws"></i>
+                                <span class="title">Amazon</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'amazon-accounts') == true)}
+                                    <li class="nav-item {if(isset($amazon_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Amazon Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-amazon-accounts') == true)}
+                                                <li class="{if(isset($amazon_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/amazon-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Amazon Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-amazon-accounts') == true)}
+                                                <li class="{if(isset($amazon_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/amazon-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Amazon Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'amazon-instances') == true)}
+                                    <li class="nav-item {if(isset($amazon_instances))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">AWS EC2 Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-amazon-instances') == true)}
+                                                <li class="{if(isset($amazon_instances_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/amazon-instances/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Instances </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-amazon-instances') == true)}
+                                                <li class="{if(isset($amazon_instances_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/amazon-instances.html" class="nav-link "> 
+                                                        <span class="title"> Instances List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'digital-ocean-management') == true)}
+                        <li class="nav-item  {if(isset($digital_ocean_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fab fa-digital-ocean"></i>
+                                <span class="title">Digital Ocean</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'digital-ocean-accounts') == true)}
+                                    <li class="nav-item {if(isset($digital_ocean_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Digital Ocean Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-digital-ocean-accounts') == true)}
+                                                <li class="{if(isset($digital_ocean_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/digital-ocean-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-digital-ocean-accounts') == true)}
+                                                <li class="{if(isset($digital_ocean_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/digital-ocean-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'digital-ocean-droplets') == true)}
+                                    <li class="nav-item {if(isset($digital_ocean_droplets))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Digital Ocean Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-digital-ocean-droplets') == true)}
+                                                <li class="{if(isset($digital_ocean_droplets_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/digital-ocean-droplets/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Droplets </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-digital-ocean-droplets') == true)}
+                                                <li class="{if(isset($digital_ocean_droplets_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/digital-ocean-droplets.html" class="nav-link "> 
+                                                        <span class="title"> Droplets List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'linode-management') == true)}
+                        <li class="nav-item  {if(isset($linode_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fab fa-linode"></i>
+                                <span class="title">Linode</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'linode-accounts') == true)}
+                                    <li class="nav-item {if(isset($linode_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Linode Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-linode-accounts') == true)}
+                                                <li class="{if(isset($linode_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/linode-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-linode-accounts') == true)}
+                                                <li class="{if(isset($linode_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/linode-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'linode-instances') == true)}
+                                    <li class="nav-item {if(isset($linode_instances))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Linode Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-linode-instances') == true)}
+                                                <li class="{if(isset($linode_instances_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/linode-instances/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Instances </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-linode-instances') == true)}
+                                                <li class="{if(isset($linode_instances_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/linode-instances.html" class="nav-link "> 
+                                                        <span class="title"> Instances List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'hetzner-management') == true)}
+                        <li class="nav-item  {if(isset($hetzner_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-h-square"></i>
+                                <span class="title">Hetzner</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'hetzner-accounts') == true)}
+                                    <li class="nav-item {if(isset($hetzner_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Hetzner Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-hetzner-accounts') == true)}
+                                                <li class="{if(isset($hetzner_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/hetzner-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-hetzner-accounts') == true)}
+                                                <li class="{if(isset($hetzner_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/hetzner-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'hetzner-instances') == true)}
+                                    <li class="nav-item {if(isset($hetzner_instances))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Hetzner Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-hetzner-instances') == true)}
+                                                <li class="{if(isset($hetzner_instances_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/hetzner-instances/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Instances </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-hetzner-instances') == true)}
+                                                <li class="{if(isset($hetzner_instances_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/hetzner-instances.html" class="nav-link "> 
+                                                        <span class="title"> Instances List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'atlantic-management') == true)}
+                        <li class="nav-item  {if(isset($atlantic_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fab fa-adn"></i>
+                                <span class="title">Atlantic</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'atlantic-accounts') == true)}
+                                    <li class="nav-item {if(isset($atlantic_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Atlantic Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-atlantic-accounts') == true)}
+                                                <li class="{if(isset($atlantic_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/atlantic-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-atlantic-accounts') == true)}
+                                                <li class="{if(isset($atlantic_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/atlantic-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'atlantic-instances') == true)}
+                                    <li class="nav-item {if(isset($atlantic_instances))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Atlantic Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-atlantic-instances') == true)}
+                                                <li class="{if(isset($atlantic_instances_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/atlantic-instances/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Instances </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-atlantic-instances') == true)}
+                                                <li class="{if(isset($atlantic_instances_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/atlantic-instances.html" class="nav-link "> 
+                                                        <span class="title"> Instances List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'scaleway-management') == true)}
+                        <li class="nav-item  {if(isset($scaleway_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fab fa-speakap"></i>
+                                <span class="title">Scaleway</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'scaleway-accounts') == true)}
+                                    <li class="nav-item {if(isset($scaleway_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Scaleway Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-scaleway-accounts') == true)}
+                                                <li class="{if(isset($scaleway_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/scaleway-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-scaleway-accounts') == true)}
+                                                <li class="{if(isset($scaleway_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/scaleway-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'scaleway-instances') == true)}
+                                    <li class="nav-item {if(isset($scaleway_instances))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Scaleway Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-scaleway-instances') == true)}
+                                                <li class="{if(isset($scaleway_instances_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/scaleway-instances/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Instances </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-scaleway-instances') == true)}
+                                                <li class="{if(isset($scaleway_instances_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/scaleway-instances.html" class="nav-link "> 
+                                                        <span class="title"> Instances List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'vultr-management') == true)}
+                        <li class="nav-item  {if(isset($vultr_management))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fab fa-vuejs"></i>
+                                <span class="title">Vultr</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'vultr-accounts') == true)}
+                                    <li class="nav-item {if(isset($vultr_accounts))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Vultr Accounts</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-vultr-accounts') == true)}
+                                                <li class="{if(isset($vultr_accounts_add))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/vultr-accounts/add.html" class="nav-link "> 
+                                                        <span class="title"> Add Accounts </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-vultr-accounts') == true)}
+                                                <li class="{if(isset($vultr_accounts_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/vultr-accounts.html" class="nav-link "> 
+                                                        <span class="title"> Accounts List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'vultr-instances') == true)}
+                                    <li class="nav-item {if(isset($vultr_instances))}{echo 'active'}{/if}">
+                                        <a href="javascript:;" class="nav-link nav-toggle">
+                                            <span class="title">Vultr Instances</span>
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'create-vultr-instances') == true)}
+                                                <li class="{if(isset($vultr_instances_create))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/vultr-instances/create.html" class="nav-link "> 
+                                                        <span class="title"> Create Instances </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                            {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-vultr-instances') == true)}
+                                                <li class="{if(isset($vultr_instances_show))}{echo 'active'}{/if} ">
+                                                    <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/vultr-instances.html" class="nav-link "> 
+                                                        <span class="title"> Instances List </span>
+                                                    </a>
+                                                </li>
+                                            {/if}
+                                        </ul>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'dns-management') == true)}
+            <li class="nav-item  {if(isset($dns_management))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-globe"></i>
+                    <span class="title">DNS Management</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'namecheap-accounts') == true)}
+                        <li class="nav-item {if(isset($namecheap_accounts))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Namecheap Accounts</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-namecheap-accounts') == true)}
+                                    <li class="{if(isset($namecheap_accounts_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/namecheap-accounts/add.html" class="nav-link "> 
+                                            <span class="title"> Add Namecheap Accounts </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-namecheap-accounts') == true)}
+                                    <li class="{if(isset($namecheap_accounts_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/namecheap-accounts.html" class="nav-link "> 
+                                            <span class="title">Namecheap Accounts List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'godaddy-accounts') == true)}
+                        <li class="nav-item {if(isset($godaddy_accounts))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">GoDaddy Accounts</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-godaddy-accounts') == true)}
+                                    <li class="{if(isset($godaddy_accounts_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/godaddy-accounts/add.html" class="nav-link "> 
+                                            <span class="title"> Add GoDaddy Accounts </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-godaddy-accounts') == true)}
+                                    <li class="{if(isset($godaddy_accounts_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/godaddy-accounts.html" class="nav-link "> 
+                                            <span class="title">GoDaddy Accounts List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'namecom-accounts') == true)}
+                        <li class="nav-item {if(isset($namecom_accounts))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Namecom Accounts</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-namecom-accounts') == true)}
+                                    <li class="{if(isset($namecom_accounts_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/namecom-accounts/add.html" class="nav-link "> 
+                                            <span class="title"> Add Namecom Accounts </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-namecom-accounts') == true)}
+                                    <li class="{if(isset($namecom_accounts_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/namecom-accounts.html" class="nav-link "> 
+                                            <span class="title">Namecom Accounts List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'domains') == true)}
+                        <li class="nav-item {if(isset($domains))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Domains</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-domains') == true)}
+                                    <li class="{if(isset($domains_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/domains/add.html" class="nav-link "> 
+                                            <span class="title"> Add Domains </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-domains') == true)}
+                                    <li class="{if(isset($domains_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/domains.html" class="nav-link "> 
+                                            <span class="title">Domains List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'upload-brands') == true)}
+                                    <li class="{if(isset($domains_brands))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/domains/brands.html" class="nav-link "> 
+                                            <span class="title"> Upload Brands </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'manage-subdomains-names') == true)}
+                                    <li class="{if(isset($domains_subnames))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/domains/subdomains.html"> 
+                                            <span class="title"> Predefined SubDomains </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'manage-domain-records') == true)}
+                                    <li class="{if(isset($domains_records))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/domains/domains-records.html"> 
+                                            <span class="title"> Manage Domain Records </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'manage-multi-records') == true)}
+                                    <li class="{if(isset($domains_multi_records))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/domains/multi-records.html"> 
+                                            <span class="title"> Manage Multi Records </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'servers-management') == true)}
+            <li class="nav-item {if(isset($servers_management))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cloud"></i>
+                    <span class="title">Servers Management</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'servers-providers') == true)}
+                        <li class="nav-item {if(isset($servers_providers))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Servers Providers</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu"> 
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-servers-providers') == true)}
+                                    <li class="{if(isset($servers_providers_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/servers-providers/add.html" class="nav-link "> 
+                                            <span class="title"> Add Servers Providers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-servers-providers') == true)}
+                                    <li class="{if(isset($servers_providers_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/servers-providers.html" class="nav-link "> 
+                                            <span class="title">Servers Providers List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'mta-servers') == true)}
+                        <li class="nav-item {if(isset($mta_servers))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">MTA Servers</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-mta-servers') == true)}
+                                    <li class="{if(isset($mta_servers_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/add.html" class="nav-link "> 
+                                            <span class="title"> Add MTA Servers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-mta-servers') == true)}
+                                    <li class="{if(isset($mta_servers_multi_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/multi-add.html" class="nav-link "> 
+                                            <span class="title"> Add Multiple MTA Servers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-mta-servers') == true)}
+                                    <li class="{if(isset($mta_servers_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers.html" class="nav-link "> 
+                                            <span class="title">MTA Servers List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-mta-servers-vmtas') == true)}
+                                    <li class="{if(isset($vmtas_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/vmtas-list.html" class="nav-link "> 
+                                            <span class="title">VMTAs List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'configure-additional-ips') == true)}
+                                    <li class="{if(isset($configure_additional_ips))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/configure-additional-ips.html"> 
+                                            <span class="title"> Configure Additional IPs </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'install-mta-servers') == true)}
+                                    <li class="{if(isset($mta_servers_install))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/install.html" class="nav-link "> 
+                                            <span class="title"> Install MTA Servers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'servers-actions') == true)}
+                                    <li class="{if(isset($mta_servers_actions))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/servers-actions.html"> 
+                                            <span class="title"> Mta Servers Actions </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'install-proxies-servers') == true)}
+                                    <li class="{if(isset($mta_servers_proxies))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mta-servers/proxies.html" class="nav-link "> 
+                                            <span class="title"> Manage Proxies Servers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'smtp-servers') == true)}
+                        <li class="nav-item {if(isset($smtp_servers))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">SMTP Servers</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-smtp-servers') == true)}
+                                    <li class="{if(isset($smtp_servers_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/smtp-servers/add.html" class="nav-link "> 
+                                            <span class="title"> Add SMTP Servers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-smtp-servers') == true)}
+                                    <li class="{if(isset($smtp_servers_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/smtp-servers.html" class="nav-link "> 
+                                            <span class="title">SMTP Servers List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'smtp-bulk-check') == true)}
+                                    <li class="{if(isset($smtp_servers_bulk_check))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/smtp-servers/smtp-bulk-check.html"> 
+                                            <span class="title"> SMTP Bulk Check </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'management-servers') == true)}
+                        <li class="nav-item {if(isset($management_servers))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Management Servers</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-management-servers') == true)}
+                                    <li class="{if(isset($management_servers_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/management-servers/add.html" class="nav-link "> 
+                                            <span class="title"> Add Management Servers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-management-servers') == true)}
+                                    <li class="{if(isset($management_servers_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/management-servers.html" class="nav-link "> 
+                                            <span class="title">Management Servers List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'pmta-management') == true)}
+            <li class="nav-item  {if(isset($pmta_management))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cog"></i>
+                    <span class="title">PMTA Management</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'pmta-commands') == true)}
+                        <li class="{if(isset($pmta_management_commands))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/commands.html" class="nav-link "> 
+                                <span class="title"> Execute Commands </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'global-vmtas') == true)}
+                        <li class="{if(isset($pmta_management_global_vmtas))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/global-vmtas.html" class="nav-link "> 
+                                <span class="title"> Global Custom Vmtas </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'individual-vmtas') == true)}
+                        <li class="{if(isset($pmta_management_individual_vmtas))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/individual-vmtas.html" class="nav-link "> 
+                                <span class="title"> Individual Custom Vmtas </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'smtp-vmtas') == true)}
+                        <li class="{if(isset($pmta_management_smtp_vmtas))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/smtp-vmtas.html" class="nav-link "> 
+                                <span class="title"> SMTP Custom Vmtas </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'pmta-templates') == true)}
+                        <li class="{if(isset($pmta_management_templates))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/templates.html" class="nav-link "> 
+                                <span class="title"> Templates Configuration </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'pmta-configs') == true)}
+                        <li class="{if(isset($pmta_management_configs))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/configs.html" class="nav-link "> 
+                                <span class="title"> Servers Configuration </span>
+                            </a>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'pmta-history') == true)}
+                        <li class="{if(isset($pmta_management_history))}{echo 'active'}{/if} ">
+                            <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/pmta/history.html" class="nav-link "> 
+                                <span class="title"> PMTA History </span>
+                            </a>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+        {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'emails-management') == true)}
+            <li class="nav-item  {if(isset($emails_management))}{echo 'active'}{/if}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-at"></i>
+                    <span class="title">Clients Management </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'isps') == true)}
+                        <li class="nav-item  {if(isset($isps))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">ISPs</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-isps') == true)}
+                                    <li class="{if(isset($isps_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/isps/add.html" class="nav-link "> 
+                                            <span class="title"> Add Isps </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-isps') == true)}
+                                    <li class="{if(isset($isps_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/isps.html" class="nav-link "> 
+                                            <span class="title">Isps List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'data-providers') == true)}
+                        <li class="nav-item  {if(isset($data_providers))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Data Providers</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-data-providers') == true)}
+                                    <li class="{if(isset($data_providers_add))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/data-providers/add.html" class="nav-link "> 
+                                            <span class="title"> Add Data Providers </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-data-providers') == true)}
+                                    <li class="{if(isset($data_providers_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/data-providers.html" class="nav-link "> 
+                                            <span class="title">Data Providers List</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'data-lists') == true)}
+                        <li class="nav-item  {if(isset($data_lists))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Data Lists</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'import-emails-lists') == true)}
+                                    <li class="{if(isset($data_lists_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/data-lists.html" class="nav-link "> 
+                                            <span class="title"> Manage Data Lists </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'data-lists-fetch') == true)}
+                                    <li class="{if(isset($data_lists_fetch))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/data-lists/emails-fetch.html" class="nav-link "> 
+                                            <span class="title"> Fetch BlackList Emails </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'black-lists') == true)}
+                                    <li class="{if(isset($data_lists_blacklist))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/data-lists/blacklists.html" class="nav-link "> 
+                                            <span class="title"> Manage BlackLists </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                    {if(IR\App\Helpers\Permissions::isMenuAuthorized($connectedUser,'internal-mailboxes') == true)}
+                        <li class="nav-item  {if(isset($internal_mailboxes))}{echo 'active'}{/if}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">Internal Mailboxes</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'add-internal-mailboxes') == true)}
+                                    <li class="{if(isset($internal_mailboxes_create))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mailboxes/create.html" class="nav-link "> 
+                                            <span class="title"> Create Mailboxes </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if(IR\App\Helpers\Permissions::isMenuiTemAuthorized($connectedUser,'show-internal-mailboxes') == true)}
+                                    <li class="{if(isset($internal_mailboxes_show))}{echo 'active'}{/if} ">
+                                        <a {if(IR\App\Helpers\Page::openPageInNewTab())} target="_blank" {/if} href="{echo $app['base_url']}/mailboxes.html" class="nav-link "> 
+                                            <span class="title"> Mailboxes Lists </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </li>
+                    {/if}
+                </ul>
+            </li>
+        {/if}
+    </ul>
+    <!-- END SIDEBAR MENU -->
+</div>

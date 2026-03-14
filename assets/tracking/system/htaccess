@@ -1,0 +1,17 @@
+Options -Indexes
+<IfModule mod_rewrite.c>
+    # Turn mod_rewrite on
+    RewriteEngine On
+
+    # As long as we're not requesting access to a file...
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # And we're also not requesting access to a directory...
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # And we're also not requesting access to a link dir ...
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+    # Route everything through index.php
+    RewriteRule ^([a-zA-Z0-9\/\-_]+)\.?([a-zA-Z]+)?$ index.php?url=$1 [QSA,L] 
+</IfModule>

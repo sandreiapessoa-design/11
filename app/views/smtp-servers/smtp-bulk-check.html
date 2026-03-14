@@ -1,0 +1,31 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-list font-dark"></i>
+            <span class="caption-subject font-dark uppercase">SMTP Bulk Check</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form id="domains-form" action="{echo $app['base_url']}/smtp-servers/smtp-bulk-check.html" class="horizontal-form" method="POST">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">SMTP Accounts (host port encryption username password (proxy-ip proxy-port)) NB: (encryption : tcp/tls/ssl)</label>
+                            <textarea name="smtp-accounts" data-required="true" data-validation-message="SMTP Accounts are Required !" class="form-control" style="height: 500px!important"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Working Accounts :</label>
+                            <textarea class="form-control" style="height: 500px !important;background: #333;color: #fff;font-family: monospace">{echo $accounts}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions right">
+                <button type="submit" class="btn btn-outline dark submit-loading"><i class="fa fa-exchange"></i> Check</button>
+            </div>
+        </form>
+    </div>
+</div>
